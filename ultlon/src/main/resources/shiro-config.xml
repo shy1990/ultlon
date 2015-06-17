@@ -12,6 +12,7 @@
 				/css/** = anon
 				/js/** = anon
 				/fonts/** = anon
+				/images/** = anon
 				/login = authc
                 /logout = logout
                 /** = user

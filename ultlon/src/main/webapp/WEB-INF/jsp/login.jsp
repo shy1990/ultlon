@@ -31,9 +31,7 @@
 	<div class="header">
 		<div class="am-g">
 			<h1>三际手机采购网</h1>
-			<p>
-				手机一站式采购
-			</p>
+			<p>手机一站式采购</p>
 		</div>
 		<hr />
 	</div>
@@ -46,9 +44,9 @@
 			<form method="post" class="am-form">
 				<label for="email">用户名:</label> <input type="text" name="username"
 					id="username" value=""> <br> <label for="password">密码:</label>
-				<input type="password" name="password" id="password" value=""> <br>
-				<label for="remember-me"> <input id="remember-me" name="rememberMe"
-					type="checkbox"> 记住密码
+				<input type="password" name="password" id="password" value="">
+				<br> <label for="remember-me"> <input id="remember-me"
+					name="rememberMe" type="checkbox"> 记住密码
 				</label> <br />
 				<div class="am-cf">
 					<input type="submit" name="" value="登 录"
