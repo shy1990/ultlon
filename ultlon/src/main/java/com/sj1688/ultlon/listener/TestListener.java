@@ -9,7 +9,7 @@ import com.sj1688.ultlon.event.TestEvent;
 public class TestListener implements ApplicationListener<TestEvent>{
 
 	@Override
-	public void onApplicationEvent(TestEvent event) {
+	public void onApplicationEvent( TestEvent event) {
 		System.out.println("测试事件广播:"+event.getSource());
 	}
 

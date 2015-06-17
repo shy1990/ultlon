@@ -20,7 +20,7 @@ public class B2BDaoTest {
 	    private B2BDao b2bDao;
 	    @Test
 	    public void selectSomething(){
-	        List<Map<String, Serializable>> findSomthing = b2bDao.findSomthing();
+	        List<Map<String, Serializable>> findSomthing = b2bDao.findSomthing("宋");
 	        for (Map<String, Serializable> map : findSomthing) {
 	            System.out.println("-------------------");
 	            for (String key: map.keySet()) {

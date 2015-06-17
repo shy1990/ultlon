@@ -3,14 +3,22 @@ package com.sj1688.ultlon.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.sj1688.ultlon.domain.User;
+import com.sj1688.ultlon.event.UserLoginEvent;
+
 @Controller
 public class LoginLogoutController {
+	@Autowired
+	private ApplicationContext ctx;
+	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	@ResponseStatus(org.springframework.http.HttpStatus.UNAUTHORIZED)
 	public String login() {
@@ -27,6 +35,7 @@ public class LoginLogoutController {
 		} catch (AuthenticationException e) {
 			return "redirect:/login";
 		}
+		ctx.publishEvent(new UserLoginEvent((User) SecurityUtils.getSubject().getPrincipal()));
 		return "redirect:/";
 	}
 
