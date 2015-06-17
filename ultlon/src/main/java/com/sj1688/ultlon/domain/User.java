@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 @Entity
 @Table(name="tb_user")
-public class User extends AbstractPersistable<Long>{
+public class User extends AbstractAuditable<User,Long>{
 
 	/**
 	 * 
