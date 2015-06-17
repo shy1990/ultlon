@@ -11,6 +11,7 @@
 			<value>
 				/css/** = anon
 				/js/** = anon
+				/fonts/** = anon
 				/login = authc
                 /logout = logout
                 /** = user

@@ -1,47 +1,64 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8"/>
-<title>登陆</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<meta charset="UTF-8">
+<title>三际手机采购网 业务登录</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="css/amazeui.min.css" />
+<style>
+.header {
+	text-align: center;
+}
 
+.header h1 {
+	font-size: 200%;
+	color: #333;
+	margin-top: 30px;
+}
+
+.header p {
+	font-size: 14px;
+}
+</style>
+</head>
 <body>
-	<div class="span5">
-		<div class="row">
-			<h2 class="span4 offset2">Login</h2>
+	<div class="header">
+		<div class="am-g">
+			<h1>三际手机采购网</h1>
+			<p>
+				手机一站式采购
+			</p>
 		</div>
-		<div class="row">
-			<form class="form-horizontal" method="post">
-				<fieldset>
-					<div class="control-group" style="padding-top: 20px">
-						<label class="control-label" for="username">Username:</label>
-						<div class="controls">
-							<input class="input-block-level" type="text" id="username"
-								name="username" />
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="password">Password:</label>
-						<div class="controls">
-							<input class="input-block-level" type="password" id="password"
-								name="password" />
-						</div>
-					</div>
-						<div class="control-group">
-						<label class="control-label" for="password">记住我:</label>
-						<div class="controls">
-							<input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<button class="btn btn-primary" type="submit">Login</button>
-						</div>
-					</div>
-				</fieldset>
+		<hr />
+	</div>
+	<div class="am-g">
+		<div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+			<h3>登录</h3>
+			<hr>
+			<br> <br>
+
+			<form method="post" class="am-form">
+				<label for="email">用户名:</label> <input type="text" name="username"
+					id="username" value=""> <br> <label for="password">密码:</label>
+				<input type="password" name="password" id="password" value=""> <br>
+				<label for="remember-me"> <input id="remember-me" name="rememberMe"
+					type="checkbox"> 记住密码
+				</label> <br />
+				<div class="am-cf">
+					<input type="submit" name="" value="登 录"
+						class="am-btn am-btn-primary am-btn-sm am-fl"> <input
+						type="submit" name="" value="忘记密码 ^_^? "
+						class="am-btn am-btn-default am-btn-sm am-fr">
+				</div>
 			</form>
+			<hr>
+			<p>© 2015 网格技术部.</p>
 		</div>
 	</div>
 </body>
