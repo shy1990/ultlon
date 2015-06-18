@@ -4,4 +4,14 @@
   <select id="findSomthing" resultType="map">
   	select * from sj_tb_admin where TRUENAME like '%'||#{name}||'%'
   </select>
+  
+  <select id="findNRGBy" resultType="map">
+  	select o.order_num,o.signfortime RECEIVE_TIME ,g.name GOODS_NAME
+       from sj_tb_order o
+       left join sj_tb_order_items oi on o.id=oi.order_id
+       left join sj_tb_goods_sku s on oi.target_id=s.id
+       left join sj_tb_goods g on s.goods_id=g.id
+       where o.ecerp_no=#{ddNum,jdbcType=VARCHAR} and s.sku_num=#{skucode,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>
