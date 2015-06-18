@@ -59,6 +59,7 @@
 		<property name="unauthorizedUrl" value="/unauthorized" />
 		<property name="filterChainDefinitions">
 			<value>
+				/aftersale/** = anon
 				/css/** = anon
 				/js/** = anon
 				/fonts/** = anon
