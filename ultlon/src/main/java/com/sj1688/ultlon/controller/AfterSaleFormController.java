@@ -1,10 +1,8 @@
 package com.sj1688.ultlon.controller;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +10,6 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +20,7 @@ import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.AfterSaleType;
 import com.sj1688.ultlon.service.AfterSaleService;
 import com.sj1688.ultlon.service.exception.NotSuportException;
+import com.sj1688.ultlon.util.DateUtil;
 
 /**
  * 售后单控制器 <br>
@@ -77,13 +75,18 @@ public class AfterSaleFormController {
 		return "aftersale/list";
 	}
 	
+	
 	@RequestMapping(value = "/{userId}/{imei}", method = RequestMethod.GET)
 	public String show(@PathVariable("userId") String userId,@PathVariable("imei") String imei,Model model) {
 		AfterSaleForm genrateAfterSaleForm = afterSaleService.genrateAfterSaleForm(imei, userId);
 		model.addAttribute("data", JSON.toJSON(genrateAfterSaleForm));
 		return "aftersale/show";
 	}
-	
+
+	@RequestMapping(value="/test",method = RequestMethod.GET)
+	public String test(){
+		return "save";
+	}
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET,params={"receiveTime","goodsName"})
 	@ResponseBody
 	public List<AfterSaleType> type(@PathVariable("userId") String userId,Long receiveTime,String goodsName,Model model) {
@@ -92,17 +95,17 @@ public class AfterSaleFormController {
 	}
 
 	
-
-	// TODO 保存demo
+ 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public String add(@RequestBody AfterSaleForm afterSaleForm) {
+	public String add(AfterSaleForm afterSaleForm,@RequestParam("receiveTimeStr")String receiveTimeStr) {
 		try {
+			afterSaleForm.setReceiveTime(DateUtil.strToDate(receiveTimeStr));
 			afterSaleService.save(afterSaleForm);
 		} catch (NotSuportException e) {
 			return e.getMessage();
 		}
-		return "ok";
+		return "您的售后申请已火速提交并通知当地的业务人员，请耐心等候....";
 	}
 
 /*	// TODO 修改demo
