@@ -1,6 +1,7 @@
 package com.sj1688.ultlon.dao.oracle;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -16,4 +17,12 @@ public interface B2BDao {
      * @return ORDER_NUM  RECEIVE_TIME GOODS_NAME
      */
 	public Map<String, Serializable> findNRGBy(@Param("skucode")String skucode,@Param("ddNum") String ddNum);
+	/**
+	 * 获取成交价和现价
+	 * @param skuCode
+	 * @param orderNum
+	 * @return ORDER_PRICE,CURRENT_PRICE
+	 */
+	public Map<String, BigDecimal> findOrderPirceAndCurrentPrice(
+			@Param("skucode")String skuCode, @Param("orderNum")String orderNum);
 }

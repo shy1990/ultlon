@@ -95,7 +95,7 @@ public class AfterSaleFormController {
 	}
 
 	
- 
+
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public String add(AfterSaleForm afterSaleForm,@RequestParam("receiveTimeStr")String receiveTimeStr) {
