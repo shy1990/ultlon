@@ -2,18 +2,19 @@ package com.sj1688.ultlon.event;
 
 import org.springframework.context.ApplicationEvent;
 
-import com.sj1688.ultlon.domain.RefundForm;
+import com.sj1688.ultlon.domain.ChangeForm;
 /**
- * 退货单创建事件
+ * 换货单创建事件
  * @author Administrator
  *
  */
-public class RefundCreateEvent extends ApplicationEvent {
+public class ChangeFormCreateEvent extends ApplicationEvent {
 
 	private static final long serialVersionUID = 1L;
 
-	public RefundCreateEvent(RefundForm source) {
+	public ChangeFormCreateEvent(ChangeForm source) {
 		super(source);
 	}
 
 }
+	

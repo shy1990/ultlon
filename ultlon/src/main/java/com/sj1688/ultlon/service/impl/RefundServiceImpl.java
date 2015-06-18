@@ -15,8 +15,8 @@ import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
-import com.sj1688.ultlon.event.RefundCreateEvent;
-import com.sj1688.ultlon.event.RefundUpdateEvent;
+import com.sj1688.ultlon.event.RefundFormCreateEvent;
+import com.sj1688.ultlon.event.RefundFormUpdateEvent;
 import com.sj1688.ultlon.service.RefundService;
 @Service
 public class RefundServiceImpl implements RefundService{
@@ -39,7 +39,7 @@ public class RefundServiceImpl implements RefundService{
 	public void save(RefundForm entity) {
 		RefundForm genrateRefundForm = genrateRefundForm(entity.getAfterForm());
 		RefundForm save = rfr.save(genrateRefundForm);
-		ctx.publishEvent(new RefundCreateEvent(save));
+		ctx.publishEvent(new RefundFormCreateEvent(save));
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class RefundServiceImpl implements RefundService{
 			}
 			entity.setStatus(status);
 			RefundForm save = rfr.save(entity);
-			ctx.publishEvent(new RefundUpdateEvent(save,old));
+			ctx.publishEvent(new RefundFormUpdateEvent(save,old));
 		}
 	}
 

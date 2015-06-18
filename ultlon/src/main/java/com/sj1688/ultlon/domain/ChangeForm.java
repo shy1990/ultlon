@@ -1,13 +1,10 @@
 package com.sj1688.ultlon.domain;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
@@ -18,29 +15,19 @@ public class ChangeForm extends AbstractAuditable<User, Long> {
 
 	@OneToOne
 	private AfterSaleForm afterForm;//售后服务
+	
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	
-	/*成交价*/
-	private BigDecimal orderPrice;
-	private BigDecimal refundMoney;
 	private String remark;
 
 	public ChangeForm() {
 		super();
 	}
 
-	@Transient
-	public BigDecimal getRealRefundMoney(){
-		//TODO 先判断售后类型，在决定是退最小还是原价退。
-		return BigDecimal.TEN;
-	}
-	public ChangeForm(AfterSaleForm afterForm, BigDecimal orderPrice,
-			BigDecimal refundMoney) {
+	public ChangeForm(AfterSaleForm afterForm) {
 		super();
 		this.afterForm = afterForm;
-		this.orderPrice = orderPrice;
-		this.refundMoney = refundMoney;
 	}
 
 
@@ -61,13 +48,6 @@ public class ChangeForm extends AbstractAuditable<User, Long> {
 		this.status = status;
 	}
 
-	public BigDecimal getOrderPrice() {
-		return orderPrice;
-	}
-
-	public void setOrderPrice(BigDecimal orderPrice) {
-		this.orderPrice = orderPrice;
-	}
 
 	public String getRemark() {
 		return remark;
@@ -77,11 +57,4 @@ public class ChangeForm extends AbstractAuditable<User, Long> {
 		this.remark = remark;
 	}
 
-	public BigDecimal getRefundMoney() {
-		return refundMoney;
-	}
-
-	public void setRefundMoney(BigDecimal refundMoney) {
-		this.refundMoney = refundMoney;
-	}
 }
