@@ -12,8 +12,8 @@ import javax.persistence.Transient;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
 @Entity
-@Table(name = "tb_refund_form")
-public class RefundForm extends AbstractAuditable<User, Long> {
+@Table(name = "tb_change_form")
+public class ChangeForm extends AbstractAuditable<User, Long> {
 	private static final long serialVersionUID = 1L;
 
 	@OneToOne
@@ -26,7 +26,7 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 	private BigDecimal refundMoney;
 	private String remark;
 
-	public RefundForm() {
+	public ChangeForm() {
 		super();
 	}
 
@@ -35,7 +35,7 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 		//TODO 先判断售后类型，在决定是退最小还是原价退。
 		return BigDecimal.TEN;
 	}
-	public RefundForm(AfterSaleForm afterForm, BigDecimal orderPrice,
+	public ChangeForm(AfterSaleForm afterForm, BigDecimal orderPrice,
 			BigDecimal refundMoney) {
 		super();
 		this.afterForm = afterForm;

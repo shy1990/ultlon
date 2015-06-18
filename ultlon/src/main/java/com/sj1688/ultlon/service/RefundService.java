@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.sj1688.ultlon.domain.AfterSaleForm;
-import com.sj1688.ultlon.domain.RefoundFormStatus;
+import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
 
 /**
@@ -24,7 +24,7 @@ public interface RefundService {
 	
 	public Page<RefundForm> get(Pageable page);
 	
-	public void updateStatus(RefundForm entity,RefoundFormStatus statusToUpdate);
+	public void updateStatus(RefundForm entity,FormAuditStatus statusToUpdate);
 
 	public Page<RefundForm> findAll(Pageable pageable);
 }

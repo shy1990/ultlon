@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.sj1688.ultlon.dao.mysql.RefundFormRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleForm;
-import com.sj1688.ultlon.domain.RefoundFormStatus;
+import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
 import com.sj1688.ultlon.event.RefundCreateEvent;
 import com.sj1688.ultlon.event.RefundUpdateEvent;
@@ -48,8 +48,8 @@ public class RefundServiceImpl implements RefundService{
 	}
 
 	@Override
-	public void updateStatus(RefundForm entity,RefoundFormStatus status) {
-		Boolean isNoProcessed=entity.getStatus().equals(RefoundFormStatus.NOPROCESS);
+	public void updateStatus(RefundForm entity,FormAuditStatus status) {
+		Boolean isNoProcessed=entity.getStatus().equals(FormAuditStatus.NOPROCESS);
 		if(isNoProcessed){
 			RefundForm old=new RefundForm();
 			try {

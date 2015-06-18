@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sj1688.ultlon.domain.RefoundFormStatus;
+import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
 import com.sj1688.ultlon.service.RefundService;
 
@@ -70,7 +70,7 @@ public class RefundAdminController {
 	@RequestMapping(value = "/{refundId}/{status}", method = RequestMethod.POST)
 	@ResponseBody
 	public String update(@PathVariable(value = "refundId")RefundForm refundForm,@PathVariable(value = "status")String status) {
-		refundService.updateStatus(refundForm,RefoundFormStatus.valueOf(status));
+		refundService.updateStatus(refundForm,FormAuditStatus.valueOf(status));
 		return "ok";
 	}
 
