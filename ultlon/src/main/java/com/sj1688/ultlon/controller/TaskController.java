@@ -77,7 +77,6 @@ public class TaskController {
 		return "task/list";
 	}
 
-	// TODO 修改demo
 	@RequestMapping(value ={"/edit"}, method = RequestMethod.GET)
 	public String edit(@RequestParam(value = "id") AfterSaleForm afterSaleForm,
 			Model model) {

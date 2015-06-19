@@ -3,6 +3,7 @@ package com.sj1688.ultlon.domain;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,7 +14,7 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 public class TaskForm extends AbstractAuditable<User, Long> {
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	private AfterSaleForm afterForm;//售后服务
 	
 	@Enumerated(EnumType.STRING)

@@ -107,27 +107,4 @@ public class AfterSaleFormController {
 		}
 		return "您的售后申请已火速提交并通知当地的业务人员，请耐心等候....";
 	}
-
-/*	// TODO 修改demo
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(
-			@RequestParam(required = false, value = "id") AfterSaleForm AfterSaleForm,
-			Model model) {
-		model.addAttribute("form", AfterSaleForm);
-		return "aftersale/edit";
-	}
-
-	// TODO 更新demo
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable("id") AfterSaleForm form, AfterSaleForm newForm) {
-		try {
-			BeanUtils.copyProperties(form, newForm);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		afterSaleFormRepository.save(form);
-		return "redirect:/aftersale";
-	}*/
 }

@@ -22,6 +22,7 @@ public class User extends AbstractAuditable<User,Long>{
 	private String username;
 	private String password;
 	private String regions;//所在区域
+	private String roler;
 	
 	public User(String username, String password) {
 		super();
@@ -53,6 +54,17 @@ public class User extends AbstractAuditable<User,Long>{
 	public void setRegions(String regions) {
 		this.regions = regions;
 	}
+	
+	public String getRoler() {
+		return roler;
+	}
+
+
+	public void setRoler(String roler) {
+		this.roler = roler;
+	}
+
+
 	@Transient
 	public List<String> getRegionList(){
 		List<String> result = Splitter.on(",").trimResults().splitToList(this.regions);

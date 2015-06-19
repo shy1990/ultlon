@@ -43,9 +43,7 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			final PrincipalCollection principals) {
-		// retrieve role names and permission names
-		final String username = (String) principals.getPrimaryPrincipal();
-		final User user = userRepository.findByUsername(username);
+		final User user = (User) principals.getPrimaryPrincipal();
 		if (user == null) {
 			throw new UnknownAccountException("Account does not exist");
 		}

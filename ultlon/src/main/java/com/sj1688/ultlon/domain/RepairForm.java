@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,7 +14,7 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 @Table(name="tb_repair_form")
 public class RepairForm extends AbstractAuditable<User, Long>{
 	private static final long serialVersionUID = 1L;
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	private AfterSaleForm afterSaleForm;
 	private BigDecimal cost;
 	@Enumerated(EnumType.STRING)

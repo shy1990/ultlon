@@ -11,10 +11,21 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<shiro:hasRole name="admin"><meta http-equiv="refresh" content="0;url=admin"></shiro:hasRole>
-<shiro:hasRole name="app"><meta http-equiv="refresh" content="0;url=app"></shiro:hasRole>
-<title>售后</title>
+<link rel="stylesheet" href="css/amazeui.min.css" />
+<style type="text/css">
+.sj-btn-block {
+	display: block;
+	height: 150px;
+	width: 100%;
+}
+</style>
+<title>售后管理页面</title>
 </head>
 <body>
+<a class="am-btn am-btn-primary am-btn-block" href="admin/refund">退货退款单</a>
+<a class="am-btn am-btn-warning am-btn-block" href="admin/change">换货单</a>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/amazeui.min.js"></script>
 </body>
 </html>

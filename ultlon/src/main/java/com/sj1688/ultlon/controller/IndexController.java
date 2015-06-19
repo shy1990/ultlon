@@ -9,5 +9,15 @@ public class IndexController {
 	public String home(){
 		return "index";
 	}
+	@RequestMapping(value={"/admin"})
+	public String admin(){
+		return "admin";
+	}
+
+	@RequestMapping(value={"/app"})
+	public String app(){
+		return "app";
+	}
+
 
 }
