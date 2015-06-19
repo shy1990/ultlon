@@ -34,6 +34,7 @@
 				/unauthorized=anon
 				/login = authc
 				/logout = logout
+				/admin/** = roles[admin] 
 				/** = user
 			</value>
 		</property>

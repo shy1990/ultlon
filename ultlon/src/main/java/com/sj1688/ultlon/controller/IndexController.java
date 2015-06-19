@@ -18,6 +18,9 @@ public class IndexController {
 	public String app(){
 		return "app";
 	}
-
-
+	@RequestMapping(value={"/unauthorized"})
+	public String unauthorized(){
+		return "unauthorized";
+	}
+	
 }
