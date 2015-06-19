@@ -1,6 +1,7 @@
 /target/
 /.classpath
 /.project
-/.settings/
+/.settings/**
 /mirco-workspace/
 /data/
+/src/
