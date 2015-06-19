@@ -10,6 +10,6 @@ public class RepairFormCreateEventTestListener implements ApplicationListener<Re
 	@Override
 	public void onApplicationEvent( RepairFormCreateEvent event) {
 		RepairForm form=(RepairForm)event.getSource();
-		System.out.println("我擦，"+form.getCreatedBy().getUsername()+"既然存了一个维修单。"+form.getAfterSaleForm().getGoodsName());
+		System.out.println("我擦，"+form.getCreatedBy().getUsername()+"既然存了一个维修单。"+form.getTaskForm().getAfterSaleForm().getGoodsName());
 	}
 }

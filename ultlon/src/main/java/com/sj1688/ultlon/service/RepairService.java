@@ -3,9 +3,9 @@ package com.sj1688.ultlon.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RepairForm;
+import com.sj1688.ultlon.domain.TaskForm;
 
 /**
  * 维修服务
@@ -15,10 +15,10 @@ import com.sj1688.ultlon.domain.RepairForm;
 public interface RepairService {
 	/**
 	 * 生成维修单
-	 * @param afterSaleForm
+	 * @param taskForm
 	 * @return
 	 */
-	public RepairForm genrateRepairForm(AfterSaleForm afterSaleForm);
+	public RepairForm genrateRepairForm(TaskForm taskForm);
 	
 	public void save(RepairForm entity);
 	
@@ -28,3 +28,4 @@ public interface RepairService {
 
 	public Page<RepairForm> findAll(Pageable pageable);
 }
+

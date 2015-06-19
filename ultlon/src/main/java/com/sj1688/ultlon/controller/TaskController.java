@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.domain.User;
 import com.sj1688.ultlon.service.TaskService;
@@ -70,18 +70,37 @@ public class TaskController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
 			PagedResourcesAssembler<TaskForm> assembler, Model model) {
-		User user =(User) SecurityUtils.getSubject().getPrincipal();
-		Page<TaskForm> tasks = taskService.get(pageable,user.getRegionList());
+		User user = (User) SecurityUtils.getSubject().getPrincipal();
+		Page<TaskForm> tasks = taskService.get(pageable, user.getRegionList());
 		model.addAttribute("data", assembler.toResource(tasks));
-		
+
 		return "task/list";
 	}
 
-	@RequestMapping(value ={"/edit"}, method = RequestMethod.GET)
-	public String edit(@RequestParam(value = "id") AfterSaleForm afterSaleForm,
+	@RequestMapping(value = "/{id}/reject", method = RequestMethod.POST)
+	@ResponseBody
+	public String reject(@PathVariable(value = "id") TaskForm form) {
+		taskService.reject(form);
+		return "ok";
+	}
+
+	@RequestMapping(value = { "/kxs", "/thh30" }, method = RequestMethod.GET)
+	public String edit(@RequestParam(value = "id") TaskForm taskForm,
 			Model model) {
-		model.addAttribute("afterSaleForm", afterSaleForm);
+		model.addAttribute("taskForm", taskForm);
 		return "task/edit";
 	}
 
+	@RequestMapping(value = { "/dmdhx100" }, method = RequestMethod.GET)
+	public String dmdhx100(@RequestParam(value = "id") TaskForm taskForm,
+			Model model) {
+		model.addAttribute("taskForm", taskForm);
+		return "task/dmdhx100";
+	}
+
+	@RequestMapping(value = { "/wx" }, method = RequestMethod.GET)
+	public String wx(@RequestParam(value = "id") TaskForm taskForm, Model model) {
+		model.addAttribute("taskForm", taskForm);
+		return "task/wx";
+	}
 }

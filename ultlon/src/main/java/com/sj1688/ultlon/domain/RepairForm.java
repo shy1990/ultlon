@@ -15,27 +15,20 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 public class RepairForm extends AbstractAuditable<User, Long>{
 	private static final long serialVersionUID = 1L;
 	@OneToOne(fetch=FetchType.EAGER)
-	private AfterSaleForm afterSaleForm;
+	private TaskForm taskForm;
 	private BigDecimal cost;
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	private String remark;
 	
-	
-	
 	public RepairForm() {
 		super();
 	}
-	public RepairForm(AfterSaleForm afterSaleForm) {
+	public RepairForm(TaskForm taskForm) {
 		super();
-		this.afterSaleForm = afterSaleForm;
+		this.taskForm = taskForm;
 	}
-	public AfterSaleForm getAfterSaleForm() {
-		return afterSaleForm;
-	}
-	public void setAfterSaleForm(AfterSaleForm afterSaleForm) {
-		this.afterSaleForm = afterSaleForm;
-	}
+	
 	public BigDecimal getCost() {
 		return cost;
 	}
@@ -54,5 +47,11 @@ public class RepairForm extends AbstractAuditable<User, Long>{
 	public void setStatus(FormAuditStatus status) {
 		this.status = status;
 	}
-	
+	public TaskForm getTaskForm() {
+		return taskForm;
+	}
+	public void setTaskForm(TaskForm taskForm) {
+		this.taskForm = taskForm;
+	}
+	 
 }

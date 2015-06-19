@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <meta charset="UTF-8">
@@ -36,11 +36,12 @@
 				</thead>
 				<tbody>
 					<c:forEach var="item" items="${data.content }">
-						<tr data-id="${item.content.afterForm.id }">
-							<td>${item.content.afterForm.imei }</td>
-							<td>${item.content.afterForm.username }</td>
+						<tr data-id="${item.content.id }"
+							data-type="${item.content.afterSaleForm.type }">
+							<td>${item.content.afterSaleForm.imei }</td>
+							<td>${item.content.afterSaleForm.username }</td>
 							<td>${item.content.createdDate }</td>
-							<td class="am-danger">${item.content.afterForm.type }</td>
+							<td class="am-danger">${item.content.afterSaleForm.type }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -53,7 +54,23 @@
 		$(function() {
 			$("#mytable").delegate("tr", "click", function() {
 				var id = $(this).attr("data-id");
-				location.href = "task/edit?id=" + id;
+				var type = $(this).attr("data-type");
+				var targetUrl = "task/";
+				switch (type) {
+				case 'KXS':
+					targetUrl+= "kxs";
+					break;
+				case 'THH30':
+					targetUrl+= "thh30"
+					break;
+				case 'WX':
+					targetUrl+= "wx"
+					break;
+				case 'DMDHX100':
+					targetUrl+= "dmdhx100"
+					break;
+				}
+				location.href = targetUrl + "?id=" + id;
 			});
 		})
 	</script>

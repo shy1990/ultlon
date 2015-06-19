@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.sj1688.ultlon.dao.mysql.ChangeFormRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
-import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.ChangeForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
+import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.event.ChangeFormCreateEvent;
 import com.sj1688.ultlon.event.ChangeFormUpdateEvent;
 import com.sj1688.ultlon.service.ChangeService;
@@ -25,14 +25,14 @@ public class ChangeServiceImpl implements ChangeService{
 	private ApplicationContext ctx;
 	
 	@Override
-	public ChangeForm genrateChangeForm(AfterSaleForm afterSaleForm) {
-		ChangeForm rf=new ChangeForm(afterSaleForm);
+	public ChangeForm genrateChangeForm(TaskForm taskForm) {
+		ChangeForm rf=new ChangeForm(taskForm);
 		return rf;
 	}
 
 	@Override
 	public void save(ChangeForm entity) {
-		ChangeForm genrateChangeForm = genrateChangeForm(entity.getAfterForm());
+		ChangeForm genrateChangeForm = genrateChangeForm(entity.getTaskForm());
 		genrateChangeForm.setRemark(entity.getRemark());
 		ChangeForm save = rfr.save(genrateChangeForm);
 		ctx.publishEvent(new ChangeFormCreateEvent(save));

@@ -30,26 +30,19 @@
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
-			售后业务受理页面。
-			<% //TODO 石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货  %>
-			<p>石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货 ,拒绝受理接口 POST task/${task.id }/reject  </p>taskId,remark</p>
+			售后业务受理页面。${taskForm }
+			<% //TODO 石洪岳 ----> 多美达换新确认页面美化  %>
+			<p>石洪岳 ----> 多美达，无条件换新。确认加备注提交。 POST change taskId,remark</p>
 			<hr>
 			订单号:${taskForm.afterSaleForm.orderNum }<br>
 			串号:${taskForm.afterSaleForm.imei }<br>
 			用户:${taskForm.afterSaleForm.username }<br>
-			<a class="am-btn am-btn-danger" href="refund/edit?id=${taskForm.id }">我要退货</a>
 			<a class="am-btn am-btn-success" href="change/edit?id=${taskForm.id }">我要换货</a>
-			<a class="am-btn am-btn-success" href="javascript:reject('${taskForm.id }');">拒绝受理</a>
 		</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
-	<script type="text/javascript">
-		function reject(id){
-			//task/${task.id }/reject
-			alert(id);
-		}
-	</script>
+	
 </body>
 </html>
 

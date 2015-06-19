@@ -18,7 +18,7 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 	private static final long serialVersionUID = 1L;
 
 	@OneToOne(fetch=FetchType.EAGER)
-	private AfterSaleForm afterForm;//售后服务
+	private TaskForm taskForm;//售后任务
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	
@@ -36,22 +36,21 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 		//TODO 宋保真 ----> 先判断售后类型，在决定是退最小还是原价退。
 		return BigDecimal.TEN;
 	}
-	public RefundForm(AfterSaleForm afterForm, BigDecimal orderPrice,
-			BigDecimal refundMoney) {
+	
+	public RefundForm(TaskForm taskForm, BigDecimal orderPrice,BigDecimal refundMoney) {
 		super();
-		this.afterForm = afterForm;
+		this.taskForm = taskForm;
 		this.orderPrice = orderPrice;
 		this.refundMoney = refundMoney;
 	}
 
 
-
-	public AfterSaleForm getAfterForm() {
-		return afterForm;
+	public TaskForm getTaskForm() {
+		return taskForm;
 	}
 
-	public void setAfterForm(AfterSaleForm afterForm) {
-		this.afterForm = afterForm;
+	public void setTaskForm(TaskForm taskForm) {
+		this.taskForm = taskForm;
 	}
 
 	public FormAuditStatus getStatus() {

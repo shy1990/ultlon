@@ -27,11 +27,11 @@ public class WhenRefundFormStatusChange implements ApplicationListener<RefundFor
 	@Override
 	public void onApplicationEvent( RefundFormUpdateEvent event) {
 		RefundForm changeForm=(RefundForm)event.getSource();
-		AfterSaleForm afterForm = changeForm.getAfterForm();
+		TaskForm taskForm = changeForm.getTaskForm();
+		AfterSaleForm afterForm = taskForm.getAfterSaleForm();
 		afterForm.setResult(changeForm.getStatus().toString());
 		afterSaleFormRepository.save(afterForm);
 		
-		TaskForm taskForm = taskRepository.findByAfterForm(afterForm);
 		taskForm.setStatus(changeForm.getStatus());
 		taskRepository.save(taskForm);
 		LOG.info("退货单状态修改：{}",changeForm);

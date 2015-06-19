@@ -32,24 +32,17 @@
 		<div class="am-g">
 			售后业务受理页面。
 			<% //TODO 石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货  %>
-			<p>石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货 ,拒绝受理接口 POST task/${task.id }/reject  </p>taskId,remark</p>
+			<p>石洪岳 ----> 维修页面美化，提交接口 POST repair afterSaleId,remark</p>
 			<hr>
-			订单号:${taskForm.afterSaleForm.orderNum }<br>
-			串号:${taskForm.afterSaleForm.imei }<br>
-			用户:${taskForm.afterSaleForm.username }<br>
-			<a class="am-btn am-btn-danger" href="refund/edit?id=${taskForm.id }">我要退货</a>
-			<a class="am-btn am-btn-success" href="change/edit?id=${taskForm.id }">我要换货</a>
-			<a class="am-btn am-btn-success" href="javascript:reject('${taskForm.id }');">拒绝受理</a>
+			保存时要提交的参数:${afterSaleForm.id },
+			订单号:${afterSaleForm.orderNum }<br>
+			串号:${afterSaleForm.imei }<br>
+			用户:${afterSaleForm.username }<br>
 		</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
-	<script type="text/javascript">
-		function reject(id){
-			//task/${task.id }/reject
-			alert(id);
-		}
-	</script>
+	
 </body>
 </html>
 

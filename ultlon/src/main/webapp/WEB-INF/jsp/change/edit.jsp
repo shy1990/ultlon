@@ -24,6 +24,11 @@
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
+		
+				<%
+				//TODO 石洪岳 ----> 换新确认。必须有明确返回。
+			%>
+			石洪岳 ---->换新确认。必须有明确返回。 POST change afterSaleId,remark。
 			手机名称:${afterSaleForm.goodsName },,,,,串号:${afterSaleForm.imei }
 			<form action="change" method="post">
 				<input type="hidden" name="afterSaleId" value="${afterSaleForm.id }">

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.RepairForm;
+import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.service.RepairService;
 
 /**
@@ -56,18 +56,18 @@ public class RepairFormController {
 	private RepairService repairService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String add(@RequestParam(value = "afterSaleId") AfterSaleForm afterSaleForm,RepairForm repairForm) {
-		repairForm.setAfterSaleForm(afterSaleForm);
+	public String add(@RequestParam(value = "taskId") TaskForm taskForm,RepairForm repairForm) {
+		repairForm.setTaskForm(taskForm);
 		repairService.save(repairForm);
 		return "repair/success";
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(@RequestParam(value = "id") AfterSaleForm afterSaleForm,
+	public String edit(@RequestParam(value = "taskId") TaskForm taskForm,
 			Model model) {
-		RepairForm genrateRepairForm = repairService.genrateRepairForm(afterSaleForm);
+		RepairForm genrateRepairForm = repairService.genrateRepairForm(taskForm);
 		model.addAttribute("repairForm", genrateRepairForm);
-		model.addAttribute("afterSaleForm", afterSaleForm);
+		model.addAttribute("task", taskForm);
 		return "repair/edit";
 	}
 

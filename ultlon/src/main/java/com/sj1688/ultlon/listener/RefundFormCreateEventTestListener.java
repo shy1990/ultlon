@@ -10,6 +10,6 @@ public class RefundFormCreateEventTestListener implements ApplicationListener<Re
 	@Override
 	public void onApplicationEvent( RefundFormCreateEvent event) {
 		RefundForm form=(RefundForm)event.getSource();
-		System.out.println("我擦，"+form.getCreatedBy().getUsername()+"既然存了一个退货单。"+form.getAfterForm().getGoodsName());
+		System.out.println("我擦，"+form.getCreatedBy().getUsername()+"既然存了一个退货单。"+form.getTaskForm().getAfterSaleForm().getGoodsName());
 	}
 }

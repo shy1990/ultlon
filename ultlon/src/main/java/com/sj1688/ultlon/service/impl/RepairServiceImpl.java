@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sj1688.ultlon.dao.mysql.RepairFormRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
-import com.sj1688.ultlon.domain.AfterSaleForm;
+import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RepairForm;
 import com.sj1688.ultlon.event.RepairFormCreateEvent;
@@ -25,14 +25,14 @@ public class RepairServiceImpl implements RepairService{
 	private ApplicationContext ctx;
 	
 	@Override
-	public RepairForm genrateRepairForm(AfterSaleForm afterSaleForm) {
-		RepairForm rf=new RepairForm(afterSaleForm);
+	public RepairForm genrateRepairForm(TaskForm taskForm) {
+		RepairForm rf=new RepairForm(taskForm);
 		return rf;
 	}
 
 	@Override
 	public void save(RepairForm entity) {
-		RepairForm genrateRepairForm = genrateRepairForm(entity.getAfterSaleForm());
+		RepairForm genrateRepairForm = genrateRepairForm(entity.getTaskForm());
 		genrateRepairForm.setRemark(entity.getRemark());
 		genrateRepairForm.setCost(entity.getCost());
 		RepairForm save = rfr.save(genrateRepairForm);

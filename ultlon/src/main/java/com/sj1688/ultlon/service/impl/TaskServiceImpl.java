@@ -2,7 +2,6 @@ package com.sj1688.ultlon.service.impl;
 
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +11,6 @@ import com.sj1688.ultlon.dao.mysql.TaskFormRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
-import com.sj1688.ultlon.domain.RepairForm;
 import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.service.TaskService;
 
@@ -32,7 +30,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void save(TaskForm entity) {
-		TaskForm genrateRefundForm = genrateForm(entity.getAfterForm());
+		TaskForm genrateRefundForm = genrateForm(entity.getAfterSaleForm());
 		tfr.save(genrateRefundForm);
 	}
 
@@ -42,17 +40,11 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public void updateStatus(TaskForm entity, FormAuditStatus statusToUpdate) {
+	public void reject(TaskForm entity) {
 		Boolean isNoProcessed = entity.getStatus().equals(
 				FormAuditStatus.NOPROCESS);
 		if (isNoProcessed) {
-			RepairForm old = new RepairForm();
-			try {
-				BeanUtils.copyProperties(old, entity);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			entity.setStatus(statusToUpdate);
+			entity.setStatus(FormAuditStatus.REJECT);
 			tfr.save(entity);
 		}
 	}

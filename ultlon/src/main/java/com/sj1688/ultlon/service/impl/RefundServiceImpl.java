@@ -15,6 +15,7 @@ import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
+import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.event.RefundFormCreateEvent;
 import com.sj1688.ultlon.event.RefundFormUpdateEvent;
 import com.sj1688.ultlon.service.RefundService;
@@ -28,16 +29,17 @@ public class RefundServiceImpl implements RefundService{
 	private ApplicationContext ctx;
 	
 	@Override
-	public RefundForm genrateRefundForm(AfterSaleForm afterSaleForm) {
+	public RefundForm genrateRefundForm(TaskForm taskForm) {
 		RefundForm rf=null;
-		Map<String,BigDecimal> prices= b2bDao.findOrderPirceAndCurrentPrice(afterSaleForm.getSkuCode(),afterSaleForm.getOrderNum());
-		rf=new RefundForm(afterSaleForm, prices.get("ORDER_PRICE"), prices.get("CURRENT_PRICE"));
+		AfterSaleForm afterForm = taskForm.getAfterSaleForm();
+		Map<String,BigDecimal> prices= b2bDao.findOrderPirceAndCurrentPrice(afterForm.getSkuCode(),afterForm.getOrderNum());
+		rf=new RefundForm(taskForm, prices.get("ORDER_PRICE"), prices.get("CURRENT_PRICE"));
 		return rf;
 	}
 
 	@Override
 	public void save(RefundForm entity) {
-		RefundForm genrateRefundForm = genrateRefundForm(entity.getAfterForm());
+		RefundForm genrateRefundForm = genrateRefundForm(entity.getTaskForm());
 		RefundForm save = rfr.save(genrateRefundForm);
 		ctx.publishEvent(new RefundFormCreateEvent(save));
 	}

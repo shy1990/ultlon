@@ -15,7 +15,7 @@ public class TaskForm extends AbstractAuditable<User, Long> {
 	private static final long serialVersionUID = 1L;
 
 	@OneToOne(fetch=FetchType.EAGER)
-	private AfterSaleForm afterForm;//售后服务
+	private AfterSaleForm afterSaleForm;//售后服务
 	
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
@@ -28,18 +28,18 @@ public class TaskForm extends AbstractAuditable<User, Long> {
 
 	public TaskForm(AfterSaleForm afterForm,String area) {
 		super();
-		this.afterForm = afterForm;
+		this.afterSaleForm = afterForm;
 		this.area=area;
 	}
 
 
 
-	public AfterSaleForm getAfterForm() {
-		return afterForm;
+	public AfterSaleForm getAfterSaleForm() {
+		return afterSaleForm;
 	}
 
 	public void setAfterForm(AfterSaleForm afterForm) {
-		this.afterForm = afterForm;
+		this.afterSaleForm = afterForm;
 	}
 
 	public FormAuditStatus getStatus() {

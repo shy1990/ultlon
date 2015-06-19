@@ -3,9 +3,9 @@ package com.sj1688.ultlon.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
+import com.sj1688.ultlon.domain.TaskForm;
 
 /**
  * 退货服务
@@ -15,10 +15,10 @@ import com.sj1688.ultlon.domain.RefundForm;
 public interface RefundService {
 	/**
 	 * 生成退货单
-	 * @param afterSaleForm
+	 * @param taskForm
 	 * @return
 	 */
-	public RefundForm genrateRefundForm(AfterSaleForm afterSaleForm);
+	public RefundForm genrateRefundForm(TaskForm taskForm);
 	
 	public void save(RefundForm entity);
 	

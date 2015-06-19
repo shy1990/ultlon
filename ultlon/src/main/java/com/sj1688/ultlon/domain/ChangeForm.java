@@ -15,31 +15,32 @@ public class ChangeForm extends AbstractAuditable<User, Long> {
 	private static final long serialVersionUID = 1L;
 
 	@OneToOne(fetch=FetchType.EAGER)
-	private AfterSaleForm afterForm;//售后服务
+	private TaskForm taskForm;//售后任务
 	
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	
 	private String remark;
 
+	
+	public ChangeForm(TaskForm taskForm) {
+		super();
+		this.taskForm = taskForm;
+	}
+
 	public ChangeForm() {
 		super();
 	}
 
-	public ChangeForm(AfterSaleForm afterForm) {
-		super();
-		this.afterForm = afterForm;
+	public TaskForm getTaskForm() {
+		return taskForm;
 	}
 
 
-
-	public AfterSaleForm getAfterForm() {
-		return afterForm;
+	public void setTaskForm(TaskForm taskForm) {
+		this.taskForm = taskForm;
 	}
 
-	public void setAfterForm(AfterSaleForm afterForm) {
-		this.afterForm = afterForm;
-	}
 
 	public FormAuditStatus getStatus() {
 		return status;
