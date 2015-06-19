@@ -11,7 +11,7 @@ import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.event.AfterSaleFormCreateEvent;
 import com.sj1688.ultlon.service.TaskService;
 /**
- * 创建售后单的时候创建业务的任务
+ * 创建换新单的时候创建售后任务
  * @author 武继明
  *
  */

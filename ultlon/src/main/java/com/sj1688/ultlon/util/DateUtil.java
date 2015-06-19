@@ -5,8 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javassist.expr.NewArray;
-
 public class DateUtil {
 	/** 时间格式 */  
     private static String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";  
@@ -48,7 +46,6 @@ public class DateUtil {
     public static long compareNowDate(Date date) {
     	long compare = 0;
     	try {
-    		 DateFormat df = new SimpleDateFormat(DATE_TIME_FORMAT);  
     		 compare = Math.abs(new Date().getTime() - date.getTime() );
 		} catch (Exception e) {
 			System.out.println("时间转换异常："+e.getMessage());
