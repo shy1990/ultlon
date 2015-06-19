@@ -31,6 +31,7 @@
 						<th>手机串号</th>
 						<th>申请人</th>
 						<th>申请时间</th>
+						<th>状态</th>
 						<th>类型</th>
 					</tr>
 				</thead>
@@ -41,6 +42,7 @@
 							<td>${item.content.afterSaleForm.imei }</td>
 							<td>${item.content.afterSaleForm.username }</td>
 							<td>${item.content.createdDate }</td>
+							<td>${item.content.status }</td>
 							<td class="am-danger">${item.content.afterSaleForm.type }</td>
 						</tr>
 					</c:forEach>
