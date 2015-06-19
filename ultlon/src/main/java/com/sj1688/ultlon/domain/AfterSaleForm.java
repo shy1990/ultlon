@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractAuditable;
 @Entity
@@ -16,7 +18,7 @@ public class AfterSaleForm extends AbstractAuditable<User, Long>{
 	private String orderNum;//订单号
 	@Enumerated(EnumType.STRING)
 	private AfterSaleType type;
-	//@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date receiveTime;
 	private String skuCode;
 	private String goodsName;
