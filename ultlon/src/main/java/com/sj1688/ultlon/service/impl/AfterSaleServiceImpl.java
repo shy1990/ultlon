@@ -128,7 +128,6 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 				resultList.add(AfterSaleType.DMDHX100);
 			}
 		}
-		resultList.add(AfterSaleType.KXS);
 		return resultList;
 	}
 
