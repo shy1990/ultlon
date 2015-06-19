@@ -37,8 +37,8 @@
 			订单号:${taskForm.afterSaleForm.orderNum }<br>
 			串号:${taskForm.afterSaleForm.imei }<br>
 			用户:${taskForm.afterSaleForm.username }<br>
-			<a class="am-btn am-btn-danger" href="refund/edit?id=${taskForm.id }">我要退货</a>
-			<a class="am-btn am-btn-success" href="change/edit?id=${taskForm.id }">我要换货</a>
+			<a class="am-btn am-btn-danger" href="refund/edit?taskId=${taskForm.id }">我要退货</a>
+			<a class="am-btn am-btn-success" href="change/edit?taskId=${taskForm.id }">我要换货</a>
 			<a class="am-btn am-btn-success" href="javascript:reject('${taskForm.id }');">拒绝受理</a>
 		</div>
 	</div>
