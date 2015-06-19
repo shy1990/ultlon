@@ -30,7 +30,7 @@
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
-			开箱损懂不懂？？
+			售后业务受理页面。
 		</div>
 	</div>
 	<script src="js/jquery.min.js"></script>

@@ -36,7 +36,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="item" items="${data.content }">
-						<tr data-id="${item.content.id }">
+						<tr data-id="${item.content.afterForm.id }">
 							<td>${item.content.afterForm.imei }</td>
 							<td>${item.content.afterForm.username }</td>
 							<td>${item.content.createdDate }</td>

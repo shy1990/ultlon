@@ -81,7 +81,7 @@ public class TaskController {
 	public String edit(@RequestParam(value = "id") AfterSaleForm afterSaleForm,
 			Model model) {
 		model.addAttribute("afterSaleForm", afterSaleForm);
-		return "task/"+afterSaleForm.getType().toString().toLowerCase();
+		return "task/edit";
 	}
 
 }

@@ -24,6 +24,7 @@
 <body>
 <a class="am-btn am-btn-primary am-btn-block" href="admin/refund">退货退款单</a>
 <a class="am-btn am-btn-warning am-btn-block" href="admin/change">换货单</a>
+<a class="am-btn am-btn-success am-btn-block" href="admin/repair">维修单</a>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
