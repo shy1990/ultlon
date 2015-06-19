@@ -85,21 +85,21 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = { "/kxs", "/thh30" }, method = RequestMethod.GET)
-	public String edit(@RequestParam(value = "id") TaskForm taskForm,
+	public String edit(@RequestParam(value = "taskId") TaskForm taskForm,
 			Model model) {
 		model.addAttribute("taskForm", taskForm);
 		return "task/edit";
 	}
 
 	@RequestMapping(value = { "/dmdhx100" }, method = RequestMethod.GET)
-	public String dmdhx100(@RequestParam(value = "id") TaskForm taskForm,
+	public String dmdhx100(@RequestParam(value = "taskId") TaskForm taskForm,
 			Model model) {
 		model.addAttribute("taskForm", taskForm);
 		return "task/dmdhx100";
 	}
 
 	@RequestMapping(value = { "/wx" }, method = RequestMethod.GET)
-	public String wx(@RequestParam(value = "id") TaskForm taskForm, Model model) {
+	public String wx(@RequestParam(value = "taskId") TaskForm taskForm, Model model) {
 		model.addAttribute("taskForm", taskForm);
 		return "task/wx";
 	}

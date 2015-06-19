@@ -28,10 +28,10 @@
 				<%
 				//TODO 石洪岳 ----> 换新确认。必须有明确返回。
 			%>
-			石洪岳 ---->换新确认。必须有明确返回。 POST change afterSaleId,remark。
-			手机名称:${afterSaleForm.goodsName },,,,,串号:${afterSaleForm.imei }
+			石洪岳 ---->换新确认。必须有明确返回。 POST change taskId,remark。
+			手机名称:${taskForm.afterSaleForm.goodsName },,,,,串号:${taskForm.afterSaleForm.imei }
 			<form action="change" method="post">
-				<input type="hidden" name="afterSaleId" value="${afterSaleForm.id }">
+				<input type="hidden" name="taskId" value="${taskForm.id }">
 				备注:<input type="text" name="remark" value="${changeForm.remark }"><br>
 				<input type="submit" value="保存">
 			</form>

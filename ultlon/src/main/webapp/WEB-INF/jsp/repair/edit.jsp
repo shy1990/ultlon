@@ -25,7 +25,7 @@
 	<div class="content">
 		<div class="am-g">
 			<form action="repair" method="post">
-			<input type="hidden" name="afterSaleId" value="${afterSaleForm.id }">
+			<input type="hidden" name="taskId" value="${taskForm.id }">
 				 金额:<input type="text" name="cost" value="${repairForm.cost }"><br>
 				备注:<input type="text" name="remark" value="${repairForm.remark }"><br>
 				<input type="submit" value="保存">

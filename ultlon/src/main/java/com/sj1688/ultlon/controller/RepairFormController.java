@@ -67,7 +67,7 @@ public class RepairFormController {
 			Model model) {
 		RepairForm genrateRepairForm = repairService.genrateRepairForm(taskForm);
 		model.addAttribute("repairForm", genrateRepairForm);
-		model.addAttribute("task", taskForm);
+		model.addAttribute("taskForm", taskForm);
 		return "repair/edit";
 	}
 

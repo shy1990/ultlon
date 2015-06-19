@@ -66,7 +66,7 @@ public class ChangeFormController {
 	public String edit(@RequestParam(value = "taskId") TaskForm taskForm,Model model) {
 		ChangeForm genrateRefundForm = changeService.genrateChangeForm(taskForm);
 		model.addAttribute("changeForm", genrateRefundForm);
-		model.addAttribute("task", taskForm);
+		model.addAttribute("taskForm", taskForm);
 		return "change/edit";
 	}
 
