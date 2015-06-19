@@ -1,6 +1,11 @@
 package com.sj1688.ultlon.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractAuditable;
@@ -8,27 +13,45 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 @Table(name="tb_repair_form")
 public class RepairForm extends AbstractAuditable<User, Long>{
 	private static final long serialVersionUID = 1L;
-	private String imei;
+	@OneToOne
+	private AfterSaleForm afterSaleForm;
+	private BigDecimal cost;
+	@Enumerated(EnumType.STRING)
+	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	private String remark;
-	private String username;
 	
-	public String getUsername() {
-		return username;
+	
+	
+	public RepairForm() {
+		super();
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public RepairForm(AfterSaleForm afterSaleForm) {
+		super();
+		this.afterSaleForm = afterSaleForm;
 	}
-	public String getImei() {
-		return imei;
+	public AfterSaleForm getAfterSaleForm() {
+		return afterSaleForm;
 	}
-	public void setImei(String imei) {
-		this.imei = imei;
+	public void setAfterSaleForm(AfterSaleForm afterSaleForm) {
+		this.afterSaleForm = afterSaleForm;
+	}
+	public BigDecimal getCost() {
+		return cost;
+	}
+	public void setCost(BigDecimal cost) {
+		this.cost = cost;
 	}
 	public String getRemark() {
 		return remark;
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public FormAuditStatus getStatus() {
+		return status;
+	}
+	public void setStatus(FormAuditStatus status) {
+		this.status = status;
 	}
 	
 }

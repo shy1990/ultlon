@@ -18,4 +18,8 @@
 	<select id="findOrderPirceAndCurrentPrice" resultType="map">
 		select 123 ORDER_PRICE, 321 CURRENT_PRICE from dual
 	</select>
+	
+	<select id="findUserArea" resultType="string">
+		select 123 from dual
+	</select>
 </mapper>

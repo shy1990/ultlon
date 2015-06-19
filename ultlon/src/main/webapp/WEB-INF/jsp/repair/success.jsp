@@ -11,6 +11,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta charset="UTF-8">
+<meta http-equiv="refresh" content="1;url=./">
 <link rel="stylesheet" href="css/amazeui.min.css" />
 <title>修改维修单</title>
 <style>
@@ -24,12 +25,7 @@
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
-			<form action="repair" method="post">
-			<input type="hidden" name="afterSaleId" value="${afterSaleForm.id }">
-				 金额:<input type="text" name="cost" value="${repairForm.cost }"><br>
-				备注:<input type="text" name="remark" value="${repairForm.remark }"><br>
-				<input type="submit" value="保存">
-			</form>
+			保存成功。
 		</div>
 	</div>
 	<script src="js/jquery.min.js"></script>

@@ -85,15 +85,15 @@ public class DateUtil {
 	    return sdf.format(new Date(Long.parseLong(str))); 
     }
       
-    /** 
+ /*   *//** 
      * 主函数 
      *  
      * @param args 
-     */  
+     *//*  
     public static void main(String[] args) {  
            // boolean isExceed = compare("2010-01-05 22:22:21", "2010-01-05 22:22:25"); 
             //System.out.println("两个时间相比, 是否相差超过3秒：" + compareNowDate("2015-06-05 09:57:00"));
         	System.out.println(dateStrFormat("1433488546000"));
             
-    }  
+    }  */
 }
