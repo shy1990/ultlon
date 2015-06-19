@@ -37,7 +37,7 @@
 			订单号:${taskForm.afterSaleForm.orderNum }<br>
 			串号:${taskForm.afterSaleForm.imei }<br>
 			用户:${taskForm.afterSaleForm.username }<br>
-			<a class="am-btn am-btn-success" href="change/edit?id=${taskForm.id }">我要换货</a>
+			<a class="am-btn am-btn-success" href="change/edit?taskId=${taskForm.id }">我要换货</a>
 		</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
