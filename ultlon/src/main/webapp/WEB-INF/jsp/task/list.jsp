@@ -22,6 +22,8 @@
 </head>
 <body>
 	<%@include file="../../common/navbar.jsp"%>
+	<% //TODO 石洪岳 ----> 待处理售后页面美化  %>
+	处理过的售后，点击不要跳转。不同处理状态颜色标注不同
 	<div class="content">
 		<div class="am-g">
 			<table id="mytable"
@@ -66,13 +68,13 @@
 					targetUrl+= "thh30"
 					break;
 				case 'WX':
-					targetUrl+= "wx"
+					targetUrl= "repair/edit"
 					break;
 				case 'DMDHX100':
 					targetUrl+= "dmdhx100"
 					break;
 				}
-				location.href = targetUrl + "?id=" + id;
+				location.href = targetUrl + "?taskId=" + id;
 			});
 		})
 	</script>

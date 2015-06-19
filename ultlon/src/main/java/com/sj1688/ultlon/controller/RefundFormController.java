@@ -63,11 +63,11 @@ public class RefundFormController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(@RequestParam(value = "taskId") TaskForm taskForm,
+	public String edit(@RequestParam(value = "taskId")TaskForm taskForm,
 			Model model) {
 		RefundForm genrateRefundForm = refundService.genrateRefundForm(taskForm);
 		model.addAttribute("refundForm", genrateRefundForm);
-		model.addAttribute("task", taskForm);
+		model.addAttribute("taskForm", taskForm);
 		return "refund/edit";
 	}
 
