@@ -22,7 +22,7 @@ public class AfterSaleForm extends AbstractAuditable<User, Long>{
 	private Date receiveTime;
 	private String skuCode;
 	private String goodsName;
-	private String result="处理中";//处理结果
+	private String result="NOPROCESS";//处理结果
 	private String remark;
 	private String username;
 	
