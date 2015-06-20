@@ -79,7 +79,8 @@ public class TaskController {
 
 	@RequestMapping(value = "/{id}/reject", method = RequestMethod.POST)
 	@ResponseBody
-	public String reject(@PathVariable(value = "id") TaskForm form) {
+	public String reject(@PathVariable(value = "id") TaskForm form,@RequestParam("remark")String remark) {
+		form.setRemark(remark);
 		taskService.reject(form);
 		return "ok";
 	}
