@@ -79,7 +79,7 @@
 			<label class="am-checkbox-inline"> <input type="checkbox"
 				value="option1"> 盒子外观是否有破损
 			</label> <label class="am-checkbox-inline"> <input type="checkbox"
-				value="option2"> 同时可以选我
+				value="option2"> 说明书
 			</label> <label class="am-checkbox-inline"> <input type="checkbox"
 				value="option3"> 还可以选我
 			</label>
