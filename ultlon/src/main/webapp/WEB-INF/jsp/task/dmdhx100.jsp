@@ -24,25 +24,55 @@
 	text-align: center;
 	padding: 50px 0;
 }
+.am-input-group {
+	width: 100%;
+}
+
+.am-input-group-label {
+	text-align: right;
+	width: 40%;
+}
+
+.am-form-field {
+	width: 60%
+}
+.a1{
+    width: 100%;
+    height:100px;
+   padding-top:29px; 
+   font-size:24px;
+}
 </style>
 </head>
 <body>
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
-			售后业务受理页面。${taskForm }
+			<%-- 	售后业务受理页面。${taskForm }
 			<% //TODO 石洪岳 ----> 多美达换新确认页面美化  %>
 			<p>石洪岳 ----> 多美达，无条件换新。确认加备注提交。 POST change taskId,remark</p>
-			<hr>
-			订单号:${taskForm.afterSaleForm.orderNum }<br>
-			串号:${taskForm.afterSaleForm.imei }<br>
-			用户:${taskForm.afterSaleForm.username }<br>
-			<a class="am-btn am-btn-success" href="change/edit?id=${taskForm.id }">我要换货</a>
+			<hr> --%>
+			<div class="am-input-group">
+				<span class="am-input-group-label">订单号:</span> <input type="text"
+					class="am-form-field"
+					placeholder="${taskForm.afterSaleForm.orderNum}">
+			</div>
+			<div class="am-input-group">
+				<span class="am-input-group-label">串&nbsp;&nbsp;&nbsp;&nbsp;号:</span>
+				<input type="text" class="am-form-field"
+					placeholder="${taskForm.afterSaleForm.imei}">
+			</div>
+			<div class="am-input-group">
+				<span class="am-input-group-label">客&nbsp;&nbsp;&nbsp;&nbsp;户:</span>
+				<input type="text" class="am-form-field"
+					placeholder="${taskForm.afterSaleForm.username}">
+			</div>
+			 <a class="am-btn am-btn-success a1" href="change/edit?id=${taskForm.id }">我要换货</a>
 		</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
-	
+
 </body>
 </html>
 
