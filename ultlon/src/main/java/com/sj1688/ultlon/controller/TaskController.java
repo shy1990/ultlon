@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.domain.User;
 import com.sj1688.ultlon.service.TaskService;
@@ -81,7 +82,7 @@ public class TaskController {
 	@ResponseBody
 	public String reject(@PathVariable(value = "id") TaskForm form,@RequestParam("remark")String remark) {
 		form.setRemark(remark);
-		taskService.reject(form);
+		taskService.updateStatus(form,FormAuditStatus.REJECT);
 		return "ok";
 	}
 

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.sj1688.ultlon.domain.AfterSaleForm;
+import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.TaskForm;
 
 /**
@@ -26,6 +27,6 @@ public interface TaskService {
 	
 	public Page<TaskForm> get(Pageable pageable,List<String> areas);
 	
-	public void reject(TaskForm entity);
+	public void updateStatus(TaskForm entity,FormAuditStatus statusToUpdate);
 
 }
