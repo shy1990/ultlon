@@ -37,11 +37,20 @@
 .am-form-field {
 	width: 60%
 }
-.a1{
-    width: 100%;
-    height:100px;
-   padding-top:29px; 
-   font-size:24px;
+
+.a1 {
+	width: 100%;
+	height: 100px;
+	padding-top: 29px;
+	font-size: 24px;
+}
+
+.checkbox1 {
+	width: 15px;
+	height: 15px;
+	left: 0;
+	top: 0;
+}
 }
 </style>
 </head>
@@ -49,7 +58,6 @@
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
-<<<<<<< HEAD
 			<%-- 		售后业务受理页面。
 			<%
 			//TODO 石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货
@@ -74,61 +82,144 @@
 				<input type="text" class="am-form-field"
 					placeholder="${taskForm.afterSaleForm.username}">
 			</div>
-			
-			
-				<div class="am-form-group">
-			<label class="am-checkbox-inline"> <input type="checkbox"
-				value="option1"> 盒子外观是否有破损
-			</label> <label class="am-checkbox-inline"> <input type="checkbox"
-				value="option2"> 说明书
-			</label> <label class="am-checkbox-inline"> <input type="checkbox"
-				value="option3"> 还可以选我
-			</label>
-				<label class="am-checkbox-inline"> <input type="checkbox"
-				value="option1"> 选我
-			</label> <label class="am-checkbox-inline"> <input type="checkbox"
-				value="option2"> 同时可以选我
-			</label> <label class="am-checkbox-inline"> <input type="checkbox"
-				value="option3"> 还可以选我
-			</label>
-				<label class="am-checkbox-inline"> <input type="checkbox"
-				value="option1"> 选我
-			</label> <label class="am-checkbox-inline"> <input type="checkbox"
-				value="option2"> 同时可以选我
-			</label> <label class="am-checkbox-inline"> <input type="checkbox"
-				value="option3"> 还可以选我
-			</label>
-=======
-			售后业务受理页面。
-			<% //TODO 石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货  %>
-			<p>石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货 ,拒绝受理接口 POST task/${task.id }/reject  </p>taskId,remark</p>
-			<hr>
-			订单号:${taskForm.afterSaleForm.orderNum }<br>
-			串号:${taskForm.afterSaleForm.imei }<br>
-			用户:${taskForm.afterSaleForm.username }<br>
-			<a class="am-btn am-btn-danger" href="refund/edit?taskId=${taskForm.id }">我要退货</a>
-			<a class="am-btn am-btn-success" href="change/edit?taskId=${taskForm.id }">我要换货</a>
-			<a class="am-btn am-btn-success" href="javascript:reject('${taskForm.id }');">拒绝受理</a>
->>>>>>> branch 'master' of https://git.coding.net/sylarlove/ultlon.git
-		</div>
+			<div class="am-panel-group" id="accordion">
+				<div class="am-panel am-panel-default">
+					<div class="am-panel-hd">
+						<h4 class="am-panel-title"
+							data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
+							包装检测</h4>
+					</div>
+					<div id="do-not-say-1" class="am-panel-collapse am-collapse">
+						<div class="am-panel-bd">
+							<label>盒子外观是否有破损</label> <input name="checkbox1"
+								class="checkbox1" type="checkbox">
+						</div>
+						<div class="am-panel-bd">
+							<label>是否有说明书</label> <input name="checkbox1" class="checkbox1"
+								type="checkbox">
+						</div>
+						<div class="am-panel-bd">
+							<label>是否有充电器</label> <input name="checkbox1" class="checkbox1"
+								type="checkbox">
+						</div>
+						<div class="am-panel-bd">
+							<label>是否有耳机，耳机是否损坏</label> <input name="checkbox1"
+								class="checkbox1" type="checkbox">
+						</div>
+						<div class="am-panel-bd">
+							<label>盒子外观是否有破损</label> <input name="checkbox1"
+								class="checkbox1" type="checkbox">
+						</div>
+					</div>
+				</div>
+				<div class="am-panel am-panel-default">
+					<div class="am-panel-hd">
+						<h4 class="am-panel-title"
+							data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">
+							手机检测</h4>
+					</div>
+					<div id="do-not-say-2" class="am-panel-collapse am-collapse">
+						<div class="am-panel-bd">
+							<label>外观检测（屏幕是否有划伤，边框是否有磕碰）</label> <input name="checkbox1"
+								class="checkbox1" type="checkbox">
+						</div>
+						<div class="am-panel-bd">
+							<label>电池仓检测（划痕、易碎标及封机标是否完整、防水标是否变红）</label> <input
+								name="checkbox1" class="checkbox1" type="checkbox">
+						</div>
+						<div class="am-panel-bd">
+							<label>盒子外观是否有破损</label> <input name="checkbox1"
+								class="checkbox1" type="checkbox">
+						</div>
+						<div class="am-panel-bd">
+							<label>盒子外观是否有破损</label> <input name="checkbox1"
+								class="checkbox1" type="checkbox">
+						</div>
+						<div class="am-panel-bd">
+							<label>盒子外观是否有破损</label> <input name="checkbox1"
+								class="checkbox1" type="checkbox">
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
 
 		</div>
-	
 
 
 
 
-		<a class="am-btn am-btn-danger a1" href="refund/edit?taskId=${taskForm.id }">我要退货</a>
-		<a class="am-btn am-btn-success a1" href="change/edit?taskId=${taskForm.id }">我要换货</a>
-		<a class="am-btn am-btn-danger a1" href="javascript:reject('${taskForm.id }');">拒绝受理</a>
+
+		<a class=" am-disabled am-btn am-btn-danger a1 a"
+			href="refund/edit?taskId=${taskForm.id }">我要退货</a> <a
+			class=" am-disabled am-btn am-btn-success a1 a"
+			href="change/edit?taskId=${taskForm.id }">我要换货</a>
+		<%-- <a
+			class="am-btn am-btn-danger a1"
+			href="javascript:reject('${taskForm.id }');">拒绝受理</a> --%>
+		<button class="am-btn am-btn-danger a1" id="doc-prompt-toggle">拒绝</button>
+
+		<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+			<div class="am-modal-dialog">
+				<div class="am-modal-hd">三际商城</div>
+				<div class="am-modal-bd">
+					请输入拒绝原因 <input type="text" class="am-modal-prompt-input">
+				</div>
+				<div class="am-modal-footer">
+					<span class="am-modal-btn" data-am-modal-confirm>提交</span>
+					<span class="am-modal-btn" data-am-modal-cancel>取消</span> 
+				
+				</div>
+			</div>
+		</div>
 	</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
 	<script type="text/javascript">
+		$(function() {
+			var allck = $("#accordion :checkbox").change(function() {
+				var cked = $("#accordion :checked");
+
+				if (cked.length < allck.length) {
+					$(".a").addClass("am-disabled");
+				} else {
+					$(".a").removeClass("am-disabled");
+				}
+			});
+			$('#doc-prompt-toggle').on('click', function() {
+				$('#my-prompt').modal({
+					relatedTarget : this,
+					onConfirm : function(e) {
+						$.post("task/${taskForm.id}/reject", {
+							"remark" : e.data
+						}, function(data) {
+							if (data === 'ok') {
+								location.href = "task?sort=createdDate,desc";
+							}
+						});
+
+					}
+					
+				});
+			});
+		})
 		function reject(id) {
-			//task/${task.id }/reject
-			alert(id);
+
+			var remark = prompt("备注：", "请输入拒绝原因")
+			if (remark) {
+				$.post("task/" + id + "/reject", {
+					"remark" : remark
+				}, function(data) {
+					if (data === 'ok') {
+						location.href = "task?sort=createdDate,desc";
+					}
+				});
+
+			}
+
 		}
 	</script>
 </body>

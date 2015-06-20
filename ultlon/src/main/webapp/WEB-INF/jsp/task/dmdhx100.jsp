@@ -46,13 +46,10 @@
 </head>
 <body>
 	<%@include file="../../common/navbar.jsp"%>
+	<form action="change" method="post">
 	<div class="content">
 		<div class="am-g">
-			<%-- 	售后业务受理页面。${taskForm }
-			<% //TODO 石洪岳 ----> 多美达换新确认页面美化  %>
-			<p>石洪岳 ----> 多美达，无条件换新。确认加备注提交。 POST change taskId,remark</p>
-<<<<<<< HEAD
-			<hr> --%>
+		    <input type="hidden" name="taskId" value="${taskForm.id }">
 			<div class="am-input-group">
 				<span class="am-input-group-label">订单号:</span> <input type="text"
 					class="am-form-field"
@@ -68,16 +65,16 @@
 				<input type="text" class="am-form-field"
 					placeholder="${taskForm.afterSaleForm.username}">
 			</div>
-			 <a class="am-btn am-btn-success a1" href="change/edit?id=${taskForm.id }">我要换货</a>
-=======
-			<hr>
-			订单号:${taskForm.afterSaleForm.orderNum }<br>
-			串号:${taskForm.afterSaleForm.imei }<br>
-			用户:${taskForm.afterSaleForm.username }<br>
-			<a class="am-btn am-btn-success" href="change/edit?taskId=${taskForm.id }">我要换货</a>
->>>>>>> branch 'master' of https://git.coding.net/sylarlove/ultlon.git
+			<div class="am-input-group am-input-group-primary">
+					<span class="am-input-group-label">备注</span> 
+						<textarea rows="6" cols="118" placeholder="请输入换新备注"  name="remark"></textarea>
+				</div>
+		    <input class="am-btn am-btn-danger a1"
+					type="submit" value="百日换新"></input>
+			<%--  <a class="am-btn am-btn-success a1" href="change/edit?id=${taskForm.id }">百日换新</a> --%>
 		</div>
 	</div>
+	</form>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
 
