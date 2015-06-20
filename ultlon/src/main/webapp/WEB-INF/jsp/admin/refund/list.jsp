@@ -37,9 +37,9 @@
 		<tbody>
 			<c:forEach var="item" items="${data.content }">
 				<tr class="am-active">
-					<td>${item.content.afterForm.username }</td>
-					<td>${item.content.afterForm.goodsName }</td>
-					<td>${item.content.afterForm.imei }</td>
+					<td>${item.content.taskForm.afterSaleForm.username }</td>
+					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
+					<td>${item.content.taskForm.afterSaleForm.imei }</td>
 					<td>${item.content.realRefundMoney }</td>
 					<td>${item.content.status }</td>
 					<td><c:if test='${item.content.status eq "NOPROCESS"}'>

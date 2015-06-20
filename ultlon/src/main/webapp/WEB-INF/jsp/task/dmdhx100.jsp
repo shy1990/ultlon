@@ -51,6 +51,7 @@
 			<%-- 	售后业务受理页面。${taskForm }
 			<% //TODO 石洪岳 ----> 多美达换新确认页面美化  %>
 			<p>石洪岳 ----> 多美达，无条件换新。确认加备注提交。 POST change taskId,remark</p>
+<<<<<<< HEAD
 			<hr> --%>
 			<div class="am-input-group">
 				<span class="am-input-group-label">订单号:</span> <input type="text"
@@ -68,6 +69,13 @@
 					placeholder="${taskForm.afterSaleForm.username}">
 			</div>
 			 <a class="am-btn am-btn-success a1" href="change/edit?id=${taskForm.id }">我要换货</a>
+=======
+			<hr>
+			订单号:${taskForm.afterSaleForm.orderNum }<br>
+			串号:${taskForm.afterSaleForm.imei }<br>
+			用户:${taskForm.afterSaleForm.username }<br>
+			<a class="am-btn am-btn-success" href="change/edit?taskId=${taskForm.id }">我要换货</a>
+>>>>>>> branch 'master' of https://git.coding.net/sylarlove/ultlon.git
 		</div>
 	</div>
 	<script src="js/jquery.min.js"></script>

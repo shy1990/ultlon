@@ -49,6 +49,7 @@
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
+<<<<<<< HEAD
 			<%-- 		售后业务受理页面。
 			<%
 			//TODO 石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货
@@ -97,6 +98,18 @@
 			</label> <label class="am-checkbox-inline"> <input type="checkbox"
 				value="option3"> 还可以选我
 			</label>
+=======
+			售后业务受理页面。
+			<% //TODO 石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货  %>
+			<p>石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货 ,拒绝受理接口 POST task/${task.id }/reject  </p>taskId,remark</p>
+			<hr>
+			订单号:${taskForm.afterSaleForm.orderNum }<br>
+			串号:${taskForm.afterSaleForm.imei }<br>
+			用户:${taskForm.afterSaleForm.username }<br>
+			<a class="am-btn am-btn-danger" href="refund/edit?taskId=${taskForm.id }">我要退货</a>
+			<a class="am-btn am-btn-success" href="change/edit?taskId=${taskForm.id }">我要换货</a>
+			<a class="am-btn am-btn-success" href="javascript:reject('${taskForm.id }');">拒绝受理</a>
+>>>>>>> branch 'master' of https://git.coding.net/sylarlove/ultlon.git
 		</div>
 
 		</div>
