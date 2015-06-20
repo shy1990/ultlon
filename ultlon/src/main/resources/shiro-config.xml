@@ -26,6 +26,7 @@
 		<property name="unauthorizedUrl" value="/unauthorized" />
 		<property name="filterChainDefinitions">
 			<value>
+				/favicon.ico=anon
 				/aftersale/** = anon
 				/css/** = anon
 				/js/** = anon

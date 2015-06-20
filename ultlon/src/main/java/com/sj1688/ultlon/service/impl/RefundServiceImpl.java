@@ -40,6 +40,7 @@ public class RefundServiceImpl implements RefundService{
 	@Override
 	public void save(RefundForm entity) {
 		RefundForm genrateRefundForm = genrateRefundForm(entity.getTaskForm());
+		genrateRefundForm.setRemark(entity.getRemark());
 		RefundForm save = rfr.save(genrateRefundForm);
 		ctx.publishEvent(new RefundFormCreateEvent(save));
 	}
