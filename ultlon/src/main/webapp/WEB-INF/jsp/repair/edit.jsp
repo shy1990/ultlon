@@ -18,6 +18,25 @@
 	text-align: center;
 	padding: 50px 0;
 }
+.am-input-group {
+	width: 100%;
+}
+
+.am-input-group-label {
+	text-align: right;
+	width: 40%;
+}
+
+.am-form-field {
+	width: 60%
+}
+
+.a1 {
+	width: 100%;
+	height: 100px;
+	padding-top: 29px;
+	font-size: 24px;
+}
 </style>
 </head>
 <body>
@@ -26,9 +45,17 @@
 		<div class="am-g">
 			<form action="repair" method="post">
 			<input type="hidden" name="taskId" value="${taskForm.id }">
-				 金额:<input type="text" name="cost" value="${repairForm.cost }"><br>
-				备注:<input type="text" name="remark" value="${repairForm.remark }"><br>
-				<input type="submit" value="保存">
+			<div class="am-input-group">
+					<span class="am-input-group-label">应&nbsp;&nbsp;&nbsp;&nbsp;退:</span>
+					<input type="text" class="am-form-field" name="cost">
+				</div>
+				<div class="am-input-group am-input-group-primary">
+					<span class="am-input-group-label">备注</span>
+					<textarea rows="6" cols="118" placeholder="请输入维修备注" id="wen"
+						name="remark"></textarea>
+				</div>
+				<input class="am-btn am-btn-danger a1" type="submit" value="维修确认"></input>
+
 			</form>
 		</div>
 	</div>
