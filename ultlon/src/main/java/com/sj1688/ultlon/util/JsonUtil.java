@@ -1,9 +1,9 @@
 /**  
 * @Title: JSONUtil.java
 * @Package com.sanji.mall.common.util
-* @Description: TODO(用一句话描述该文件做�?��)
+* @Description: TODO(鐢ㄤ竴鍙ヨ瘽鎻忚堪璇ユ枃浠跺仛锟�?锟斤拷)
 * @author ZhouZhangbao  
-* @date 2014-7-23 下午1:56:54
+* @date 2014-7-23 涓嬪崍1:56:54
 * @version V1.0  
 */
 package com.sj1688.ultlon.util;
@@ -23,22 +23,22 @@ import com.alibaba.fastjson.JSONObject;
 
 
 /**
- * JSON工具�?
+ * JSON宸ュ叿锟�?
  * @ClassName: JSONUtil
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜绫荤殑浣滅敤)
  * @author ZhouZhangbao
- * @date 2014-7-23 下午1:56:54
+ * @date 2014-7-23 涓嬪崍1:56:54
  */
 public class JsonUtil {
 	
 	/**
-	 * 从一个JSON 对象字符格式中得到一个java对象
+	 * 浠庝竴涓狫SON 瀵硅薄瀛楃鏍煎紡涓緱鍒颁竴涓猨ava瀵硅薄
 	* @Title: getObject4JsonString
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
 	* @param @param pojoCalss
-	* @param @return    设定文件
-	* @return Object    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return Object    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static Object getObject4JsonString(String jsonString, Class pojoCalss) {
@@ -50,20 +50,20 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 从一个JSON 对象字符格式中得到一个List对象
+	 * 浠庝竴涓狫SON 瀵硅薄瀛楃鏍煎紡涓緱鍒颁竴涓狶ist瀵硅薄
 	* @Title: getJsonStr2List
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
 	* @param @param pojoCalss
-	* @param @return    设定文件
-	* @return List    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return List    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	@SuppressWarnings("rawtypes")
 	public static List getJsonStr2List(String jsonString, Class pojoCalss) {
 		List result = new ArrayList();
 		Object[] dtoArray = JsonUtil.getObjectArray4Json(jsonString);
-		//warehouseService.delWarehouseMaterial(warehosueId[0]);// 添加前先删除原有数据
+		//warehouseService.delWarehouseMaterial(warehosueId[0]);// 娣诲姞鍓嶅厛鍒犻櫎鍘熸湁鏁版嵁
 		if (dtoArray != null && dtoArray.length > 0) {
 			for (int i = 0; i < dtoArray.length; i++) {
 				try {
@@ -240,12 +240,12 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 从json HASH表达式中获取�?��map，改map支持嵌套功能
+	 * 浠巎son HASH琛ㄨ揪寮忎腑鑾峰彇锟�?锟斤拷map锛屾敼map鏀寔宓屽鍔熻兘
 	* @Title: getMap4Json
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
-	* @param @return    设定文件
-	* @return Map    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return Map    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static Map getMap4Json(String jsonString) {
@@ -263,12 +263,12 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 从json数组中得到相应java数组
+	 * 浠巎son鏁扮粍涓緱鍒扮浉搴攋ava鏁扮粍
 	* @Title: getObjectArray4Json
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
-	* @param @return    设定文件
-	* @return Object[]    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return Object[]    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static Object[] getObjectArray4Json(String jsonString) {
@@ -278,13 +278,13 @@ public class JsonUtil {
 	}
 
 	/** 
-	 * 从json对象集合表达式中得到�?��java对象�?
+	 * 浠巎son瀵硅薄闆嗗悎琛ㄨ揪寮忎腑寰楀埌锟�?锟斤拷java瀵硅薄锟�?
 	* @Title: getList4Json
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
 	* @param @param pojoClass
-	* @param @return    设定文件
-	* @return List    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return List    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static List getList4Json(String jsonString, Class pojoClass) {
@@ -306,12 +306,12 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 从json数组中解析出java字符串数�?
+	 * 浠巎son鏁扮粍涓В鏋愬嚭java瀛楃涓叉暟锟�?
 	* @Title: getStringArray4Json
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
-	* @param @return    设定文件
-	* @return String[]    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return String[]    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static String[] getStringArray4Json(String jsonString) {
@@ -327,12 +327,12 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 从json数组中解析出javaLong型对象数�?
+	 * 浠巎son鏁扮粍涓В鏋愬嚭javaLong鍨嬪璞℃暟锟�?
 	* @Title: getLongArray4Json
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
-	* @param @return    设定文件
-	* @return Long[]    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return Long[]    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static Long[] getLongArray4Json(String jsonString) {
@@ -347,12 +347,12 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 从json数组中解析出java Integer型对象数�?
+	 * 浠巎son鏁扮粍涓В鏋愬嚭java Integer鍨嬪璞℃暟锟�?
 	* @Title: getIntegerArray4Json
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
-	* @param @return    设定文件
-	* @return Integer[]    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return Integer[]    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static Integer[] getIntegerArray4Json(String jsonString) {
@@ -367,13 +367,13 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 从json数组中解析出java Date 型对象数组，使用本方法必须保�?
+	 * 浠巎son鏁扮粍涓В鏋愬嚭java Date 鍨嬪璞℃暟缁勶紝浣跨敤鏈柟娉曞繀椤讳繚锟�?
 	* @Title: getDateArray4Json
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
 	* @param @param DataFormat
-	* @param @return    设定文件
-	* @return Date[]    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return Date[]    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static Date[] getDateArray4Json(String jsonString, String DataFormat) {
@@ -393,12 +393,12 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 从json数组中解析出java Integer型对象数�?
+	 * 浠巎son鏁扮粍涓В鏋愬嚭java Integer鍨嬪璞℃暟锟�?
 	* @Title: getDoubleArray4Json
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param jsonString
-	* @param @return    设定文件
-	* @return Double[]    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return Double[]    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static Double[] getDoubleArray4Json(String jsonString) {
@@ -412,12 +412,12 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 将java对象转换成json字符�?
+	 * 灏唈ava瀵硅薄杞崲鎴恓son瀛楃锟�?
 	* @Title: getJsonString4JavaPOJO
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param javaObj
-	* @param @return    设定文件
-	* @return String    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return String    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static String getJsonString4JavaPOJO(Object javaObj) {
@@ -428,13 +428,13 @@ public class JsonUtil {
 
 
 	/**
-	 * 根据表列将字符串数组格式化为json对象
+	 * 鏍规嵁琛ㄥ垪灏嗗瓧绗︿覆鏁扮粍鏍煎紡鍖栦负json瀵硅薄
 	* @Title: formatBytableCols
-	* @Description: TODO(这里用一句话描述这个方法的作�?
+	* @Description: TODO(杩欓噷鐢ㄤ竴鍙ヨ瘽鎻忚堪杩欎釜鏂规硶鐨勪綔锟�?
 	* @param @param obj
 	* @param @param tableCols
-	* @param @return    设定文件
-	* @return String    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return String    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static String formatBytableCols(Object[] obj, String[] tableCols) {
@@ -484,13 +484,13 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 根据表列将集合格式化为json对象
+	 * 鏍规嵁琛ㄥ垪灏嗛泦鍚堟牸寮忓寲涓簀son瀵硅薄
 	* @Title: formatBytableCols
-	* @Description: TODO(根据表列将集合格式化为json对象)
+	* @Description: TODO(鏍规嵁琛ㄥ垪灏嗛泦鍚堟牸寮忓寲涓簀son瀵硅薄)
 	* @param @param list
 	* @param @param tableCols
-	* @param @return    设定文件
-	* @return String    返回类型
+	* @param @return    璁惧畾鏂囦欢
+	* @return String    杩斿洖绫诲瀷
 	* @author ZhouZhangbao
 	 */
 	public static String formatBytableCols(List<Object[]> list,String[] tableCols) {

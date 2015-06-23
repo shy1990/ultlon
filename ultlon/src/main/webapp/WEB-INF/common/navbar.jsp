@@ -15,7 +15,7 @@
 		<div class="am-collapse am-topbar-collapse" id="collapse-head">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li class="am-active"><a href="./">首页</a></li>
-				<li><a href="task">待处理售后</a></li>
+				<li><a href="task?sort=createdDate,desc">待处理售后</a></li>
 				<li><a href="#">售后历史</a></li>
 				<li><a href="#">帮助中心</a></li>
 			</ul>
