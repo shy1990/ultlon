@@ -1,5 +1,7 @@
 package com.sj1688.ultlon.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,19 +58,25 @@ public class RepairFormController {
 	private RepairService repairService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String add(@RequestParam(value = "taskId") TaskForm taskForm,RepairForm repairForm) {
+	public String add(@RequestParam(value = "taskId") TaskForm taskForm,
+			RepairForm repairForm) {
 		repairForm.setTaskForm(taskForm);
 		repairService.save(repairForm);
 		return "repair/success";
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(@RequestParam(value = "taskId") TaskForm taskForm,
 			Model model) {
-		RepairForm genrateRepairForm = repairService.genrateRepairForm(taskForm);
+		RepairForm genrateRepairForm = repairService
+				.genrateRepairForm(taskForm);
 		model.addAttribute("repairForm", genrateRepairForm);
 		model.addAttribute("taskForm", taskForm);
 		return "repair/edit";
 	}
 
+	@RequestMapping(value = "/save")
+	public void save(String nameone, HttpServletRequest request) {
+		System.out.println("已经进来了");
+	}
 }
