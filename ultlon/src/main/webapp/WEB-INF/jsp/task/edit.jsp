@@ -119,15 +119,15 @@
 								name="checkbox1" class="checkbox1" type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>盒子外观是否有破损</label> <input name="checkbox1"
+							<label>手机有无私拆 （螺丝有无拧过的痕迹，封机标是否完整）</label> <input name="checkbox1"
 								class="checkbox1" type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>盒子外观是否有破损</label> <input name="checkbox1"
+							<label>卡槽是否人为损坏（触点、线路）</label> <input name="checkbox1"
 								class="checkbox1" type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>盒子外观是否有破损</label> <input name="checkbox1"
+							<label>开机有无密码（酷派系列酷管家密码 、魅族系列FLME密码）</label> <input name="checkbox1"
 								class="checkbox1" type="checkbox">
 						</div>
 					</div>
