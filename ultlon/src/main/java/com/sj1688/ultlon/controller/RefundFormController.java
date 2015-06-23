@@ -61,7 +61,6 @@ public class RefundFormController {
 		refundService.save(refundForm);
 		return "refund/success";
 	}
-	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(@RequestParam(value = "id") AfterSaleForm afterSaleForm,
 			Model model) {

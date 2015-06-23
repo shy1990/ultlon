@@ -17,7 +17,7 @@ public class ChangeForm extends AbstractAuditable<User, Long> {
 	private AfterSaleForm afterForm;//售后服务
 	
 	@Enumerated(EnumType.STRING)
-	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
+	private FormAuditStatus status= FormAuditStatus.NOPROCESS;
 	
 	private String remark;
 
@@ -29,8 +29,6 @@ public class ChangeForm extends AbstractAuditable<User, Long> {
 		super();
 		this.afterForm = afterForm;
 	}
-
-
 
 	public AfterSaleForm getAfterForm() {
 		return afterForm;

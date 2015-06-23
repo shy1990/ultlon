@@ -10,7 +10,6 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
  * @author Administrator
  *
  */
-
 @Entity
 @Table(name="tb_after_sale_order")
 public class AfterSaleOrder extends AbstractAuditable<User, Long>{
@@ -46,7 +45,7 @@ public class AfterSaleOrder extends AbstractAuditable<User, Long>{
 	public String getNormsCode() {
 		return normsCode;
 	}
-	public void setNormsCode(String normsCode) {
+	public void setNormsCode(String normsCode){
 		this.normsCode = normsCode;
 	}
 	
