@@ -22,7 +22,9 @@
 </head>
 <body>
 	<%@include file="../../common/navbar.jsp"%>
-	<% //TODO 石洪岳 ----> 待处理售后页面美化  %>
+	<%
+		//TODO 石洪岳 ----> 待处理售后页面美化
+	%>
 	处理过的售后，点击不要跳转。不同处理状态颜色标注不同
 	<div class="content">
 		<div class="am-g">
@@ -30,22 +32,21 @@
 				class="am-table am-table-bordered am-table-striped am-table-hover">
 				<thead>
 					<tr>
-						<th>手机串号</th>
+						<th>手机名称</th>
 						<th>申请人</th>
 						<th>申请时间</th>
-						<th>状态</th>
 						<th>类型</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="item" items="${data.content }">
 						<tr data-id="${item.content.id }"
-							data-type="${item.content.afterSaleForm.type }">
-							<td>${item.content.afterSaleForm.imei }</td>
+							data-type="${item.content.afterSaleForm.type }" class="am-danger am-disabled">
+							<td>${item.content.afterSaleForm.goodsName }</td>
 							<td>${item.content.afterSaleForm.username }</td>
 							<td>${item.content.createdDate }</td>
-							<td>${item.content.status }</td>
-							<td class="am-danger">${item.content.afterSaleForm.type }</td>
+							<td><input type="hidden" name="status" value="${item.content.status}"></td>
+							<td >${item.content.afterSaleForm.type }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -57,24 +58,37 @@
 	<script type="text/javascript">
 		$(function() {
 			$("#mytable").delegate("tr", "click", function() {
+			/* 
+				var status = $(this).attr("data-type"); */
+				var allck = $("#accordion :hidden").change(function() {
+					var status = $("#accordion :hidden");
+
+					if (status=="NOPROCESS") {
+						$(".tr").removeClass("am-disabled");
+						
+					} else {
+						$(".tr").addClass("am-disabled");
+					}
+				});
 				var id = $(this).attr("data-id");
 				var type = $(this).attr("data-type");
 				var targetUrl = "task/";
 				switch (type) {
 				case 'KXS':
-					targetUrl+= "kxs";
+					targetUrl += "kxs";
 					break;
 				case 'THH30':
-					targetUrl+= "thh30"
+					targetUrl += "thh30"
 					break;
 				case 'WX':
-					targetUrl= "repair/edit"
+					targetUrl = "repair/edit"
 					break;
 				case 'DMDHX100':
-					targetUrl+= "dmdhx100"
+					targetUrl += "dmdhx100"
 					break;
 				}
 				location.href = targetUrl + "?taskId=" + id;
+			
 			});
 		})
 	</script>
