@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <meta charset="UTF-8">
@@ -21,6 +22,8 @@
 </head>
 <body>
 	<%@include file="../../common/navbar.jsp"%>
+	<% //TODO 石洪岳 ----> 待处理售后页面美化  %>
+	处理过的售后，点击不要跳转。不同处理状态颜色标注不同
 	<div class="content">
 		<div class="am-g">
 			<table id="mytable"
@@ -30,34 +33,21 @@
 						<th>手机串号</th>
 						<th>申请人</th>
 						<th>申请时间</th>
+						<th>状态</th>
 						<th>类型</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr data-id="1" data-type="开箱损">
-						<td>111111</td>
-						<td>三际电子商务测试手机店</td>
-						<td>15年6月25日 15点52分</td>
-						<td class="am-danger">开箱损</td>
-					</tr>
-					<tr data-id="2" data-type="30天退换货">
-						<td>111111</td>
-						<td>三际电子商务测试手机店</td>
-						<td>15年6月25日 15点52分</td>
-						<td class="am-primary">30天退换货</td>
-					</tr>
-					<tr data-id="3" data-type="维修">
-						<td>111111</td>
-						<td>三际电子商务测试手机店</td>
-						<td>15年6月25日 15点52分</td>
-						<td class="am-warning">维修</td>
-					</tr>
-					<tr data-id="4" data-type="多美达百日换新">
-						<td>111111</td>
-						<td>三际电子商务测试手机店</td>
-						<td>15年6月25日 15点52分</td>
-						<td class="am-success">多美达百日换新</td>
-					</tr>
+					<c:forEach var="item" items="${data.content }">
+						<tr data-id="${item.content.id }"
+							data-type="${item.content.afterSaleForm.type }">
+							<td>${item.content.afterSaleForm.imei }</td>
+							<td>${item.content.afterSaleForm.username }</td>
+							<td>${item.content.createdDate }</td>
+							<td>${item.content.status }</td>
+							<td class="am-danger">${item.content.afterSaleForm.type }</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -69,22 +59,22 @@
 			$("#mytable").delegate("tr", "click", function() {
 				var id = $(this).attr("data-id");
 				var type = $(this).attr("data-type");
-				var targetUrl="";
+				var targetUrl = "task/";
 				switch (type) {
-				case '开箱损':
-					targetUrl="kxs";
+				case 'KXS':
+					targetUrl+= "kxs";
 					break;
-				case '30天退换货':
-					targetUrl="thh30"
+				case 'THH30':
+					targetUrl+= "thh30"
 					break;
-				case '维修':
-					targetUrl="repair/edit"
+				case 'WX':
+					targetUrl= "repair/edit"
 					break;
-				case '多美达百日换新':
-					targetUrl="dmdhx100"
+				case 'DMDHX100':
+					targetUrl+= "dmdhx100"
 					break;
 				}
-				location.href=targetUrl+"?id="+id;
+				location.href = targetUrl + "?taskId=" + id;
 			});
 		})
 	</script>

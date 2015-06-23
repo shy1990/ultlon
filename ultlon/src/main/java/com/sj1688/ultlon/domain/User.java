@@ -1,10 +1,15 @@
 package com.sj1688.ultlon.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.data.jpa.domain.AbstractAuditable;
+
+import com.google.common.base.Splitter;
 @Entity
 @Table(name="tb_user")
 public class User extends AbstractAuditable<User,Long>{
@@ -17,6 +22,7 @@ public class User extends AbstractAuditable<User,Long>{
 	private String username;
 	private String password;
 	private String regions;//所在区域
+	private String roler;
 	
 	public User(String username, String password) {
 		super();
@@ -48,5 +54,20 @@ public class User extends AbstractAuditable<User,Long>{
 	public void setRegions(String regions) {
 		this.regions = regions;
 	}
+	
+	public String getRoler() {
+		return roler;
+	}
 
+
+	public void setRoler(String roler) {
+		this.roler = roler;
+	}
+
+
+	@Transient
+	public List<String> getRegionList(){
+		List<String> result = Splitter.on(",").trimResults().splitToList(this.regions);
+		return result;
+	}
 }

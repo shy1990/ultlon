@@ -11,23 +11,11 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="stylesheet" href="css/amazeui.min.css" />
-<style type="text/css">
-.sj-btn-block {
-	display: block;
-	height: 150px;
-	width: 100%;
-}
-</style>
+<shiro:hasRole name="admin"><meta http-equiv="refresh" content="0;url=admin"></shiro:hasRole>
+<shiro:hasRole name="app"><meta http-equiv="refresh" content="0;url=app"></shiro:hasRole>
 <title>售后</title>
 </head>
 <body>
-	<%@include file="../common/navbar.jsp"%>
-	<a href="task" class="am-btn am-btn-primary sj-btn-block ">待处理售后</a>
-	<a class="am-btn am-btn-default sj-btn-block">售后历史</a>
-	<a class="am-btn am-btn-secondary sj-btn-block">帮助中心</a>
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/amazeui.min.js"></script>
+正在转向首页..
 </body>
 </html>

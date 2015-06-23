@@ -18,11 +18,11 @@ public class AfterSaleForm extends AbstractAuditable<User, Long>{
 	private String orderNum;//订单号
 	@Enumerated(EnumType.STRING)
 	private AfterSaleType type;
-	//@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date receiveTime;
 	private String skuCode;
 	private String goodsName;
-	private String result="处理中";//处理结果
+	private String result="NOPROCESS";//处理结果
 	private String remark;
 	private String username;
 	

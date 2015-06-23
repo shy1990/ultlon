@@ -16,6 +16,17 @@
 	</select>
 
 	<select id="findOrderPirceAndCurrentPrice" resultType="map">
-		select 123 ORDER_PRICE, 321 CURRENT_PRICE from dual
+		select i.deal_price ORDER_PRICE, s.price CURRENT_PRICE from sj_tb_order o 
+		left join sj_tb_order_items i on o.id = i.order_id 
+		left join sj_tb_goods_sku s on i.target_id = s.id 
+		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR} and s.sku_num = #{skuCode,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="findUserArea" resultType="string">
+		select 123 from dual where 
+	</select>
+	
+	<select id="findOrderId" resultType="string">
+		select o.id from sj_tb_order o where o.orderNum = #{orderNum,jdbcType=VARCHAR}
 	</select>
 </mapper>

@@ -38,8 +38,8 @@
 			<artifactId>spring-boot-starter-hateoas</artifactId>
 		</dependency>
 		<dependency>
-			 <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -112,7 +112,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
-			 <artifactId>shiro-ehcache</artifactId>
+			<artifactId>shiro-ehcache</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
 		<dependency>
@@ -146,7 +146,13 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jbundle.util.osgi.wrapped</groupId>
+			<artifactId>org.jbundle.util.osgi.wrapped.org.apache.http.client</artifactId>
+			<version>4.1.2</version>
+		</dependency>
 	</dependencies>
+
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -156,6 +162,21 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 </project>

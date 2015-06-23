@@ -43,23 +43,13 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			final PrincipalCollection principals) {
-		// retrieve role names and permission names
-		final String username = (String) principals.getPrimaryPrincipal();
-		final User user = userRepository.findByUsername(username);
+		final User user = (User) principals.getPrimaryPrincipal();
 		if (user == null) {
 			throw new UnknownAccountException("Account does not exist");
 		}
 		final Set<String> roleNames = new LinkedHashSet<String>();
 		final Set<String> permissionNames = new LinkedHashSet<String>();
-		// TODO 添加角色权限
-		/*
-		 * final int totalRoles = user.getRoles().size();
-		 * 
-		 * if (totalRoles > 0) { for (Role role : user.getRoles()) {
-		 * roleNames.add(role.getName()); for (Permission permission :
-		 * role.getPermissions()) { permissionNames.add(permission.getName()); }
-		 * } }
-		 */
+		roleNames.add(user.getRoler());
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(
 				roleNames);
 		info.setStringPermissions(permissionNames);

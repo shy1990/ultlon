@@ -10,6 +10,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,7 +91,16 @@ public class AfterSaleFormController {
 			return afterSaleService.getTypes(parseDate, goodsName);
 	}
 
-	
+	@RequestMapping(value="testadd",method = RequestMethod.POST)
+	@ResponseBody
+	public String add(@RequestBody AfterSaleForm afterSaleForm) {
+		try {
+			afterSaleService.save(afterSaleForm);
+		} catch (NotSuportException e) {
+			return e.getMessage();
+		}
+		return "ok";
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
@@ -103,27 +113,4 @@ public class AfterSaleFormController {
 		}
 		return "您的售后申请已火速提交并通知当地的业务人员，请耐心等候....";
 	}
-
-/*	// TODO 修改demo
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(
-			@RequestParam(required = false, value = "id") AfterSaleForm AfterSaleForm,
-			Model model) {
-		model.addAttribute("form", AfterSaleForm);
-		return "aftersale/edit";
-	}
-
-	// TODO 更新demo
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable("id") AfterSaleForm form, AfterSaleForm newForm) {
-		try {
-			BeanUtils.copyProperties(form, newForm);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		afterSaleFormRepository.save(form);
-		return "redirect:/aftersale";
-	}*/
 }

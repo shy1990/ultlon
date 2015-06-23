@@ -3,6 +3,7 @@ package com.sj1688.ultlon.domain;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,32 +14,33 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 public class ChangeForm extends AbstractAuditable<User, Long> {
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne
-	private AfterSaleForm afterForm;//售后服务
+	@OneToOne(fetch=FetchType.EAGER)
+	private TaskForm taskForm;//售后任务
 	
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	
 	private String remark;
 
+	
+	public ChangeForm(TaskForm taskForm) {
+		super();
+		this.taskForm = taskForm;
+	}
+
 	public ChangeForm() {
 		super();
 	}
 
-	public ChangeForm(AfterSaleForm afterForm) {
-		super();
-		this.afterForm = afterForm;
+	public TaskForm getTaskForm() {
+		return taskForm;
 	}
 
 
-
-	public AfterSaleForm getAfterForm() {
-		return afterForm;
+	public void setTaskForm(TaskForm taskForm) {
+		this.taskForm = taskForm;
 	}
 
-	public void setAfterForm(AfterSaleForm afterForm) {
-		this.afterForm = afterForm;
-	}
 
 	public FormAuditStatus getStatus() {
 		return status;

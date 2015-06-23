@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -16,14 +17,14 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 public class RefundForm extends AbstractAuditable<User, Long> {
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne
-	private AfterSaleForm afterForm;//售后服务
+	@OneToOne(fetch=FetchType.EAGER)
+	private TaskForm taskForm;//售后任务
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	
 	/*成交价*/
 	private BigDecimal orderPrice;
-	private BigDecimal refundMoney;
+	private BigDecimal currentPrice;
 	private String remark;
 
 	public RefundForm() {
@@ -32,25 +33,29 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 
 	@Transient
 	public BigDecimal getRealRefundMoney(){
-		//TODO 先判断售后类型，在决定是退最小还是原价退。
-		return BigDecimal.TEN;
+		AfterSaleType type = this.taskForm.getAfterSaleForm().getType();
+		if(type.equals(AfterSaleType.KXS)){
+			return this.orderPrice;
+		}else if(type.equals(AfterSaleType.THH30)){
+			return this.orderPrice.compareTo(this.currentPrice)<0?this.orderPrice:this.currentPrice;
+		}
+		return BigDecimal.ZERO;
 	}
-	public RefundForm(AfterSaleForm afterForm, BigDecimal orderPrice,
-			BigDecimal refundMoney) {
+	
+	public RefundForm(TaskForm taskForm, BigDecimal orderPrice,BigDecimal currentPrice) {
 		super();
-		this.afterForm = afterForm;
+		this.taskForm = taskForm;
 		this.orderPrice = orderPrice;
-		this.refundMoney = refundMoney;
+		this.currentPrice = currentPrice;
 	}
 
 
-
-	public AfterSaleForm getAfterForm() {
-		return afterForm;
+	public TaskForm getTaskForm() {
+		return taskForm;
 	}
 
-	public void setAfterForm(AfterSaleForm afterForm) {
-		this.afterForm = afterForm;
+	public void setTaskForm(TaskForm taskForm) {
+		this.taskForm = taskForm;
 	}
 
 	public FormAuditStatus getStatus() {
@@ -77,11 +82,13 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 		this.remark = remark;
 	}
 
-	public BigDecimal getRefundMoney() {
-		return refundMoney;
+	public BigDecimal getCurrentPrice() {
+		return currentPrice;
 	}
 
-	public void setRefundMoney(BigDecimal refundMoney) {
-		this.refundMoney = refundMoney;
+	public void setCurrentPrice(BigDecimal currentPrice) {
+		this.currentPrice = currentPrice;
 	}
+
+	
 }
