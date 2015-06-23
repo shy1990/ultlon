@@ -6,7 +6,6 @@ import java.io.Serializable;
 /**
  * 
 * @ClassName: Json
-* @Description: TODO(这里用一句话描述这个类的作用)
 * @author ZhouZhangbao
 * @date 2014-9-4 下午8:03:25
  */

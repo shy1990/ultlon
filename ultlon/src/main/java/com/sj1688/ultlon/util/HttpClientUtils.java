@@ -406,7 +406,7 @@ public class HttpClientUtils {
 	}
 	
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		Map<String,String> params = new HashMap<String,String>();
 		String orderId = "0cd4c72a2f3642d3943dde59a9af96f4";
@@ -415,5 +415,5 @@ public class HttpClientUtils {
 		params.put("reFundAmt", reFundAmt);
 		String s = HttpClientUtils.sendPostSSLRequest("http://www.3j1688.com/yeePay/toRefund.html", params);
 		System.out.println(s);
-	}
+	}*/
 }
