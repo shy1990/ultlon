@@ -58,15 +58,6 @@
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
-			<%-- 		售后业务受理页面。
-			<%
-			//TODO 石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货
-		%>
-			<p>石洪岳 ----> 验机流程，所有条件满足才可以点击退货或者换货 ,拒绝受理接口 POST task/${task.id
-				}/reject</p>
-			taskId,remark
-			</p>
-			<hr> --%>
 			<div class="am-input-group">
 				<span class="am-input-group-label">订单号:</span> <input type="text"
 					class="am-form-field"
