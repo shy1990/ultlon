@@ -40,7 +40,7 @@
 				<tbody>
 					<c:forEach var="item" items="${data.content }">
 						<tr data-id="${item.content.id }"
-							data-type="${item.content.afterSaleForm.type }">
+							data-type="${item.content.afterSaleForm.type }" data-status="${item.content.status }">
 							<td>${item.content.afterSaleForm.imei }</td>
 							<td>${item.content.afterSaleForm.username }</td>
 							<td>${item.content.createdDate }</td>
@@ -57,6 +57,11 @@
 	<script type="text/javascript">
 		$(function() {
 			$("#mytable").delegate("tr", "click", function() {
+				var status = $(this).attr("data-status");
+				if(status!="NOPROCESS"){
+					return;
+				}
+				
 				var id = $(this).attr("data-id");
 				var type = $(this).attr("data-type");
 				var targetUrl = "task/";
