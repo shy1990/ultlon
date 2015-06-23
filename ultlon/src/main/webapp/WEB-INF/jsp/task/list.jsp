@@ -43,8 +43,24 @@
 							<td>${item.content.afterSaleForm.goodsName }</td>
 							<td>${item.content.afterSaleForm.username }</td>
 							<td>${item.content.createdDate }</td>
-							<%-- 	<td><input type="hidden" name="status" value="${item.content.status}"></td> --%>
-							<td>${item.content.afterSaleForm.type }</td>
+					 	<c:choose>
+								<c:when test="${item.content.afterSaleForm.type=='THH30' }">
+									<td>30天退换货</td>
+								</c:when>
+								<c:when test="${item.content.afterSaleForm.type=='KXS' }">
+									<td>开箱损</td>
+								</c:when>
+								<c:when test="${item.content.afterSaleForm.type=='WX' }">
+									<td>维修</td>
+								</c:when>
+								<c:otherwise>
+									<td>多美达百日换新</td>
+								</c:otherwise>
+							</c:choose>  
+							<%-- <c:if test="${item.content.afterSaleForm.type}=='THH30'">
+							<td>三十天退换货</td>
+							</c:if> --%>
+
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -55,49 +71,48 @@
 	<script src="js/amazeui.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$("#mytable tbody tr").each(function(i,o){
-				var status=$(o).attr("data-status");
+			$("#mytable tbody tr").each(function(i, o) {
+				var status = $(o).attr("data-status");
 				var type = $(o).attr("data-type");
 				console.log(status);
-			 	if(status=="NOPROCESS"){
-			 		if(type=="KXS"){
-			 			$(o).addClass("am-success");
-			 		}else if(type=="WX"){
-			 			$(o).addClass("am-warning");
-			 		}else if(type=="THH30"){
-			 			$(o).addClass("am-danger");
-			 		}else if(type=="DMDHX100"){
-			 			$(o).addClass("am-primary");
-			 		}
-			 		/* $(o).addClass("am-disabled"); */
-				} 
-					
-					
-	/* 		switch (status) {
-				case 'NOPROCESS':
-					return
-					break;
-				case 'NOPROCESS':
-					return
-					break;
-				case 'NOPROCESS':
-					return
-					break;
-				case 'NOPROCESS':
-					return
-					break;
-				}  */
+				if (status == "NOPROCESS") {
+					if (type == "KXS") {
+						$(o).addClass("am-success");
+					} else if (type == "WX") {
+						$(o).addClass("am-warning");
+					} else if (type == "THH30") {
+						$(o).addClass("am-danger");
+					} else if (type == "DMDHX100") {
+						$(o).addClass("am-primary");
+					}
+					/* $(o).addClass("am-disabled"); */
+				}
+
+				/* 		switch (status) {
+							case 'NOPROCESS':
+								return
+								break;
+							case 'NOPROCESS':
+								return
+								break;
+							case 'NOPROCESS':
+								return
+								break;
+							case 'NOPROCESS':
+								return
+								break;
+							}  */
 			});
-		
+
 			$("#mytable").delegate("tr", "click", function() {
-				var status=$(this).attr("data-status");
-				if(status!="NOPROCESS"){
+				var status = $(this).attr("data-status");
+				if (status != "NOPROCESS") {
 					return;
 				}
-		        var id = $(this).attr("data-id");
+				var id = $(this).attr("data-id");
 				var type = $(this).attr("data-type");
 				var targetUrl = "task/";
-	
+
 				switch (type) {
 				case 'KXS':
 					targetUrl += "kxs";
@@ -113,10 +128,9 @@
 					break;
 				}
 				location.href = targetUrl + "?taskId=" + id;
-			
+
 			});
 		})
-			
 	</script>
 </body>
 </html>

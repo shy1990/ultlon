@@ -54,17 +54,17 @@
 			<div class="am-input-group">
 				<span class="am-input-group-label">订单号:</span> <input type="text"
 					class="am-form-field"
-					placeholder="${taskForm.afterSaleForm.orderNum}">
+					placeholder="${taskForm.afterSaleForm.orderNum}" disabled="disabled">
 			</div>
 			<div class="am-input-group">
 				<span class="am-input-group-label">串&nbsp;&nbsp;&nbsp;&nbsp;号:</span>
 				<input type="text" class="am-form-field"
-					placeholder="${taskForm.afterSaleForm.imei}">
+					placeholder="${taskForm.afterSaleForm.imei}" disabled="disabled">
 			</div>
 			<div class="am-input-group">
 				<span class="am-input-group-label">客&nbsp;&nbsp;&nbsp;&nbsp;户:</span>
 				<input type="text" class="am-form-field"
-					placeholder="${taskForm.afterSaleForm.username}">
+					placeholder="${taskForm.afterSaleForm.username}" disabled="disabled">
 			</div>
 			<div class="am-input-group am-input-group-primary">
 					<span class="am-input-group-label">备注</span> 

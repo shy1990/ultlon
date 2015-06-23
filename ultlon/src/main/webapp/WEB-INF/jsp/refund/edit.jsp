@@ -50,17 +50,17 @@
 				<input type="hidden" name="taskId" value="${taskForm.id }">
 				<div class="am-input-group">
 					<span class="am-input-group-label">成交价:</span> <input type="text"
-						class="am-form-field" placeholder="${refundForm.orderPrice }">
+						class="am-form-field" placeholder="${refundForm.orderPrice }" disabled="disabled">
 				</div>
 				<div class="am-input-group">
 					<span class="am-input-group-label">现&nbsp;&nbsp;&nbsp;&nbsp;价:</span>
 					<input type="text" class="am-form-field"
-						placeholder="${refundForm.currentPrice }">
+						placeholder="${refundForm.currentPrice }" disabled="disabled">
 				</div>
 				<div class="am-input-group">
 					<span class="am-input-group-label">应&nbsp;&nbsp;&nbsp;&nbsp;退:</span>
 					<input type="text" class="am-form-field"
-						placeholder="${refundForm.realRefundMoney }">
+						placeholder="${refundForm.realRefundMoney }" disabled="disabled">
 				</div>
 				<div class="am-input-group am-input-group-primary">
 					<span class="am-input-group-label">备注</span>

@@ -51,7 +51,6 @@
 	left: 0;
 	top: 0;
 }
-}
 </style>
 </head>
 <body>
@@ -61,18 +60,18 @@
 		<div class="am-g">
 			<div class="am-input-group">
 				<span class="am-input-group-label">订单号:</span> <input type="text"
-					class="am-form-field"
-					placeholder="${taskForm.afterSaleForm.orderNum}">
+					class="am-form-field" 
+					placeholder="${taskForm.afterSaleForm.orderNum}" disabled="disabled">
 			</div>
 			<div class="am-input-group">
 				<span class="am-input-group-label">串&nbsp;&nbsp;&nbsp;&nbsp;号:</span>
-				<input type="text" class="am-form-field"
-					placeholder="${taskForm.afterSaleForm.imei}">
+				<input type="text" class="am-form-field" 
+					placeholder="${taskForm.afterSaleForm.imei}" disabled="disabled">
 			</div>
 			<div class="am-input-group">
 				<span class="am-input-group-label">客&nbsp;&nbsp;&nbsp;&nbsp;户:</span>
 				<input type="text" class="am-form-field"
-					placeholder="${taskForm.afterSaleForm.username}">
+					placeholder="${taskForm.afterSaleForm.username}" disabled="disabled">
 			</div>
 			<div class="am-panel-group" id="accordion">
 				<div class="am-panel am-panel-default">
