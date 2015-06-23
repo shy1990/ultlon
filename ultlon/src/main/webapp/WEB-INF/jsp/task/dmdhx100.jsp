@@ -48,6 +48,7 @@
 	<%@include file="../../common/navbar.jsp"%>
 	<form action="change" method="post">
 	<div class="content">
+	<h1>多美达百日换新</h1>
 		<div class="am-g">
 		    <input type="hidden" name="taskId" value="${taskForm.id }">
 			<div class="am-input-group">

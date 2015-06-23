@@ -22,10 +22,7 @@
 </head>
 <body>
 	<%@include file="../../common/navbar.jsp"%>
-	<%
-		//TODO 石洪岳 ----> 待处理售后页面美化
-	%>
-	处理过的售后，点击不要跳转。不同处理状态颜色标注不同
+
 	<div class="content">
 		<div class="am-g">
 			<table id="mytable"
@@ -41,12 +38,13 @@
 				<tbody>
 					<c:forEach var="item" items="${data.content }">
 						<tr data-id="${item.content.id }"
-							data-type="${item.content.afterSaleForm.type }" class="am-danger am-disabled">
+							data-type="${item.content.afterSaleForm.type }"
+							data-status="${item.content.status}" class=" b">
 							<td>${item.content.afterSaleForm.goodsName }</td>
 							<td>${item.content.afterSaleForm.username }</td>
 							<td>${item.content.createdDate }</td>
-							<td><input type="hidden" name="status" value="${item.content.status}"></td>
-							<td >${item.content.afterSaleForm.type }</td>
+							<%-- 	<td><input type="hidden" name="status" value="${item.content.status}"></td> --%>
+							<td>${item.content.afterSaleForm.type }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -57,22 +55,49 @@
 	<script src="js/amazeui.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			$("#mytable tbody tr").each(function(i,o){
+				var status=$(o).attr("data-status");
+				var type = $(o).attr("data-type");
+				console.log(status);
+			 	if(status=="NOPROCESS"){
+			 		if(type=="KXS"){
+			 			$(o).addClass("am-success");
+			 		}else if(type=="WX"){
+			 			$(o).addClass("am-warning");
+			 		}else if(type=="THH30"){
+			 			$(o).addClass("am-danger");
+			 		}else if(type=="DMDHX100"){
+			 			$(o).addClass("am-primary");
+			 		}
+			 		/* $(o).addClass("am-disabled"); */
+				} 
+					
+					
+	/* 		switch (status) {
+				case 'NOPROCESS':
+					return
+					break;
+				case 'NOPROCESS':
+					return
+					break;
+				case 'NOPROCESS':
+					return
+					break;
+				case 'NOPROCESS':
+					return
+					break;
+				}  */
+			});
+		
 			$("#mytable").delegate("tr", "click", function() {
-			/* 
-				var status = $(this).attr("data-type"); */
-				var allck = $("#accordion :hidden").change(function() {
-					var status = $("#accordion :hidden");
-
-					if (status=="NOPROCESS") {
-						$(".tr").removeClass("am-disabled");
-						
-					} else {
-						$(".tr").addClass("am-disabled");
-					}
-				});
-				var id = $(this).attr("data-id");
+				var status=$(this).attr("data-status");
+				if(status!="NOPROCESS"){
+					return;
+				}
+		        var id = $(this).attr("data-id");
 				var type = $(this).attr("data-type");
 				var targetUrl = "task/";
+	
 				switch (type) {
 				case 'KXS':
 					targetUrl += "kxs";
@@ -91,7 +116,8 @@
 			
 			});
 		})
+			
 	</script>
-	
+
 </body>
 </html>
