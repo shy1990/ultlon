@@ -23,21 +23,24 @@ import com.sj1688.ultlon.service.RefundService;
 import com.sj1688.ultlon.util.HttpClientUtils;
 import com.sj1688.ultlon.util.Json;
 import com.sj1688.ultlon.util.JsonUtil;
+
 @Service
-public class RefundServiceImpl implements RefundService{
+public class RefundServiceImpl implements RefundService {
 	@Autowired
 	private B2BDao b2bDao;
 	@Autowired
 	private RefundFormRepository rfr;
 	@Autowired
 	private ApplicationContext ctx;
-	
+
 	@Override
 	public RefundForm genrateRefundForm(TaskForm taskForm) {
-		RefundForm rf=null;
+		RefundForm rf = null;
 		AfterSaleForm afterForm = taskForm.getAfterSaleForm();
-		Map<String,BigDecimal> prices= b2bDao.findOrderPirceAndCurrentPrice(afterForm.getSkuCode(),afterForm.getOrderNum());
-		rf=new RefundForm(taskForm, prices.get("ORDER_PRICE"), prices.get("CURRENT_PRICE"));
+		Map<String, BigDecimal> prices = b2bDao.findOrderPirceAndCurrentPrice(
+				afterForm.getSkuCode(), afterForm.getOrderNum());
+		rf = new RefundForm(taskForm, prices.get("ORDER_PRICE"),
+				prices.get("CURRENT_PRICE"));
 		return rf;
 	}
 
@@ -55,10 +58,11 @@ public class RefundServiceImpl implements RefundService{
 	}
 
 	@Override
-	public void updateStatus(RefundForm entity,FormAuditStatus status) {
-		Boolean isNoProcessed=entity.getStatus().equals(FormAuditStatus.NOPROCESS);
-		if(isNoProcessed){
-			RefundForm old=new RefundForm();
+	public void updateStatus(RefundForm entity, FormAuditStatus status) {
+		Boolean isNoProcessed = entity.getStatus().equals(
+				FormAuditStatus.NOPROCESS);
+		if (isNoProcessed) {
+			RefundForm old = new RefundForm();
 			try {
 				BeanUtils.copyProperties(old, entity);
 			} catch (Exception e) {
@@ -66,7 +70,7 @@ public class RefundServiceImpl implements RefundService{
 			}
 			entity.setStatus(status);
 			RefundForm save = rfr.save(entity);
-			ctx.publishEvent(new RefundFormUpdateEvent(save,old));
+			ctx.publishEvent(new RefundFormUpdateEvent(save, old));
 		}
 	}
 
@@ -77,27 +81,25 @@ public class RefundServiceImpl implements RefundService{
 
 	@Override
 	public void refundMoney(RefundForm form) {
-		//TODO 查找订单的id
-		String orderId = b2bDao.findOrderId(form.getTaskForm().getAfterSaleForm().getOrderNum());
-		//TODO 
-		//TODO 要退款的金额  ，退款
+		String orderId = b2bDao.findOrderId(form.getTaskForm()
+				.getAfterSaleForm().getOrderNum());
 		BigDecimal realRefundMoney = form.getRealRefundMoney();
-		if(!realRefundMoney.equals(BigDecimal.ZERO)){
-			doRefundMoney(orderId,realRefundMoney);
+		if (!realRefundMoney.equals(BigDecimal.ZERO)) {
+			doRefundMoney(orderId, realRefundMoney);
 		}
 	}
 
 	private void doRefundMoney(String orderId, BigDecimal realRefundMoney) {
-		// TODO 宋宝真--->执行退款操作
-		System.out.println("给订单:"+orderId+" 退款："+realRefundMoney);
-		Map<String,String> params = new HashMap<String,String>();
-		params.put("orderId",orderId);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("orderId", orderId);
 		params.put("reFundAmt", String.valueOf(realRefundMoney));
-		
-		String s = HttpClientUtils.sendPostSSLRequest("http://www.3j1688.com/yeePay/toRefund.html", params);
-		if(s != null && !"".equals(s)){
-			Json json =(Json)JsonUtil.getObject4JsonString(s,Json.class);}
-		
+
+		String s = HttpClientUtils.sendPostSSLRequest(
+				"http://www.3j1688.com/yeePay/toRefund.html", params);
+		if (s != null && !"".equals(s)) {
+			Json json = (Json) JsonUtil.getObject4JsonString(s, Json.class);
+			System.out.println("退款返回结果:"+json.getMsg());
+		}
 	}
 
 }

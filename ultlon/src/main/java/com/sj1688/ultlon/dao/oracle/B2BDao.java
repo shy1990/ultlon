@@ -18,7 +18,6 @@ public interface B2BDao {
      */
 	public Map<String, Serializable> findNRGBy(@Param("skucode")String skucode,@Param("ddNum") String ddNum);
 	/**
-	 * //TODO 宋保真 ----> 获取成交价和现价
 	 * @param skuCode
 	 * @param orderNum
 	 * @return ORDER_PRICE,CURRENT_PRICE
@@ -26,7 +25,6 @@ public interface B2BDao {
 	public Map<String, BigDecimal> findOrderPirceAndCurrentPrice(
 			@Param("skuCode")String skuCode, @Param("orderNum")String orderNum);
 	/**
-	 *  //TODO 张泽林 ----> 获取用户区域 
 	 * @param username
 	 * @return
 	 */

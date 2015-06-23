@@ -21,6 +21,7 @@ public interface RepairService {
 	public RepairForm genrateRepairForm(TaskForm taskForm);
 	
 	public void save(RepairForm entity);
+	public void update(RepairForm entity) ;
 	
 	public Page<RepairForm> get(Pageable page);
 	

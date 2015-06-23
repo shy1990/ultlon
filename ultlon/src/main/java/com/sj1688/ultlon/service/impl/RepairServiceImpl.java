@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.sj1688.ultlon.dao.mysql.RepairFormRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
-import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RepairForm;
+import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.event.RepairFormCreateEvent;
 import com.sj1688.ultlon.event.RepairFormUpdateEvent;
 import com.sj1688.ultlon.service.RepairService;
@@ -39,6 +39,10 @@ public class RepairServiceImpl implements RepairService{
 		ctx.publishEvent(new RepairFormCreateEvent(save));
 	}
 
+	@Override
+	public void update(RepairForm entity) {
+		 rfr.save(entity);
+	}
 	@Override
 	public Page<RepairForm> get(Pageable page) {
 		return rfr.findAll(page);
