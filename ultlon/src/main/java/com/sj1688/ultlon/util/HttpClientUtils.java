@@ -35,8 +35,6 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
-import com.sun.crypto.provider.HmacMD5;
-
 /**
  * 封装了一些采用HttpClient发送HTTP请求的方法
  * 

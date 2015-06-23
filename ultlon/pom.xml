@@ -146,7 +146,11 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.jbundle.util.osgi.wrapped</groupId>
+			<artifactId>org.jbundle.util.osgi.wrapped.org.apache.http.client</artifactId>
+			<version>4.1.2</version>
+		</dependency>
 	</dependencies>
 
 
