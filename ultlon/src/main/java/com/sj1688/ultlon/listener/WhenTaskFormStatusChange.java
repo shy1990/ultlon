@@ -24,6 +24,7 @@ public class WhenTaskFormStatusChange implements ApplicationListener<TaskFormUpd
 	public void onApplicationEvent( TaskFormUpdateEvent event) {
 		TaskForm taskForm=(TaskForm)event.getSource();
 		AfterSaleForm afterForm = taskForm.getAfterSaleForm();
+		afterForm.setResult(taskForm.getStatus().toString());
 		afterSaleFormRepository.save(afterForm);
 		LOG.info("任务状态修改：{}",taskForm);
 	}

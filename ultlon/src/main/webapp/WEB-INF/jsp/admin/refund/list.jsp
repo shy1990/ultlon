@@ -41,7 +41,7 @@
 					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
 					<td>${item.content.taskForm.afterSaleForm.imei }</td>
 					<td>${item.content.realRefundMoney }</td>
-					<td>${item.content.status.getName() }</td>
+					<td>${item.content.status.toString() }</td>
 					<td><c:if test='${item.content.status eq "NOPROCESS"}'>
 							<button type="button" class="am-btn am-btn-success am-radius" onclick="agree('${item.content.id}');">同意</button>
 							<button type="button" class="am-btn am-btn-danger am-radius"  onclick="reject('${item.content.id}');">拒绝</button>
