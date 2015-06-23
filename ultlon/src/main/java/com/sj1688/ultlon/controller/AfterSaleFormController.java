@@ -71,7 +71,7 @@ public class AfterSaleFormController {
 	public String list(@PathVariable("userId")String userId,Pageable pageable,
 			PagedResourcesAssembler<AfterSaleForm> assembler, Model model) {
 		Page<AfterSaleForm> AfterSaleForms = afterSaleService.get(userId, pageable);
-		model.addAttribute("data", assembler.toResource(AfterSaleForms));
+		//model.addAttribute("data", assembler.toResource(AfterSaleForms));
 		model.addAttribute("json", JSON.toJSONString(assembler.toResource(AfterSaleForms)));
 		return "aftersale/list";
 	}
