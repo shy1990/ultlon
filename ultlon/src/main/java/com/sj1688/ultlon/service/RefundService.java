@@ -27,4 +27,9 @@ public interface RefundService {
 	public void updateStatus(RefundForm entity,FormAuditStatus statusToUpdate);
 
 	public Page<RefundForm> findAll(Pageable pageable);
+	/**
+	 * 退款
+	 * @param form
+	 */
+	public void refundMoney(RefundForm form);
 }

@@ -24,7 +24,7 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 	
 	/*成交价*/
 	private BigDecimal orderPrice;
-	private BigDecimal refundMoney;
+	private BigDecimal currentPrice;
 	private String remark;
 
 	public RefundForm() {
@@ -33,15 +33,20 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 
 	@Transient
 	public BigDecimal getRealRefundMoney(){
-		//TODO 宋保真 ----> 先判断售后类型，在决定是退最小还是原价退。
-		return BigDecimal.TEN;
+		AfterSaleType type = this.taskForm.getAfterSaleForm().getType();
+		if(type.equals(AfterSaleType.KXS)){
+			return this.orderPrice;
+		}else if(type.equals(AfterSaleType.THH30)){
+			return this.orderPrice.compareTo(this.currentPrice)<0?this.orderPrice:this.currentPrice;
+		}
+		return BigDecimal.ZERO;
 	}
 	
-	public RefundForm(TaskForm taskForm, BigDecimal orderPrice,BigDecimal refundMoney) {
+	public RefundForm(TaskForm taskForm, BigDecimal orderPrice,BigDecimal currentPrice) {
 		super();
 		this.taskForm = taskForm;
 		this.orderPrice = orderPrice;
-		this.refundMoney = refundMoney;
+		this.currentPrice = currentPrice;
 	}
 
 
@@ -77,11 +82,13 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 		this.remark = remark;
 	}
 
-	public BigDecimal getRefundMoney() {
-		return refundMoney;
+	public BigDecimal getCurrentPrice() {
+		return currentPrice;
 	}
 
-	public void setRefundMoney(BigDecimal refundMoney) {
-		this.refundMoney = refundMoney;
+	public void setCurrentPrice(BigDecimal currentPrice) {
+		this.currentPrice = currentPrice;
 	}
+
+	
 }

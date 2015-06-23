@@ -1,6 +1,7 @@
 package com.sj1688.ultlon.service.impl;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -19,6 +20,9 @@ import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.event.RefundFormCreateEvent;
 import com.sj1688.ultlon.event.RefundFormUpdateEvent;
 import com.sj1688.ultlon.service.RefundService;
+import com.sj1688.ultlon.util.HttpClientUtils;
+import com.sj1688.ultlon.util.Json;
+import com.sj1688.ultlon.util.JsonUtil;
 @Service
 public class RefundServiceImpl implements RefundService{
 	@Autowired
@@ -69,6 +73,31 @@ public class RefundServiceImpl implements RefundService{
 	@Override
 	public Page<RefundForm> findAll(Pageable pageable) {
 		return rfr.findAll(pageable);
+	}
+
+	@Override
+	public void refundMoney(RefundForm form) {
+		//TODO 查找订单的id
+		String orderId = b2bDao.findOrderId(form.getTaskForm().getAfterSaleForm().getOrderNum());
+		//TODO 
+		//TODO 要退款的金额  ，退款
+		BigDecimal realRefundMoney = form.getRealRefundMoney();
+		if(!realRefundMoney.equals(BigDecimal.ZERO)){
+			doRefundMoney(orderId,realRefundMoney);
+		}
+	}
+
+	private void doRefundMoney(String orderId, BigDecimal realRefundMoney) {
+		// TODO 宋宝真--->执行退款操作
+		System.out.println("给订单:"+orderId+" 退款："+realRefundMoney);
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("orderId",orderId);
+		params.put("reFundAmt", String.valueOf(realRefundMoney));
+		
+		String s = HttpClientUtils.sendPostSSLRequest("http://www.3j1688.com/yeePay/toRefund.html", params);
+		if(s != null && !"".equals(s)){
+			Json json =(Json)JsonUtil.getObject4JsonString(s,Json.class);}
+		
 	}
 
 }

@@ -24,11 +24,17 @@ public interface B2BDao {
 	 * @return ORDER_PRICE,CURRENT_PRICE
 	 */
 	public Map<String, BigDecimal> findOrderPirceAndCurrentPrice(
-			@Param("skucode")String skuCode, @Param("orderNum")String orderNum);
+			@Param("skuCode")String skuCode, @Param("orderNum")String orderNum);
 	/**
 	 *  //TODO 张泽林 ----> 获取用户区域 
 	 * @param username
 	 * @return
 	 */
 	public String findUserArea(String username);
+	/**
+	 * 通过orderNum 查找订单id
+	 * @param orderNum
+	 * @return
+	 */
+	public String findOrderId(String orderNum);
 }
