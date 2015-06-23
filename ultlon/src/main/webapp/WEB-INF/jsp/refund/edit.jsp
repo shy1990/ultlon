@@ -41,6 +41,7 @@
 </style>
 </head>
 <body>
+
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
 		<div class="am-g">
