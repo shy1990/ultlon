@@ -1,3 +1,4 @@
+
 package com.sj1688.ultlon.domain;
 
 import javax.persistence.Entity;

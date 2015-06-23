@@ -23,10 +23,10 @@
 	</select>
 	
 	<select id="findUserArea" resultType="string">
-		select 123 from dual where 
+		select area from sj_tb_members where username=#{username}
 	</select>
 	
 	<select id="findOrderId" resultType="string">
-		select o.id from sj_tb_order o where o.orderNum = #{orderNum,jdbcType=VARCHAR}
+		select o.id from sj_tb_order o where o.order_num = #{orderNum,jdbcType=VARCHAR}
 	</select>
 </mapper>

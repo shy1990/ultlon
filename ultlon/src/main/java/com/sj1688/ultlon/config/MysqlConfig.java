@@ -1,10 +1,8 @@
 package com.sj1688.ultlon.config;
 
 import java.util.Properties;
-
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -22,23 +20,27 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableJpaAuditing(auditorAwareRef="auditorAware")
 public class MysqlConfig {
 	
+	
 	@Bean(name="auditorAware")
 	public AuditorAware<Object> auditorAware(){
 		return new AuditorAwareImpl();
 	}
+	
+	
 	@Bean(name = "mysqlDataSource")
 	@Primary
 	@ConfigurationProperties(prefix="datasource.mysql")
-	public DataSource mysqlDataSource() {
+	public DataSource mysqlDataSource(){
 		return DataSourceBuilder.create().build();
 	}
+	
 	
 	@Bean(name = "mysqlEntityManagerFactory")
 	public EntityManagerFactory  entityManagerFactory() {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 	    vendorAdapter.setGenerateDdl(true);
 	    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-	    factory.setJpaVendorAdapter(vendorAdapter);
+	    factory.setJpaVendorAdapter(vendorAdapter); 
 	    factory.setDataSource(mysqlDataSource());
 	    factory.setMappingResources("META-INF/orm.xml");
 	    factory.setPackagesToScan("com.sj1688.ultlon.domain");
@@ -47,9 +49,9 @@ public class MysqlConfig {
 		factory.setJpaProperties(jpaProperties);
 	    factory.afterPropertiesSet();
 	    return factory.getObject();
-		
 	}
-
+	
+	
 	@Bean(name = "mysqlTransactionManager")
 	public PlatformTransactionManager transactionManagerSecondary() {
 		JpaTransactionManager txManager = new JpaTransactionManager();

@@ -1,5 +1,7 @@
 package com.sj1688.ultlon.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sj1688.ultlon.domain.FormAuditStatus;
@@ -65,6 +68,13 @@ public class RepairAdminController {
 		Page<RepairForm> repairForms = repairService.findAll(pageable);
 		model.addAttribute("data", assembler.toResource(repairForms));
 		return "admin/repair/list";
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String cost(@RequestParam(value = "id")RepairForm repairForm,BigDecimal cost) {
+		repairForm.setCost(cost);
+		repairService.update(repairForm);
+		return "redirect:admin/repair?sort=createdDate,desc";
 	}
 
 	@RequestMapping(value = "/{repairId}/{status}", method = RequestMethod.POST)

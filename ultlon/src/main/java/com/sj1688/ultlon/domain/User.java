@@ -14,9 +14,6 @@ import com.google.common.base.Splitter;
 @Table(name="tb_user")
 public class User extends AbstractAuditable<User,Long>{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Column(unique=true)
 	private String username;
@@ -29,13 +26,9 @@ public class User extends AbstractAuditable<User,Long>{
 		this.username = username;
 		this.password = password;
 	}
-	
-	
 	public User() {
 		super();
 	}
-
-
 	public String getUsername() {
 		return username;
 	}
