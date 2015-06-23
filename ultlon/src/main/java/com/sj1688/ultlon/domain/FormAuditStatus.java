@@ -3,6 +3,7 @@ package com.sj1688.ultlon.domain;
 public enum FormAuditStatus {
 	
 	NOPROCESS("未处理"),
+	PROCESSING("处理中"),
 	AGREE("同意退款"),
 	REJECT("拒绝退款");
 	
@@ -12,7 +13,6 @@ public enum FormAuditStatus {
 	private FormAuditStatus(String name) {
 		this.name = name;
 	}
-
 
 	@Override
 	public String toString() {
