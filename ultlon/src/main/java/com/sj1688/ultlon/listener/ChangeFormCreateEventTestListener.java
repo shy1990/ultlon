@@ -10,6 +10,6 @@ public class ChangeFormCreateEventTestListener implements ApplicationListener<Ch
 	@Override
 	public void onApplicationEvent( ChangeFormCreateEvent event) {
 		ChangeForm form=(ChangeForm)event.getSource();
-		System.out.println("我擦，"+form.getCreatedBy().getUsername()+"既然存了一个換新单。"+form.getAfterForm().getGoodsName());
+		System.out.println("我擦，"+form.getCreatedBy().getUsername()+"既然存了一个換新单。"+form.getTaskForm().getAfterSaleForm().getGoodsName());
 	}
 }

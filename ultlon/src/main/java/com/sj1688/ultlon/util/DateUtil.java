@@ -31,7 +31,7 @@ public class DateUtil {
      */
     public static long compareNowDate(String date) throws ParseException {  
         DateFormat df = new SimpleDateFormat(DATE_TIME_FORMAT);  
-        long compare = Math.abs(df.parse(date).getTime() - new Date().getTime());
+        long compare = Math.abs(new Date().getTime() - df.parse(date).getTime());
         return compare;  
     }  
     
@@ -46,12 +46,10 @@ public class DateUtil {
     public static long compareNowDate(Date date) {
     	long compare = 0;
     	try {
-    		 DateFormat df = new SimpleDateFormat(DATE_TIME_FORMAT);  
-    		 compare = Math.abs(date.getTime() - new Date().getTime());
+    		 compare = Math.abs(new Date().getTime() - date.getTime() );
 		} catch (Exception e) {
 			System.out.println("时间转换异常："+e.getMessage());
 		}
-       
         return compare;  
     } 
     
@@ -85,15 +83,15 @@ public class DateUtil {
 	    return sdf.format(new Date(Long.parseLong(str))); 
     }
       
-    /** 
+ /*   *//** 
      * 主函数 
      *  
      * @param args 
-     */  
+     *//*  
     public static void main(String[] args) {  
            // boolean isExceed = compare("2010-01-05 22:22:21", "2010-01-05 22:22:25"); 
             //System.out.println("两个时间相比, 是否相差超过3秒：" + compareNowDate("2015-06-05 09:57:00"));
-        	System.out.println(dateStrFormat("1433488546000"));
+        	System.out.println(strToDate("1434608814000"));
             
-    }  
+    }  */
 }

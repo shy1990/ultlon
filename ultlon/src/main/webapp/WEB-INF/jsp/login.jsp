@@ -40,7 +40,6 @@
 			<h3>登录</h3>
 			<hr>
 			<br> <br>
-
 			<form method="post" class="am-form">
 				<label for="email">用户名:</label> <input type="text" name="username"
 					id="username" value=""> <br> <label for="password">密码:</label>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -20,6 +21,7 @@ import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.AfterSaleType;
 import com.sj1688.ultlon.service.AfterSaleService;
 import com.sj1688.ultlon.service.exception.NotSuportException;
+import com.sj1688.ultlon.util.DateUtil;
 
 /**
  * 售后单控制器 <br>
@@ -74,13 +76,14 @@ public class AfterSaleFormController {
 		return "aftersale/list";
 	}
 	
+	
 	@RequestMapping(value = "/{userId}/{imei}", method = RequestMethod.GET)
 	public String show(@PathVariable("userId") String userId,@PathVariable("imei") String imei,Model model) {
 		AfterSaleForm genrateAfterSaleForm = afterSaleService.genrateAfterSaleForm(imei, userId);
 		model.addAttribute("data", JSON.toJSON(genrateAfterSaleForm));
 		return "aftersale/show";
 	}
-	
+
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET,params={"receiveTime","goodsName"})
 	@ResponseBody
 	public List<AfterSaleType> type(@PathVariable("userId") String userId,Long receiveTime,String goodsName,Model model) {
@@ -88,9 +91,7 @@ public class AfterSaleFormController {
 			return afterSaleService.getTypes(parseDate, goodsName);
 	}
 
-	
-
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value="testadd",method = RequestMethod.POST)
 	@ResponseBody
 	public String add(@RequestBody AfterSaleForm afterSaleForm) {
 		try {
@@ -101,26 +102,15 @@ public class AfterSaleFormController {
 		return "ok";
 	}
 
-/*	// TODO 修改demo
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(
-			@RequestParam(required = false, value = "id") AfterSaleForm AfterSaleForm,
-			Model model) {
-		model.addAttribute("form", AfterSaleForm);
-		return "aftersale/edit";
-	}
-
-	// TODO 更新demo
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable("id") AfterSaleForm form, AfterSaleForm newForm) {
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
+	public String add(AfterSaleForm afterSaleForm,@RequestParam("receiveTimeStr")String receiveTimeStr) {
 		try {
-			BeanUtils.copyProperties(form, newForm);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			afterSaleForm.setReceiveTime(DateUtil.strToDate(receiveTimeStr));
+			afterSaleService.save(afterSaleForm);
+		} catch (NotSuportException e) {
+			return e.getMessage();
 		}
-		afterSaleFormRepository.save(form);
-		return "redirect:/aftersale";
-	}*/
+		return "您的售后申请已火速提交并通知当地的业务人员，请耐心等候....";
+	}
 }

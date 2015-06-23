@@ -1,8 +1,6 @@
 package com.sj1688.ultlon.controller;
 
-import java.lang.reflect.InvocationTargetException;
-
-import org.apache.commons.beanutils.BeanUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sj1688.ultlon.dao.mysql.RepairFormRepository;
-import com.sj1688.ultlon.domain.RepairForm;
+import com.sj1688.ultlon.domain.FormAuditStatus;
+import com.sj1688.ultlon.domain.TaskForm;
+import com.sj1688.ultlon.domain.User;
+import com.sj1688.ultlon.service.TaskService;
 
 /**
  * 售后任务控制器 <br>
@@ -59,51 +60,49 @@ import com.sj1688.ultlon.domain.RepairForm;
 @RequestMapping("/task")
 public class TaskController {
 	@Autowired
-	private RepairFormRepository repairFormRepository;
+	private TaskService taskService;
 
-	// TODO id查询demo
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String show(@PathVariable("id") RepairForm form,Model model) {
+	public String show(@PathVariable("id") TaskForm form, Model model) {
 		model.addAttribute("data", form);
 		return "task/show";
 	}
 
-	// TODO 分页查询demo
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
-			PagedResourcesAssembler<RepairForm> assembler, Model model) {
-		Page<RepairForm> repairForms = repairFormRepository.findAll(pageable);
-		model.addAttribute("data", assembler.toResource(repairForms));
+			PagedResourcesAssembler<TaskForm> assembler, Model model) {
+		User user = (User) SecurityUtils.getSubject().getPrincipal();
+		Page<TaskForm> tasks = taskService.get(pageable, user.getRegionList());
+		model.addAttribute("data", assembler.toResource(tasks));
+
 		return "task/list";
 	}
 
-	// TODO 保存demo
-	@RequestMapping(method = RequestMethod.POST)
-	public String add(RepairForm repairForm) {
-		repairFormRepository.save(repairForm);
-		return "redirect:/task";
+	@RequestMapping(value = "/{id}/reject", method = RequestMethod.POST)
+	@ResponseBody
+	public String reject(@PathVariable(value = "id") TaskForm form,@RequestParam("remark")String remark) {
+		form.setRemark(remark);
+		taskService.updateStatus(form,FormAuditStatus.REJECT);
+		return "ok";
 	}
 
-	// TODO 修改demo
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(
-			@RequestParam(required = false, value = "id") RepairForm repairForm,
+	@RequestMapping(value = { "/kxs", "/thh30" }, method = RequestMethod.GET)
+	public String edit(@RequestParam(value = "taskId") TaskForm taskForm,
 			Model model) {
-		model.addAttribute("form", repairForm);
+		model.addAttribute("taskForm", taskForm);
 		return "task/edit";
 	}
 
-	// TODO 更新demo
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable("id") RepairForm form, RepairForm newForm) {
-		try {
-			BeanUtils.copyProperties(form, newForm);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		repairFormRepository.save(form);
-		return "redirect:/task";
+	@RequestMapping(value = { "/dmdhx100" }, method = RequestMethod.GET)
+	public String dmdhx100(@RequestParam(value = "taskId") TaskForm taskForm,
+			Model model) {
+		model.addAttribute("taskForm", taskForm);
+		return "task/dmdhx100";
+	}
+
+	@RequestMapping(value = { "/wx" }, method = RequestMethod.GET)
+	public String wx(@RequestParam(value = "taskId") TaskForm taskForm, Model model) {
+		model.addAttribute("taskForm", taskForm);
+		return "task/wx";
 	}
 }

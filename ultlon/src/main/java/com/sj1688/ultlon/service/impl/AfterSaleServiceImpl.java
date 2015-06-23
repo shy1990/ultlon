@@ -71,7 +71,6 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	 */
 	private Map<String, String> getOrderMap(String imei) {
 		Map<String, String> result=new HashMap<String, String>();
-		//TODO 根据串号查询商品编号，dd号
 		AfterSaleOrder aso = asor.findByImei(imei);
 		result.put("skucode", aso.getNormsCode());
 		result.put("ddnum", aso.getEcerpNo());
@@ -128,7 +127,6 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 				resultList.add(AfterSaleType.DMDHX100);
 			}
 		}
-		resultList.add(AfterSaleType.KXS);
 		return resultList;
 	}
 

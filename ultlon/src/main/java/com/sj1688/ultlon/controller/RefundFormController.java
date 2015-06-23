@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.RefundForm;
+import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.service.RefundService;
 
 /**
@@ -56,17 +56,18 @@ public class RefundFormController {
 	private RefundService refundService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String add(@RequestParam(value = "afterSaleId") AfterSaleForm afterSaleForm,RefundForm refundForm) {
-		refundForm.setAfterForm(afterSaleForm);
+	public String add(@RequestParam(value = "taskId") TaskForm taskForm,RefundForm refundForm) {
+		refundForm.setTaskForm(taskForm);
 		refundService.save(refundForm);
 		return "refund/success";
 	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(@RequestParam(value = "id") AfterSaleForm afterSaleForm,
+	public String edit(@RequestParam(value = "taskId")TaskForm taskForm,
 			Model model) {
-		RefundForm genrateRefundForm = refundService.genrateRefundForm(afterSaleForm);
+		RefundForm genrateRefundForm = refundService.genrateRefundForm(taskForm);
 		model.addAttribute("refundForm", genrateRefundForm);
-		model.addAttribute("afterSaleForm", afterSaleForm);
+		model.addAttribute("taskForm", taskForm);
 		return "refund/edit";
 	}
 
