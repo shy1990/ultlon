@@ -45,10 +45,6 @@
 		<div class="am-g">
 			<form action="repair" method="post">
 			<input type="hidden" name="taskId" value="${taskForm.id }">
-			<div class="am-input-group">
-					<span class="am-input-group-label">应&nbsp;&nbsp;&nbsp;&nbsp;退:</span>
-					<input type="text" class="am-form-field" name="cost">
-				</div>
 				<div class="am-input-group am-input-group-primary">
 					<span class="am-input-group-label">备注</span>
 					<textarea rows="6" cols="118" placeholder="请输入维修备注" id="wen"
