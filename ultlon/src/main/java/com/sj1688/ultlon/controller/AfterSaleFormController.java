@@ -83,10 +83,6 @@ public class AfterSaleFormController {
 		return "aftersale/show";
 	}
 
-	@RequestMapping(value="/test",method = RequestMethod.GET)
-	public String test(){
-		return "save";
-	}
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET,params={"receiveTime","goodsName"})
 	@ResponseBody
 	public List<AfterSaleType> type(@PathVariable("userId") String userId,Long receiveTime,String goodsName,Model model) {
