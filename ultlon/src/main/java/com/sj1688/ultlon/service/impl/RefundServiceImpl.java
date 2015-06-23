@@ -1,7 +1,6 @@
 package com.sj1688.ultlon.service.impl;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
+import java.math.BigDecimal;import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -21,8 +20,6 @@ import com.sj1688.ultlon.event.RefundFormCreateEvent;
 import com.sj1688.ultlon.event.RefundFormUpdateEvent;
 import com.sj1688.ultlon.service.RefundService;
 import com.sj1688.ultlon.util.HttpClientUtils;
-import com.sj1688.ultlon.util.Json;
-import com.sj1688.ultlon.util.JsonUtil;
 
 @Service
 public class RefundServiceImpl implements RefundService {
@@ -94,12 +91,9 @@ public class RefundServiceImpl implements RefundService {
 		params.put("orderId", orderId);
 		params.put("reFundAmt", String.valueOf(realRefundMoney));
 
-		String s = HttpClientUtils.sendPostSSLRequest(
+		HttpClientUtils.sendPostSSLRequest(
 				"http://www.3j1688.com/yeePay/toRefund.html", params);
-		if (s != null && !"".equals(s)) {
-			Json json = (Json) JsonUtil.getObject4JsonString(s, Json.class);
-			System.out.println("退款返回结果:"+json.getMsg());
-		}
+		
 	}
 
 }
