@@ -55,7 +55,7 @@
 				<div class="am-input-group">
 					<span class="am-input-group-label">现&nbsp;&nbsp;&nbsp;&nbsp;价:</span>
 					<input type="text" class="am-form-field"
-						placeholder="${refundForm.refundMoney }">
+						placeholder="${refundForm.currentPrice }">
 				</div>
 				<div class="am-input-group">
 					<span class="am-input-group-label">应&nbsp;&nbsp;&nbsp;&nbsp;退:</span>
