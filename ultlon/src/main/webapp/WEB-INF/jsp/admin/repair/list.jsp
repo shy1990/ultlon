@@ -42,7 +42,6 @@
 
 		});
 	}
-
 	function reject(id) {
 		$.post("admin/repair/" + id + "/REJECT", function(data) {
 			if (data === 'ok') {
@@ -94,7 +93,6 @@
 			<div class="am-modal-footer">
 				<span class="am-modal-btn" data-am-modal-confirm>提交</span> <span
 					class="am-modal-btn" data-am-modal-cancel>取消</span>
-
 			</div>
 		</div>
 	</div>
