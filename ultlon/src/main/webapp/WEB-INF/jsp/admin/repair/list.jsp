@@ -10,12 +10,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<script type="text/javascript" src="jquery.min.js"></script>
 <base href="<%=basePath%>" />
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/amazeui.min.css" />
 <title>退货退款申请</title>
-<link rel="stylesheet" href="css/lanrenzhijia.css" media="all">
 <style>
 .content {
 	text-align: center;
@@ -25,29 +23,25 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
-<script src="jquery.min.js"></script>
 <script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$('.am-radius').click(function() {
-			$('.theme-popover-mask').fadeIn(100);
-			$('.theme-popover').slideDown(200);
-		})
-		
-		
-		$('.submittwo').click(function() {
-			$('.theme-popover-mask').fadeOut(100);
-			$('.theme-popover').slideUp(100);
-		})
-		
-		
-		
+	function agree(id) {
+		$('#my-prompt').modal({
+			relatedTarget : this,
+			onConfirm : function(e) {
+				var cost = e.data || 0;
+				$.post("admin/repair", {
+					"id":id,
+					"cost" : cost
+				}, function(data) {
+					if (data === 'ok') {
+						location.href = "admin/repair?sort=createdDate,desc";
+					}
+				});
 
-	})
-	
-	
-	
-	
-	
+			}
+
+		});
+	}
 
 	function reject(id) {
 		$.post("admin/repair/" + id + "/REJECT", function(data) {
@@ -79,7 +73,7 @@
 					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
 					<td>${item.content.taskForm.afterSaleForm.imei }</td>
 					<td>${item.content.cost}</td>
-					<td>${item.content.status }</td>
+					<td>${item.content.status.toString() }</td>
 					<td><c:if test='${item.content.status eq "NOPROCESS"}'>
 							<button type="button" class="am-btn am-btn-success am-radius"
 								onclick="agree('${item.content.id}');">同意</button>
@@ -91,27 +85,19 @@
 		</tbody>
 	</table>
 
+	<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">三际商城</div>
+			<div class="am-modal-bd">
+				请输入维修报价 <input type="number" class="am-modal-prompt-input">
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" data-am-modal-confirm>提交</span> <span
+					class="am-modal-btn" data-am-modal-cancel>取消</span>
 
-
-
-	<div class="theme-popover">
-		<div class="theme-poptit">
-			<a href="javascript:;" title="关闭" class="close">×</a>
-			<h1>请输入退款金额</h1>
-		</div>
-		<div class="theme-popbod dform">
-				<form action="/admin/repair/save" method="post">
-					<input id="log" class="ipt" type="text" name="log"
-						value="lanrenzhijia" size="20" />
-					<input
-						style="text-center:right; font-size: 15px; red; background: white"
-						type="submit" class="submittwo" value="确定">
-					<input
-						style="text-center:right; font-size: 15px; red; background: white"
-						type="button" class="submittwo" value="取消">
-				</form>
+			</div>
 		</div>
 	</div>
-	
+
 </body>
 </html>

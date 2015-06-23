@@ -71,10 +71,11 @@ public class RepairAdminController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
 	public String cost(@RequestParam(value = "id")RepairForm repairForm,BigDecimal cost) {
 		repairForm.setCost(cost);
 		repairService.update(repairForm);
-		return "redirect:admin/repair?sort=createdDate,desc";
+		return "ok";
 	}
 
 	@RequestMapping(value = "/{repairId}/{status}", method = RequestMethod.POST)

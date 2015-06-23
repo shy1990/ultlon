@@ -56,22 +56,24 @@
 <body>
 	<%@include file="../../common/navbar.jsp"%>
 	<div class="content">
-	<h1>退换货订单</h1>
+		<h1>退换货订单</h1>
 		<div class="am-g">
 			<div class="am-input-group">
 				<span class="am-input-group-label">订单号:</span> <input type="text"
-					class="am-form-field" 
-					placeholder="${taskForm.afterSaleForm.orderNum}" disabled="disabled">
+					class="am-form-field"
+					placeholder="${taskForm.afterSaleForm.orderNum}"
+					disabled="disabled">
 			</div>
 			<div class="am-input-group">
 				<span class="am-input-group-label">串&nbsp;&nbsp;&nbsp;&nbsp;号:</span>
-				<input type="text" class="am-form-field" 
+				<input type="text" class="am-form-field"
 					placeholder="${taskForm.afterSaleForm.imei}" disabled="disabled">
 			</div>
 			<div class="am-input-group">
 				<span class="am-input-group-label">客&nbsp;&nbsp;&nbsp;&nbsp;户:</span>
 				<input type="text" class="am-form-field"
-					placeholder="${taskForm.afterSaleForm.username}" disabled="disabled">
+					placeholder="${taskForm.afterSaleForm.username}"
+					disabled="disabled">
 			</div>
 			<div class="am-panel-group" id="accordion">
 				<div class="am-panel am-panel-default">
@@ -127,21 +129,13 @@
 								class="checkbox1" type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>开机有无密码（酷派系列酷管家密码 、魅族系列FLME密码）</label> <input name="checkbox1"
-								class="checkbox1" type="checkbox">
+							<label>开机有无密码（酷派系列酷管家密码 、魅族系列FLME密码）</label> <input
+								name="checkbox1" class="checkbox1" type="checkbox">
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
-
 		</div>
-
-
-
-
 
 		<a class=" am-disabled am-btn am-btn-danger a1 a"
 			href="refund/edit?taskId=${taskForm.id }">我要退货</a> <a
@@ -159,13 +153,12 @@
 					请输入拒绝原因 <input type="text" class="am-modal-prompt-input">
 				</div>
 				<div class="am-modal-footer">
-					<span class="am-modal-btn" data-am-modal-confirm>提交</span>
-					<span class="am-modal-btn" data-am-modal-cancel>取消</span> 
-				
+					<span class="am-modal-btn" data-am-modal-confirm>提交</span> <span
+						class="am-modal-btn" data-am-modal-cancel>取消</span>
+
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
@@ -193,7 +186,7 @@
 						});
 
 					}
-					
+
 				});
 			});
 		})
