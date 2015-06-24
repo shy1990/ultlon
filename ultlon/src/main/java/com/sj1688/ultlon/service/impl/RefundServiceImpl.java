@@ -56,9 +56,10 @@ public class RefundServiceImpl implements RefundService {
 
 	@Override
 	public void updateStatus(RefundForm entity, FormAuditStatus status) {
-		Boolean isNoProcessed = entity.getStatus().equals(
-				FormAuditStatus.NOPROCESS);
-		if (isNoProcessed) {
+		Boolean processed = entity.getStatus().equals(
+				FormAuditStatus.AGREE)|| entity.getStatus().equals(
+						FormAuditStatus.REJECT);
+		if(!processed){
 			RefundForm old = new RefundForm();
 			try {
 				BeanUtils.copyProperties(old, entity);

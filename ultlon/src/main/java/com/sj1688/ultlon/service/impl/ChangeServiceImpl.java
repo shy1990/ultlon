@@ -45,8 +45,10 @@ public class ChangeServiceImpl implements ChangeService{
 
 	@Override
 	public void updateStatus(ChangeForm entity,FormAuditStatus status) {
-		Boolean isNoProcessed=entity.getStatus().equals(FormAuditStatus.NOPROCESS);
-		if(isNoProcessed){
+		Boolean processed = entity.getStatus().equals(
+				FormAuditStatus.AGREE)|| entity.getStatus().equals(
+						FormAuditStatus.REJECT);
+		if(!processed){
 			ChangeForm old=new ChangeForm();
 			try {
 				BeanUtils.copyProperties(old, entity);

@@ -50,8 +50,10 @@ public class RepairServiceImpl implements RepairService{
 
 	@Override
 	public void updateStatus(RepairForm entity,FormAuditStatus status) {
-		Boolean isNoProcessed=entity.getStatus().equals(FormAuditStatus.NOPROCESS);
-		if(isNoProcessed){
+		Boolean processed = entity.getStatus().equals(
+				FormAuditStatus.AGREE)|| entity.getStatus().equals(
+						FormAuditStatus.REJECT);
+		if(!processed){
 			RepairForm old=new RepairForm();
 			try {
 				BeanUtils.copyProperties(old, entity);
