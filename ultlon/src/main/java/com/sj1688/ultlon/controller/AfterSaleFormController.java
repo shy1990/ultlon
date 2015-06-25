@@ -87,7 +87,10 @@ public class AfterSaleFormController {
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET,params={"receiveTime","goodsName"})
 	@ResponseBody
 	public List<AfterSaleType> type(@PathVariable("userId") String userId,Long receiveTime,String goodsName,Model model) {
-			Date parseDate = new Date(receiveTime);
+			Date parseDate = null;
+			if(receiveTime!=null){
+				parseDate = new Date(receiveTime);
+			}
 			return afterSaleService.getTypes(parseDate, goodsName);
 	}
 

@@ -44,9 +44,11 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		if(orderMap!=null){
 			asf.setSkuCode(orderMap.get("skucode"));
 			Map<String, Serializable> orderDetialMap=getOrderDetialMap(orderMap);
-			asf.setOrderNum((String) orderDetialMap.get("ORDER_NUM"));
-			asf.setReceiveTime((Date) orderDetialMap.get("RECEIVE_TIME"));
-			asf.setGoodsName((String) orderDetialMap.get("GOODS_NAME"));
+			if(orderDetialMap!=null){
+				asf.setOrderNum((String) orderDetialMap.get("ORDER_NUM"));
+				asf.setReceiveTime((Date) orderDetialMap.get("RECEIVE_TIME"));
+				asf.setGoodsName((String) orderDetialMap.get("GOODS_NAME"));
+			}
 		}else{
 			//不属于咱们商品 直接维修
 			asf.setType(AfterSaleType.WX);
@@ -72,9 +74,12 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	private Map<String, String> getOrderMap(String imei) {
 		Map<String, String> result=new HashMap<String, String>();
 		AfterSaleOrder aso = asor.findByImei(imei);
-		result.put("skucode", aso.getNormsCode());
-		result.put("ddnum", aso.getEcerpNo());
-		return result;
+		if(aso!=null){
+			result.put("skucode", aso.getNormsCode());
+			result.put("ddnum", aso.getEcerpNo());
+			return result;
+		}
+		return null;
 	}
 
 	@Override
@@ -105,8 +110,10 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		
 		if(null==receiveTime){//没有签收那么可以享受所有服务
 			//没有签收时间和签收时间为空。可以享受所有服务
-			resultList.add(AfterSaleType.KXS);
-			resultList.add(AfterSaleType.THH30);
+			if(null!=goodsName&&!"".equals(goodsName)){
+				resultList.add(AfterSaleType.KXS);
+				resultList.add(AfterSaleType.THH30);
+			}
 			resultList.add(AfterSaleType.WX);
 			if(goodsName.indexOf("多美达")>-1){
 				resultList.add(AfterSaleType.DMDHX100);
@@ -120,9 +127,9 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 			if(ApplicationUtil.getThh30()>=Poor){//退换货
 				resultList.add(AfterSaleType.THH30);
 			}
-			if(ApplicationUtil.getWx()>=Poor){//维修
+			//if(ApplicationUtil.getWx()>=Poor){//维修
 				resultList.add(AfterSaleType.WX);
-			}
+			//}
 			if(ApplicationUtil.getDmdhx100()>=Poor && goodsName.indexOf("多美达")>-1){
 				resultList.add(AfterSaleType.DMDHX100);
 			}
