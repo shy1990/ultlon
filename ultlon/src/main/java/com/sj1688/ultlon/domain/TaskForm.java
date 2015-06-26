@@ -26,6 +26,12 @@ public class TaskForm extends AbstractAuditable<User, Long> {
 		super();
 	}
 
+	public TaskForm(AfterSaleForm afterSaleForm,Long id) {
+		super();
+		this.afterSaleForm = afterSaleForm;
+		setId(id);		
+	}
+	
 	public TaskForm(AfterSaleForm afterSaleForm,String area) {
 		super();
 		this.afterSaleForm = afterSaleForm;

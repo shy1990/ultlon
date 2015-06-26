@@ -1,7 +1,10 @@
 package com.sj1688.ultlon.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,8 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.sj1688.ultlon.domain.AfterSaleForm;
+import com.sj1688.ultlon.domain.AfterSaleFormDTO;
+import com.sj1688.ultlon.domain.AfterSaleFormDtoFunction;
 import com.sj1688.ultlon.domain.AfterSaleType;
+import com.sj1688.ultlon.domain.RefundForm;
+import com.sj1688.ultlon.domain.RepairForm;
+import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.service.AfterSaleService;
+import com.sj1688.ultlon.service.RefundService;
+import com.sj1688.ultlon.service.RepairService;
 import com.sj1688.ultlon.service.exception.NotSuportException;
 import com.sj1688.ultlon.util.DateUtil;
 
@@ -66,13 +76,44 @@ import com.sj1688.ultlon.util.DateUtil;
 public class AfterSaleFormController {
 	@Autowired
 	private AfterSaleService afterSaleService;
+	@Autowired
+	private RefundService refundService;
+	@Autowired
+	private RepairService repairService;
+	
+	private AfterSaleFormDtoFunction asfdf = new AfterSaleFormDtoFunction(repairService,refundService);
 
 	@RequestMapping(value="/{userId}",method = RequestMethod.GET)
 	public String list(@PathVariable("userId")String userId,Pageable pageable,
 			PagedResourcesAssembler<AfterSaleForm> assembler, Model model) {
-		Page<AfterSaleForm> AfterSaleForms = afterSaleService.get(userId, pageable);
+		Page<AfterSaleForm> afterSaleForms = afterSaleService.get(userId, pageable);
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<AfterSaleFormDTO> list = new ArrayList<AfterSaleFormDTO>();
+		List<AfterSaleForm> afterSaleFormsList = afterSaleForms.getContent();
+		for (AfterSaleForm as : afterSaleFormsList) {
+			AfterSaleFormDTO dto = asfdf.apply(as);
+			if(as!=null){
+				TaskForm tf = new TaskForm(as,as.getId());
+				if(as.getType().equals(AfterSaleType.WX)){
+					RepairForm rf = repairService.findByTaskForm(tf);
+					if(rf!=null){
+						dto.setPrice(rf.getCost());
+					}
+				}
+				if(as.getType().equals(AfterSaleType.THH30)){
+					RefundForm refundForm = refundService.findByTaskForm(tf);
+					if(refundForm!=null){
+						dto.setPrice(refundForm.getCurrentPrice());
+					}
+				}
+			}
+			list.add(dto);
+		}
+		data.put("metadata", assembler.toResource(afterSaleForms).getMetadata());
 		//model.addAttribute("data", assembler.toResource(AfterSaleForms));
-		model.addAttribute("json", JSON.toJSONString(assembler.toResource(AfterSaleForms)));
+		//model.addAttribute("json", JSON.toJSONString(assembler.toResource(afterSaleForms)));
+		data.put("content", list);
+		model.addAttribute("json", JSON.toJSONString(data));
 		return "aftersale/list";
 	}
 	

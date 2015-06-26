@@ -32,4 +32,6 @@ public interface RefundService {
 	 * @param form
 	 */
 	public void refundMoney(RefundForm form);
+	
+	RefundForm findByTaskForm(TaskForm tf);
 }
