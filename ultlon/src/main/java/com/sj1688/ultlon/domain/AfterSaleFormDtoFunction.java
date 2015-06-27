@@ -11,12 +11,8 @@ import com.sj1688.ultlon.util.DateUtil;
 
 public class AfterSaleFormDtoFunction  implements Function<AfterSaleForm, AfterSaleFormDTO>{
 
-	private RepairService rs;
-	private RefundService rss;
 	
 	public AfterSaleFormDtoFunction(RepairService rs,RefundService rss){
-		this.rs	= rs;
-		this.rss= rss;
 	}
 	
 	@Override
