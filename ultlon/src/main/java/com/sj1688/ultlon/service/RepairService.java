@@ -28,5 +28,6 @@ public interface RepairService {
 	public void updateStatus(RepairForm entity,FormAuditStatus statusToUpdate);
 
 	public Page<RepairForm> findAll(Pageable pageable);
+	RepairForm findByTaskForm(TaskForm taskForm);
 }
 

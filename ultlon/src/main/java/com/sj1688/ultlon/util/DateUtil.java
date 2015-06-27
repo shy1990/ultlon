@@ -1,9 +1,13 @@
 package com.sj1688.ultlon.util;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 public class DateUtil {
 	/** 时间格式 */  
@@ -81,6 +85,17 @@ public class DateUtil {
     public static String dateStrFormat(String str){
     	SimpleDateFormat sdf = new SimpleDateFormat(DATE_TIME_FORMAT);
 	    return sdf.format(new Date(Long.parseLong(str))); 
+    }
+    
+    /**
+     * 把时间转换成时间格式字符串
+     * @param date
+     * @return
+     */
+    public static String dateToStr(Date date){
+    	SimpleDateFormat sdf=new SimpleDateFormat(DATE_TIME_FORMAT);  
+    	String str=sdf.format(date);  
+    	return str;
     }
       
  /*   *//** 

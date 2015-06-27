@@ -71,4 +71,9 @@ public class RepairServiceImpl implements RepairService{
 		return rfr.findAll(pageable);
 	}
 
+	@Override
+	public RepairForm findByTaskForm(TaskForm taskForm) {
+		return rfr.findByTaskForm(taskForm);
+	}
+
 }
