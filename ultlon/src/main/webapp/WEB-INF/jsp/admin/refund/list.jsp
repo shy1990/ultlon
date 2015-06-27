@@ -29,6 +29,8 @@
 				<th>申请人</th>
 				<th>手机</th>
 				<th>串号</th>
+				<th>订单号</th>
+				<th>签收时间</th>
 				<th>退款金额</th>
 				<th>状态</th>
 				<th>操作</th>
@@ -40,6 +42,8 @@
 					<td>${item.content.taskForm.afterSaleForm.username }</td>
 					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
 					<td>${item.content.taskForm.afterSaleForm.imei }</td>
+					<td>${item.content.taskForm.afterSaleForm.orderNum }</td>
+					<td>${item.content.taskForm.afterSaleForm.receiveTime }</td>
 					<td>${item.content.realRefundMoney }</td>
 					<td>${item.content.status.toString() }</td>
 					<td><c:if test='${item.content.status eq "NOPROCESS"}'>
