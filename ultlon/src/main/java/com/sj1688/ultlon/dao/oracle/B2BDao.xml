@@ -32,7 +32,11 @@
 	
 	<select id="selectByUidAndErp" parameterType="java.lang.String" resultType="map">
         select 
-	    <include refid="Base_Column_List" />
+		    ID, MEMBER_ID, CREATETIME, SOURCE_TYPE, SALE_TYPE, STATUS, PAY_STATUS, SHIP_STATUS, 
+		    KESH_STATUS, IS_DELIVERY, EXPRESS_ID, EXPRESS_NUM, PAY_MENT, PAY_TIME, SHIP_NAME, 
+		    AREA, SHIP_ZIP, SHIP_TEL, SHIP_EMAIL, SHIP_TIME, TOTAL_COST, CARRIAGE, ADVANCE, EBANK_MON, 
+		    REMARK, MODIFYTIME, ORDER_POINTS, PROVINCE, CITY, ADDRESS, MEMBER_TYPE, BILL_TYPE, 
+		    BILL_HEAD, BILL_CONTENT, DISABLED, ORDER_NUM, LOGISTICS_TEL, DEAL_ID, DEAL_TYPE
 	    from SJ_TB_ORDER o
 	    where o.MEMBER_ID= #{userId,jdbcType=VARCHAR} and o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR}
    </select>

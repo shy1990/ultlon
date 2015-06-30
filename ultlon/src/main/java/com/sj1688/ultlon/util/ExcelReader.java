@@ -1,10 +1,7 @@
 package com.sj1688.ultlon.util;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -32,13 +29,11 @@ public class ExcelReader {
 	 * @return 
 	 */
 	public static String readOutStockExcel(InputStream file,AfterSaleOrderService os,GoodsService gs) throws Exception {
-		    StringBuffer sql = new StringBuffer();
 			OPCPackage opcPackage = OPCPackage.open(file);
 			XSSFWorkbook xs = new XSSFWorkbook(opcPackage);  
 	        XSSFSheet sheet = xs.getSheetAt(0);  
 	       
 	        int xsRows = sheet.getPhysicalNumberOfRows();  
-	        int a = 1;
 	        ExecutorService pool = Executors.newFixedThreadPool(50);// 创建一个固定大小为3的线程池
 	        for (int i = 1; i <= xsRows; i++) {  
 	        	XSSFRow row = sheet.getRow(i);
@@ -119,26 +114,9 @@ public class ExcelReader {
     		if(cell.getCellType()==HSSFCell.CELL_TYPE_NUMERIC){
         		DecimalFormat df = new DecimalFormat("0");
         		str = new StringBuffer(df.format(cell.getNumericCellValue()));
-        		
     		}
 		}
 		return str;
-	}
-	
-	public static void main(String[] args) {
-		
-		try {
-			//File file = new File("e:\\test\\出库单模板.xlsx");
-			//readOutStockExcel(file);
-			
-			File file = new File("e:\\test\\Book1.xlsx");
-			InputStream in = new FileInputStream(file);
-			//System.out.println(readOutStockExcel(in));
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
 	}
 	
 	

@@ -2,14 +2,11 @@ package com.sj1688.ultlon.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON; 
 import com.sj1688.ultlon.dao.mysql.AfterSaleOrderRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleOrder;

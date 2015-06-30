@@ -1,13 +1,9 @@
 package com.sj1688.ultlon.util;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 
 public class DateUtil {
 	/** 时间格式 */  
