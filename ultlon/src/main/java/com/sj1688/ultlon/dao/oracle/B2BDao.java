@@ -35,4 +35,35 @@ public interface B2BDao {
 	 * @return
 	 */
 	public String findOrderId(String orderNum);
+	
+	/**
+     * 根据用户名和订单管易编号获取订单信息
+     * @param userId 用户Id
+     * @param ecerpNo 订单编号
+     * @return
+     */
+    Map<String,Object> selectByUidAndErp(@Param("userId")String userId,@Param("ecerpNo")String ecerpNo);
+    
+    /**
+     * 根据用户名和订单管易编号和商品id获取订单信息
+     * @param userId 用户Id
+     * @param ecerpNo 订单编号
+     * @return
+     */
+    Map<String,Object> selectByUidAndErpAndGoodsId(@Param("userId")String userId,@Param("ecerpNo")String ecerpNo,@Param("goodsId")String goodsId);
+    
+    /**
+     * 根据规格代码获取商品信息
+     * @param skuNum
+     * @return
+     */
+    Map<String,Object> getGoodsBySkunum(@Param("skuNum")String skuNum);
+    
+    /**
+     * 根据管易编号和商品id获取订单信息
+     * @param ecerpNo
+     * @param goodsId
+     * @return
+     */
+    Map<String,Object> selectByArea(@Param("ecerpNo")String ecerpNo,@Param("goodsId")String goodsId);
 }
