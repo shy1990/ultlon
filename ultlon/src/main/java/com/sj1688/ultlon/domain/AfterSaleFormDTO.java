@@ -1,19 +1,6 @@
 package com.sj1688.ultlon.domain;
 
 import java.math.BigDecimal;
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.data.jpa.domain.AbstractAuditable;
 
 public class AfterSaleFormDTO {
 	private Long id;
