@@ -21,17 +21,16 @@ public class TaskForm extends AbstractAuditable<User, Long> {
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	private String area;
 	private String remark;
-
+    private String marketbale_price;
+    private String deal_price;
+    private String pay_time;
+    private String ship_name;
+    private String address;
+    private String goods_id;
 	public TaskForm() {
 		super();
 	}
 
-	public TaskForm(AfterSaleForm afterSaleForm,Long id) {
-		super();
-		this.afterSaleForm = afterSaleForm;
-		setId(id);		
-	}
-	
 	public TaskForm(AfterSaleForm afterSaleForm,String area) {
 		super();
 		this.afterSaleForm = afterSaleForm;
@@ -71,6 +70,54 @@ public class TaskForm extends AbstractAuditable<User, Long> {
 
 	public void setArea(String area) {
 		this.area = area;
+	}
+
+	public String getMarketbale_price() {
+		return marketbale_price;
+	}
+
+	public void setMarketbale_price(String marketbale_price) {
+		this.marketbale_price = marketbale_price;
+	}
+
+	public String getDeal_price() {
+		return deal_price;
+	}
+
+	public void setDeal_price(String deal_price) {
+		this.deal_price = deal_price;
+	}
+
+	public String getPay_time() {
+		return pay_time;
+	}
+
+	public void setPay_time(String pay_time) {
+		this.pay_time = pay_time;
+	}
+
+	public String getShip_name() {
+		return ship_name;
+	}
+
+	public void setShip_name(String ship_name) {
+		this.ship_name = ship_name;
+	}
+
+	public String getGoods_id() {
+		return goods_id;
+	}
+
+	public void setGoods_id(String goods_id) {
+		this.goods_id = goods_id;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

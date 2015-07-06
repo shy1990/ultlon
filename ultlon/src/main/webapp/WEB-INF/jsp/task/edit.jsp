@@ -75,6 +75,36 @@
 					placeholder="${taskForm.afterSaleForm.username}"
 					disabled="disabled">
 			</div>
+			<div class="am-input-group">
+				<span class="am-input-group-label">收货人姓名:</span> <input type="text"
+					class="am-form-field" placeholder="${orderInfo.SHIP_NAME}"
+					disabled="disabled">
+			</div>
+			<div class="am-input-group">
+				<span class="am-input-group-label">收货人电话:</span> <input type="text"
+					class="am-form-field" placeholder="${orderInfo.SHIP_TEL}"
+					disabled="disabled">
+			</div>
+			<div class="am-input-group">
+				<span class="am-input-group-label">收货地址:</span> <input type="text"
+					class="am-form-field" placeholder="${orderInfo.ADDRESS}"
+					disabled="disabled">
+			</div>
+			<div class="am-input-group">
+				<span class="am-input-group-label">成交价格:</span> <input type="text"
+					class="am-form-field" placeholder="${orderInfo.MARKETBALE_PRICE}"
+					disabled="disabled">
+			</div>
+			<div class="am-input-group">
+				<span class="am-input-group-label">数&nbsp;&nbsp;&nbsp;&nbsp;量:</span>
+				<input type="text" class="am-form-field" value="1"
+					disabled="disabled">
+			</div>
+			<div class="am-input-group">
+				<span class="am-input-group-label">成交时间:</span> <input type="text"
+					class="am-form-field" placeholder="${orderInfo.PAY_TIME}"
+					disabled="disabled">
+			</div>
 			<div class="am-panel-group" id="accordion">
 				<div class="am-panel am-panel-default">
 					<div class="am-panel-hd">
@@ -84,25 +114,22 @@
 					</div>
 					<div id="do-not-say-1" class="am-panel-collapse am-collapse">
 						<div class="am-panel-bd">
-							<label>盒子外观是否有破损</label> <input name="checkbox1"
-								class="checkbox1" type="checkbox">
-						</div>
-						<div class="am-panel-bd">
-							<label>是否有说明书</label> <input name="checkbox1" class="checkbox1"
+							<label>盒子外观无破损</label> <input name="checkbox1" class="checkbox1"
 								type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>是否有充电器</label> <input name="checkbox1" class="checkbox1"
+							<label>有说明书</label> <input name="checkbox1" class="checkbox1"
 								type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>是否有耳机，耳机是否损坏</label> <input name="checkbox1"
-								class="checkbox1" type="checkbox">
+							<label>有充电器</label> <input name="checkbox1" class="checkbox1"
+								type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>盒子外观是否有破损</label> <input name="checkbox1"
+							<label>有耳机，耳机没有损坏</label> <input name="checkbox1"
 								class="checkbox1" type="checkbox">
 						</div>
+
 					</div>
 				</div>
 				<div class="am-panel am-panel-default">
@@ -113,29 +140,37 @@
 					</div>
 					<div id="do-not-say-2" class="am-panel-collapse am-collapse">
 						<div class="am-panel-bd">
-							<label>外观检测（屏幕是否有划伤，边框是否有磕碰）</label> <input name="checkbox1"
+							<label>外观检测（屏幕无划伤，边框无磕碰）</label> <input name="checkbox1"
 								class="checkbox1" type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>电池仓检测（划痕、易碎标及封机标是否完整、防水标是否变红）</label> <input
+							<label>电池仓检测（划痕、易碎标及封机标完整、防水标没有变红）</label> <input
 								name="checkbox1" class="checkbox1" type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>手机有无私拆 （螺丝有无拧过的痕迹，封机标是否完整）</label> <input name="checkbox1"
+							<label>手机无私拆 （螺丝无拧过的痕迹，封机标完整）</label> <input name="checkbox1"
 								class="checkbox1" type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>卡槽是否人为损坏（触点、线路）</label> <input name="checkbox1"
+							<label>卡槽是无人为损坏（触点、线路）</label> <input name="checkbox1"
 								class="checkbox1" type="checkbox">
 						</div>
 						<div class="am-panel-bd">
-							<label>开机有无密码（酷派系列酷管家密码 、魅族系列FLME密码）</label> <input
+							<label>开机无密码（酷派系列酷管家密码 、魅族系列FLME密码）</label> <input
 								name="checkbox1" class="checkbox1" type="checkbox">
 						</div>
 					</div>
 				</div>
+
 			</div>
+
+
+
 		</div>
+
+
+
+
 
 		<a class=" am-disabled am-btn am-btn-danger a1 a"
 			href="refund/edit?taskId=${taskForm.id }">我要退货</a> <a
@@ -159,6 +194,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>

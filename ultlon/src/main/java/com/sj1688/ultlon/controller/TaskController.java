@@ -1,5 +1,9 @@
 package com.sj1688.ultlon.controller;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.domain.User;
@@ -67,17 +72,26 @@ public class TaskController {
 		model.addAttribute("data", form);
 		return "task/show";
 	}
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
 			PagedResourcesAssembler<TaskForm> assembler, Model model) {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
-		Page<TaskForm> tasks = taskService.get(pageable, user.getRegionList());
+		Page<TaskForm> tasks = taskService.getNoProccessTask(pageable, user.getRegionList());
 		model.addAttribute("data", assembler.toResource(tasks));
 
 		return "task/list";
 	}
 
+	@RequestMapping(value="/historyList", method = RequestMethod.GET)
+	public String historyList(Pageable pageable,
+			PagedResourcesAssembler<TaskForm> assembler, Model model) {
+		User user = (User) SecurityUtils.getSubject().getPrincipal();
+		Page<TaskForm> tasks = taskService.getHistory(pageable, user.getRegionList());
+		model.addAttribute("data", assembler.toResource(tasks));
+
+		return "task/history_list";
+	}
+	
 	@RequestMapping(value = "/{id}/reject", method = RequestMethod.POST)
 	@ResponseBody
 	public String reject(@PathVariable(value = "id") TaskForm form,@RequestParam("remark")String remark) {
@@ -90,6 +104,12 @@ public class TaskController {
 	public String edit(@RequestParam(value = "taskId") TaskForm taskForm,
 			Model model) {
 		model.addAttribute("taskForm", taskForm);
+	//	System.out.println( taskService.findAllByOrderNum(taskForm.getAfterSaleForm().getOrderNum(),taskForm.getAfterSaleForm().getSkuCode()));
+		List<Map<String,Serializable>> map = taskService.findAllByOrderNum(taskForm.getAfterSaleForm().getOrderNum(),taskForm.getAfterSaleForm().getSkuCode());
+		//根据taskForm的信息去b2bDao查询相关信息
+		//然后把查出的相关信息返回到页面
+	System.out.println(JSON.toJSONString(map));
+		model.addAttribute("orderInfo", map.get(0));
 		return "task/edit";
 	}
 

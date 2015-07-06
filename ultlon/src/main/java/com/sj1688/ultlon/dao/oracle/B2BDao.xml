@@ -30,48 +30,10 @@
 		select o.id from sj_tb_order o where o.order_num = #{orderNum,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectByUidAndErp" parameterType="java.lang.String" resultType="map">
-        select 
-		    ID, MEMBER_ID, CREATETIME, SOURCE_TYPE, SALE_TYPE, STATUS, PAY_STATUS, SHIP_STATUS, 
-		    KESH_STATUS, IS_DELIVERY, EXPRESS_ID, EXPRESS_NUM, PAY_MENT, PAY_TIME, SHIP_NAME, 
-		    AREA, SHIP_ZIP, SHIP_TEL, SHIP_EMAIL, SHIP_TIME, TOTAL_COST, CARRIAGE, ADVANCE, EBANK_MON, 
-		    REMARK, MODIFYTIME, ORDER_POINTS, PROVINCE, CITY, ADDRESS, MEMBER_TYPE, BILL_TYPE, 
-		    BILL_HEAD, BILL_CONTENT, DISABLED, ORDER_NUM, LOGISTICS_TEL, DEAL_ID, DEAL_TYPE
-	    from SJ_TB_ORDER o
-	    where o.MEMBER_ID= #{userId,jdbcType=VARCHAR} and o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR}
-   </select>
-   
-   <!-- 根据用户名和订单管易编号和商品id获取订单信息  -->
-   <select id="selectByUidAndErpAndGoodsId" parameterType="java.lang.String" resultType="map">
-	   select o.id orderId,o.order_num orderNum,o.ship_name shipName,o.area,o.ship_tel shipTel,o.total_cost totalCost,
-	       o.province,o.city,o.address,o.signfortime,o.ecerp_no ecerpNo,
-	       oi.id itemId, oi.deal_price dealPrice,oi.nums,oi.target_id targetId,
-		   s.price skuPrice,s.sku_num skuNum
-	       from sj_tb_order o
-	       left join sj_tb_order_items oi on o.id=oi.order_id
-	       left join sj_tb_goods_sku s on oi.target_id=s.id
-	       where o.MEMBER_ID= #{userId,jdbcType=VARCHAR} and o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR} and oi.target_id=#{goodsId,jdbcType=VARCHAR}
-  </select>
-  
-    <!-- 根据规格代码获取商品信息 -->
-  <select id="getGoodsBySkunum" parameterType="java.lang.String" resultType="map">
-	  select g.id goodsId,g.name,g.ram,gs.id skuId,gs.edition,gs.standard,gs.storage,c.color_name colorName,p.pic_src picSrc,b.name brandName
-	  	   from sj_tb_goods g 
-	       left join sj_tb_goods_sku gs on g.id=gs.goods_id 
-	       left join sj_tb_color c on gs.color_id=c.id
-	       left join sj_tb_goods_pic p on gs.id=p.sku_id
-	       left join Sj_Tb_Brand b on g.brand_id=b.id
-	       where gs.sku_num=#{skuNum,jdbcType=VARCHAR}
-  </select>
-  
-     <!-- 根据用户名和订单管易编号和商品id获取订单信息  -->
-   <select id="selectByArea" parameterType="java.lang.String" resultType="map">
-	   select o.id orderId,o.order_num orderNum,o.ship_name shipName,o.area,o.ship_tel shipTel,o.total_cost totalCost,
-	       o.province,o.city,o.address,o.signfortime,o.ecerp_no ecerpNo,
-	       oi.id itemId, oi.deal_price dealPrice,oi.nums,oi.target_id targetId
-	       from sj_tb_order o
-	       left join sj_tb_order_items oi on o.id=oi.order_id
-	       where o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR} and oi.target_id=#{goodsId,jdbcType=VARCHAR}
-  </select>
-	
+	<select id="findAllByOrderNum" resultType="map">
+		select  i.marketbale_price,i.deal_price,s.sku_num,s.goods_id,o.pay_time,o.ship_name,o.ship_tel,o.address from sj_tb_order o 
+		left join sj_tb_order_items i on o.id = i.order_id 
+		left join sj_tb_goods_sku s on i.target_id = s.id 
+		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR} and s.sku_num = #{skuCode,jdbcType=VARCHAR}
+	</select>
 </mapper>

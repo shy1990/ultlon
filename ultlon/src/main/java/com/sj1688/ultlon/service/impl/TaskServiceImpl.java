@@ -1,6 +1,8 @@
 package com.sj1688.ultlon.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +42,15 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Page<TaskForm> get(Pageable pageable, List<String> areas) {
-		return tfr.findByAreaIn(areas, pageable);
+	public Page<TaskForm> getNoProccessTask(Pageable pageable, List<String> areas) {
+		return tfr.findByAreaInAndStatus(areas, pageable,FormAuditStatus.NOPROCESS );
 	}
 
 	@Override
 	public void updateStatus(TaskForm entity,FormAuditStatus statusToUpdate) {
-		Boolean processed = entity.getStatus().equals(
-				FormAuditStatus.AGREE)|| entity.getStatus().equals(
-						FormAuditStatus.REJECT);
-		if(!processed){
+		Boolean isNoProcessed = entity.getStatus().equals(
+				FormAuditStatus.NOPROCESS);
+		if(isNoProcessed){
 			TaskForm old=new TaskForm();
 			try {
 				BeanUtils.copyProperties(old, entity);
@@ -60,6 +61,16 @@ public class TaskServiceImpl implements TaskService {
 			TaskForm save = tfr.save(entity);
 			ctx.publishEvent(new TaskFormUpdateEvent(save,old));
 		}
+	}
+
+	@Override
+	public List<Map<String, Serializable>> findAllByOrderNum(String orderNum,String skuCode) {
+		return b2bDao.findAllByOrderNum(orderNum,skuCode);
+	}
+
+	@Override
+	public Page<TaskForm> getHistory(Pageable pageable, List<String> regionList) {
+		return tfr.findByAreaInAndStatusNot(regionList, pageable,FormAuditStatus.NOPROCESS );
 	}
 
 

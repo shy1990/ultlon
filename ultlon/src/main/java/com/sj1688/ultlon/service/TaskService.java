@@ -1,6 +1,8 @@
 package com.sj1688.ultlon.service;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,8 +27,10 @@ public interface TaskService {
 	
 	public void save(TaskForm entity);
 	
-	public Page<TaskForm> get(Pageable pageable,List<String> areas);
+	public Page<TaskForm> getNoProccessTask(Pageable pageable,List<String> areas);
 	
 	public void updateStatus(TaskForm entity,FormAuditStatus statusToUpdate);
-
+	public List<Map<String,Serializable>> findAllByOrderNum(String orderNum,String skuCode );
+	
+	public Page<TaskForm> getHistory(Pageable pageable, List<String> regionList);
 }

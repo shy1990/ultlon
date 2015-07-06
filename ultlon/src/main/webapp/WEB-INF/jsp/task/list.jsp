@@ -18,6 +18,7 @@
 	text-align: center;
 	padding: 50px 0;
 }
+
 </style>
 </head>
 <body>
@@ -36,33 +37,35 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${data.content }">
-						<tr data-id="${item.content.id }"
-							data-type="${item.content.afterSaleForm.type }"
-							data-status="${item.content.status}" class=" b">
-							<td>${item.content.afterSaleForm.goodsName }</td>
-							<td>${item.content.afterSaleForm.username }</td>
-							<td>${item.content.createdDate }</td>
-					 	<c:choose>
-								<c:when test="${item.content.afterSaleForm.type=='THH30' }">
-									<td>30天退换货</td>
-								</c:when>
-								<c:when test="${item.content.afterSaleForm.type=='KXS' }">
-									<td>开箱损</td>
-								</c:when>
-								<c:when test="${item.content.afterSaleForm.type=='WX' }">
-									<td>维修</td>
-								</c:when>
-								<c:otherwise>
-									<td>多美达百日换新</td>
-								</c:otherwise>
-							</c:choose>  
-							<%-- <c:if test="${item.content.afterSaleForm.type}=='THH30'">
+					<div id="labelDiv">
+						<c:forEach var="item" items="${data.content }">
+							<tr data-id="${item.content.id }"
+								data-type="${item.content.afterSaleForm.type }"
+								data-status="${item.content.status}">
+								<td>${item.content.afterSaleForm.goodsName }</td>
+								<td>${item.content.afterSaleForm.username }</td>
+								<td>${item.content.createdDate }</td>
+								<c:choose>
+									<c:when test="${item.content.afterSaleForm.type=='THH30' }">
+										<td>30天退换货</td>
+									</c:when>
+									<c:when test="${item.content.afterSaleForm.type=='KXS' }">
+										<td>开箱损</td>
+									</c:when>
+									<c:when test="${item.content.afterSaleForm.type=='WX' }">
+										<td>维修</td>
+									</c:when>
+									<c:otherwise>
+										<td>多美达百日换新</td>
+									</c:otherwise>
+								</c:choose>
+								<%-- <c:if test="${item.content.afterSaleForm.type}=='THH30'">
 							<td>三十天退换货</td>
 							</c:if> --%>
 
-						</tr>
-					</c:forEach>
+							</tr>
+						</c:forEach>
+					</div>
 				</tbody>
 			</table>
 		</div>
@@ -86,22 +89,10 @@
 						$(o).addClass("am-primary");
 					}
 					/* $(o).addClass("am-disabled"); */
+				} else {
+				/* 	 $(o).css("display", "none");  */
 				}
 
-				/* 		switch (status) {
-							case 'NOPROCESS':
-								return
-								break;
-							case 'NOPROCESS':
-								return
-								break;
-							case 'NOPROCESS':
-								return
-								break;
-							case 'NOPROCESS':
-								return
-								break;
-							}  */
 			});
 
 			$("#mytable").delegate("tr", "click", function() {
