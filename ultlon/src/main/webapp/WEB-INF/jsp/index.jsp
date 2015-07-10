@@ -10,6 +10,9 @@
 </shiro:hasRole>
 <shiro:hasRole name="app">
 	<meta http-equiv="refresh" content="0;url=app"/>
+</shiro:hasRole> 
+<shiro:hasRole name="excel">
+	<meta http-equiv="refresh" content="0;url=excel"/> 
 </shiro:hasRole>
 <title>售后</title>
 </head>
