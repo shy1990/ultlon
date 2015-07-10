@@ -20,8 +20,8 @@ public class AfterSaleFormDtoFunction  implements Function<AfterSaleForm, AfterS
 		AfterSaleFormDTO dto = new AfterSaleFormDTO();
 		try {
 			BeanUtils.copyProperties(dto, as);
-			dto.setCreateTime(DateUtil.dateToStr(as.getCreatedDate().toDate()));
-			dto.setReceiveTime(DateUtil.dateToStr(as.getReceiveTime()));
+			dto.setCreateTime(as.getCreatedDate()!=null?DateUtil.dateToStr(as.getCreatedDate().toDate()):"");
+			dto.setReceiveTime(as.getReceiveTime()!=null?DateUtil.dateToStr(as.getReceiveTime()):"");
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			System.out.println("实体转换异常"+e.getMessage());
 			e.printStackTrace();
