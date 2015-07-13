@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
 import com.sj1688.ultlon.service.RefundService;
+import com.sj1688.ultlon.service.TaskService;
 
 /**
  * 退货单管理控制器 <br>
@@ -66,11 +67,16 @@ public class RefundAdminController {
 		model.addAttribute("data", assembler.toResource(refundForms));
 		return "admin/refund/list";
 	}
-
+	@Autowired
+	private TaskService taskService;
 	@RequestMapping(value = "/{refundId}/{status}", method = RequestMethod.POST)
 	@ResponseBody
 	public String update(@PathVariable(value = "refundId")RefundForm refundForm,@PathVariable(value = "status")String status) {
 		refundService.updateStatus(refundForm,FormAuditStatus.valueOf(status));
+		String mobile = taskService.findMobileByOrderNum1(refundForm.getTaskForm().getAfterSaleForm().getOrderNum());
+		System.out.println(mobile);
+//			String msg = "审批已完成，请注意查看。。。。。。";
+//		MsgUtil.sendMessage("mobile", msg, "SMS");
 		return "ok";
 	}
 

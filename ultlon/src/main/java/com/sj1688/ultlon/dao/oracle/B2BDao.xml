@@ -29,7 +29,14 @@
 	<select id="findOrderId" resultType="string">
 		select o.id from sj_tb_order o where o.order_num = #{orderNum,jdbcType=VARCHAR}
 	</select>
-	
+	<!-- 根据订单号获取客户手机号  -->
+	<select id="findMobileByOrderNum" resultType="map">
+		select o.ship_tel from sj_tb_order o where o.order_num = #{orderNum,jdbcType=VARCHAR}
+	</select>
+	<select id="findMobileByOrderNum1" resultType="string">
+		select o.ship_tel from sj_tb_order o where order_num=#{orderNum}
+	</select>
+	<!-- 根据订单号和商品ID获取订单信息  -->
 	<select id="findAllByOrderNum" resultType="map">
 		select  i.marketbale_price,i.deal_price,s.sku_num,s.goods_id,o.pay_time,o.ship_name,o.ship_tel,o.address from sj_tb_order o 
 		left join sj_tb_order_items i on o.id = i.order_id 

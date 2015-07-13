@@ -1,5 +1,9 @@
 package com.sj1688.ultlon.controller;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.alibaba.fastjson.JSON;
 import com.sj1688.ultlon.domain.RefundForm;
 import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.service.RefundService;
+import com.sj1688.ultlon.service.TaskService;
+import com.sj1688.ultlon.util.MsgUtil;
 
 /**
  * 退货单控制器 <br>
@@ -53,13 +60,19 @@ import com.sj1688.ultlon.service.RefundService;
 @RequestMapping("/refund")
 public class RefundFormController {
 	@Autowired
+	private TaskService taskService;
+	@Autowired
 	private RefundService refundService;
-
 	@RequestMapping(method = RequestMethod.POST)
 	public String add(@RequestParam(value = "taskId") TaskForm taskForm,RefundForm refundForm) {
 		refundForm.setTaskForm(taskForm);
-		refundService.save(refundForm);
-		return "refund/success";
+		String orderNum =taskForm.getAfterSaleForm().getOrderNum();
+		String mobile = taskService.findMobileByOrderNum1(orderNum);
+		System.out.println(mobile);
+//			String msg = "您的申请已通过审批，正在打款请稍候。。。。。。";
+//		MsgUtil.sendMessage("mobile", msg, "SMS");
+	refundService.save(refundForm);
+		return "refund/success";	
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

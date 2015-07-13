@@ -47,6 +47,7 @@
 		<div class="am-g">
 
 			<form action="refund" method="post">
+			
 				<input type="hidden" name="taskId" value="${taskForm.id }">
 				<div class="am-input-group">
 					<span class="am-input-group-label">成交价:</span> <input type="text"
@@ -67,12 +68,21 @@
 					<textarea rows="6" cols="118" placeholder="请输入退货备注" id="wen"
 						name="remark"></textarea>
 				</div>
-				<input class="am-btn am-btn-danger a1" type="submit" value="退货确认"></input>
+				
+				<input class="am-btn am-btn-danger a1" type="submit" value="退货确认" onclick="show()"></input>
 
 			</form>
 			<a class="am-btn  a1" href="javascript:history.back(1);">返回</a>
 		</div>
 	</div>
+	<script type="text/javascript">
+	
+	function show(){
+		alert(request)
+	}
+	
+	
+	</script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
 </body>

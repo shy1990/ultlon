@@ -18,6 +18,7 @@ public class User extends AbstractAuditable<User,Long>{
 	@Column(unique=true)
 	private String username;
 	private String password;
+	private String mobile;
 	private String regions;//所在区域
 	private String roler;
 	
@@ -28,6 +29,13 @@ public class User extends AbstractAuditable<User,Long>{
 	}
 	public User() {
 		super();
+	}
+	
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 	public String getUsername() {
 		return username;

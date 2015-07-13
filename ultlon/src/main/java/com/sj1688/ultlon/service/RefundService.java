@@ -1,5 +1,9 @@
 package com.sj1688.ultlon.service;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,6 +31,7 @@ public interface RefundService {
 	public void updateStatus(RefundForm entity,FormAuditStatus statusToUpdate);
 
 	public Page<RefundForm> findAll(Pageable pageable);
+	public List<Map<String, Serializable>> findMobileByOrderNum(String orderNum);
 	/**
 	 * 退款
 	 * @param form

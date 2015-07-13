@@ -43,6 +43,16 @@ public interface B2BDao {
 	 */
 	public List<Map<String, Serializable>> findAllByOrderNum(
 			@Param("orderNum") String orderNum, @Param("skuCode") String skuCode);
+	
+	/**
+	 * 通过orderNum 查找客户手机号
+	 * 
+	 * @param orderNum
+	 * @return
+	 */
+	public List<Map<String, Serializable>> findMobileByOrderNum(
+			@Param("orderNum") String orderNum);
+	public String findMobileByOrderNum1(String orderNum);
 
 	/**
 	 * 根据订单号和商品号查询 地址，签收时间，商品名称

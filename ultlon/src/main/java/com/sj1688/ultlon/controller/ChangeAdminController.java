@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sj1688.ultlon.domain.ChangeForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.service.ChangeService;
+import com.sj1688.ultlon.service.TaskService;
 
 /**
  * 换货单管理控制器 <br>
@@ -66,11 +67,16 @@ public class ChangeAdminController {
 		model.addAttribute("data", assembler.toResource(changeForms));
 		return "admin/change/list";
 	}
-
+	@Autowired
+	private TaskService taskService;
 	@RequestMapping(value = "/{changeId}/{status}", method = RequestMethod.POST)
 	@ResponseBody
 	public String update(@PathVariable(value = "changeId")ChangeForm changeForm,@PathVariable(value = "status")String status) {
 		changeService.updateStatus(changeForm,FormAuditStatus.valueOf(status));
+		String mobile = taskService.findMobileByOrderNum1(changeForm.getTaskForm().getAfterSaleForm().getOrderNum());
+		System.out.println(mobile);
+//			String msg = "审批已完成，请注意查看。。。。。。";
+//		MsgUtil.sendMessage("mobile", msg, "SMS");
 		return "ok";
 	}
 

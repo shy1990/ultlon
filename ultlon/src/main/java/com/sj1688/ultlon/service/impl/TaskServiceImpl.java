@@ -73,5 +73,16 @@ public class TaskServiceImpl implements TaskService {
 		return tfr.findByAreaInAndStatusNot(regionList, pageable,FormAuditStatus.NOPROCESS );
 	}
 
+	@Override
+	public List<Map<String, Serializable>> findMobileByOrderNum(String orderNum) {
+		return b2bDao.findMobileByOrderNum(orderNum);
+	}
+
+	@Override
+	public String findMobileByOrderNum1(String orderNum) {
+		// TODO Auto-generated method stub
+		return b2bDao.findMobileByOrderNum1(orderNum);
+	}
+
 
 }
