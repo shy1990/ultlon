@@ -61,6 +61,7 @@ import com.sj1688.ultlon.service.TaskService;
  * 
  * 
  */
+
 @Controller
 @RequestMapping("/task")
 public class TaskController {
@@ -78,6 +79,7 @@ public class TaskController {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Page<TaskForm> tasks = taskService.getNoProccessTask(pageable, user.getRegionList());
 		model.addAttribute("data", assembler.toResource(tasks));
+		model.getClass().getName();
 
 		return "task/list";
 	}
@@ -104,7 +106,7 @@ public class TaskController {
 	public String edit(@RequestParam(value = "taskId") TaskForm taskForm,
 			Model model) {
 		model.addAttribute("taskForm", taskForm);
-	//	System.out.println( taskService.findAllByOrderNum(taskForm.getAfterSaleForm().getOrderNum(),taskForm.getAfterSaleForm().getSkuCode()));
+		
 		List<Map<String,Serializable>> map = taskService.findAllByOrderNum(taskForm.getAfterSaleForm().getOrderNum(),taskForm.getAfterSaleForm().getSkuCode());
 		//根据taskForm的信息去b2bDao查询相关信息
 		//然后把查出的相关信息返回到页面

@@ -31,6 +31,7 @@ public interface TaskService {
 	
 	public void updateStatus(TaskForm entity,FormAuditStatus statusToUpdate);
 	public List<Map<String,Serializable>> findAllByOrderNum(String orderNum,String skuCode );
-	
+	public List<Map<String, Serializable>> findMobileByOrderNum(String orderNum);
 	public Page<TaskForm> getHistory(Pageable pageable, List<String> regionList);
+	public String findMobileByOrderNum1(String orderNum);
 }

@@ -28,5 +28,11 @@ public class B2BDaoTest {
 	            }
 	        }
 	    }
+	    
+	    @Test
+	    public void selectSomething1(){
+	    	List<Map<String, Serializable>> aa = b2bDao.findMobileByOrderNum("20150123161739495");
+	    	System.out.println(aa);
+	    }
 	
 }

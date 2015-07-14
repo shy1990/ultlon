@@ -105,6 +105,7 @@
 					class="am-form-field" placeholder="${orderInfo.PAY_TIME}"
 					disabled="disabled">
 			</div>
+		<%-- 	<%request.setAttribute("orderInfo", orderInfo) %> --%>
 			<div class="am-panel-group" id="accordion">
 				<div class="am-panel am-panel-default">
 					<div class="am-panel-hd">
@@ -170,7 +171,7 @@
 
 
 
-
+        
 
 		<a class=" am-disabled am-btn am-btn-danger a1 a"
 			href="refund/edit?taskId=${taskForm.id }">我要退货</a> <a

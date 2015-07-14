@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RepairForm;
 import com.sj1688.ultlon.service.RepairService;
+import com.sj1688.ultlon.service.TaskService;
 
 /**
  * 维修单管理控制器 <br>
@@ -77,12 +78,17 @@ public class RepairAdminController {
 		repairService.update(repairForm);
 		return "ok";
 	}
-
+	@Autowired
+	private TaskService taskService;
 	@RequestMapping(value = "/{repairId}/{status}", method = RequestMethod.POST)
 	@ResponseBody
 	public String update(@PathVariable(value = "repairId")RepairForm repairForm,@PathVariable(value = "status")String status) {
 		repairService.updateStatus(repairForm,FormAuditStatus.valueOf(status));
+		String mobile = taskService.findMobileByOrderNum1(repairForm.getTaskForm().getAfterSaleForm().getOrderNum());
+		System.out.println(mobile);
+//			String msg = "审批已完成，请注意查看。。。。。。";
+//		MsgUtil.sendMessage("mobile", msg, "SMS");
 		return "ok";
 	}
-
+	
 }
