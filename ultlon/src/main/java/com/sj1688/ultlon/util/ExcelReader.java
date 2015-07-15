@@ -43,13 +43,10 @@ public class ExcelReader {
 	        		o.setImei(cellToStr(row.getCell(2)).toString());
 	        		o.setBarCode(cellToStr(row.getCell(1)).toString());
 	        		o.setEcerpNo(cellToStr(row.getCell(0)).toString());
-	        		Goods g = gs.findByBarCode(o.getBarCode());
-	        		if(null!=g&& !g.getGoodsCode().isEmpty()){
-	        			o.setNormsCode(g.getNormsCode());
-	        		}
+	        		
 	        		System.out.println("正在解析出库excel:"+xsRows+"   "+i);
 
-		            pool.submit(new ReadOutExcelThread(os,o));// 多线程保存
+		            pool.submit(new ReadOutExcelThread(os,o,gs));// 多线程保存
 		    
 	        	}
 	        }  

@@ -47,7 +47,7 @@
 			</form>
 		</div>
 		<div class="row" style="text-algin:center;display:none;" id="loding"> 
-       		<img alt="玩命处理中" src="static/img/loding.gif"> 玩 命 处 理 中 · · ·文件有点大不要捉急
+       		<img alt="玩命处理中" src="static/img/loding2.gif"> 玩 命 处 理 中 · · ·文件有点大不要捉急
        	</div>
 	</div>
 </body>
