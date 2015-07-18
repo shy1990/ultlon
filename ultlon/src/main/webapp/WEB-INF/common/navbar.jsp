@@ -19,7 +19,7 @@
 				<!-- <li class="am-active"><a href="./">首页</a></li> -->
 				<li><a href="${ctx }/task?sort=createdDate,desc">待处理售后</a></li>
 				<li><a href="${ctx }/task/historyList?sort=createdDate,desc">售后历史</a></li>
-				<li><a href="#">帮助中心</a></li>
+				<li><a href="${ctx }/task/help">帮助中心</a></li>
 			</ul>
 			<div class="am-topbar-right">
 				<a class="am-btn am-btn-primary am-topbar-btn am-btn-sm"

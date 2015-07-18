@@ -127,4 +127,10 @@ public class TaskController {
 		model.addAttribute("taskForm", taskForm);
 		return "task/wx";
 	}
+	
+	@RequestMapping(value = "help", method = RequestMethod.GET)
+	public String help() {
+		
+		return "task/sjzc";
+	}
 }
