@@ -122,6 +122,7 @@ public class AfterSaleFormController {
 	public String show(@PathVariable("userId") String userId,@PathVariable("imei") String imei,Model model) {
 		AfterSaleForm genrateAfterSaleForm = afterSaleService.genrateAfterSaleForm(imei, userId);
 		model.addAttribute("data", JSON.toJSON(genrateAfterSaleForm));
+		System.out.println("当前系统时间："+new Date());
 		return "aftersale/show";
 	}
 
@@ -130,7 +131,7 @@ public class AfterSaleFormController {
 	public List<AfterSaleType> type(@PathVariable("userId") String userId,Long receiveTime,String goodsName,Model model) {
 			Date parseDate = null;
 			if(receiveTime!=null){
-				parseDate = new Date(receiveTime);
+				parseDate = DateUtil.longStrToDate(receiveTime.toString());
 			}
 			return afterSaleService.getTypes(parseDate, goodsName);
 	}
@@ -150,7 +151,7 @@ public class AfterSaleFormController {
 	@ResponseBody
 	public String add(AfterSaleForm afterSaleForm,@RequestParam("receiveTimeStr")String receiveTimeStr) {
 		try {
-			afterSaleForm.setReceiveTime(DateUtil.strToDate(receiveTimeStr));
+			afterSaleForm.setReceiveTime(DateUtil.longStrToDate(receiveTimeStr));
 			afterSaleService.save(afterSaleForm);
 		} catch (NotSuportException e) {
 			return e.getMessage();

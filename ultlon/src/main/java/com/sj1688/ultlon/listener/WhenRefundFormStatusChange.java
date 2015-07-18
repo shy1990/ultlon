@@ -24,6 +24,7 @@ public class WhenRefundFormStatusChange implements ApplicationListener<RefundFor
 	public void onApplicationEvent( RefundFormUpdateEvent event) {
 		RefundForm changeForm=(RefundForm)event.getSource();
 		TaskForm taskForm = changeForm.getTaskForm();
+		System.out.println("WhenRefundFormStatusChange:+++++++++++++++++");
 		taskService.updateStatus(taskForm,changeForm.getStatus());
 		LOG.info("退货单状态修改：{}",changeForm);
 	}

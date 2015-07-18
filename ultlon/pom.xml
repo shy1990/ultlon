@@ -155,7 +155,7 @@
 
 
 	<build>
-		<finalName>ROOT</finalName>
+		<finalName>ultlon</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
