@@ -46,7 +46,7 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 			Map<String, Serializable> orderDetialMap=getOrderDetialMap(orderMap);
 			if(orderDetialMap!=null){
 				asf.setOrderNum((String) orderDetialMap.get("ORDER_NUM"));
-				asf.setReceiveTime((Date) orderDetialMap.get("RECEIVE_TIME"));
+				asf.setReceiveTime(DateUtil.strToDate(orderDetialMap.get("RECEIVE_TIME").toString()));
 				asf.setGoodsName((String) orderDetialMap.get("GOODS_NAME"));
 			}
 		}else{

@@ -35,7 +35,7 @@ import com.sj1688.ultlon.service.TaskService;
  * <tr>
  * <td>POST</td>
  * <td>/task</td>
- * <td>新增售后任务</td>
+ * <td>新增售后任务</td> 
  * </tr>
  * <tr>
  * <td>GET</td>
@@ -127,7 +127,6 @@ public class TaskController {
 		model.addAttribute("taskForm", taskForm);
 		return "task/wx";
 	}
-	
 	@RequestMapping(value = "help", method = RequestMethod.GET)
 	public String help() {
 		

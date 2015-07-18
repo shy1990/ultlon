@@ -54,12 +54,12 @@ public class DateUtil {
     } 
     
     /**
-     * 字符串转date类型
+     * long字符串转date类型
      * @param str
      * @return
      * @throws ParseException
      */
-    public static Date strToDate(String str){
+    public static Date longStrToDate(String str){
 	    SimpleDateFormat sdf = new SimpleDateFormat(DATE_TIME_FORMAT);
 	    try {
 			return sdf.parse(sdf.format(new Date(Long.parseLong(str))));
@@ -93,6 +93,26 @@ public class DateUtil {
     	String str=sdf.format(date);  
     	return str;
     }
+    
+
+    /**
+     * 字符串转时间
+     * @param dateStr
+     * @return
+     */
+    public static Date strToDate(String dateStr){
+    	DateFormat fmt =new	SimpleDateFormat(DATE_TIME_FORMAT);
+    	try {
+			Date date = fmt.parse(dateStr);
+			return date;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
+
       
  /*   *//** 
      * 主函数 

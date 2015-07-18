@@ -48,9 +48,9 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void updateStatus(TaskForm entity,FormAuditStatus statusToUpdate) {
-		Boolean isNoProcessed = entity.getStatus().equals(
-				FormAuditStatus.NOPROCESS);
-		if(isNoProcessed){
+		/*Boolean isNoProcessed = entity.getStatus().equals(
+				FormAuditStatus.NOPROCESS);*/
+		//if(!isNoProcessed){
 			TaskForm old=new TaskForm();
 			try {
 				BeanUtils.copyProperties(old, entity);
@@ -58,9 +58,10 @@ public class TaskServiceImpl implements TaskService {
 				e.printStackTrace();
 			}
 			entity.setStatus(statusToUpdate);
+			System.out.println("TaskServiceImpl:::::::::::updateStatus");
 			TaskForm save = tfr.save(entity);
 			ctx.publishEvent(new TaskFormUpdateEvent(save,old));
-		}
+		//}
 	}
 
 	@Override

@@ -32,20 +32,22 @@
 				<th>订单号</th>
 				<th>签收时间</th>
 				<th>退款金额</th>
+				<th>类型</th>
 				<th>状态</th>
 				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="item" items="${data.content }">
-				<tr class="am-active">
+				<tr class="am-active"> 
 					<td>${item.content.taskForm.afterSaleForm.username }</td>
 					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
 					<td>${item.content.taskForm.afterSaleForm.imei }</td>
 					<td>${item.content.taskForm.afterSaleForm.orderNum }</td>
 					<td>${item.content.taskForm.afterSaleForm.receiveTime }</td>
 					<td>${item.content.realRefundMoney }</td>
-					<td>${item.content.status.toString() }</td>
+					<td>${item.content.taskForm.afterSaleForm.type.toString() }</td>
+					<td>${item.content.status.toString()}</td>
 					<td><c:if test='${item.content.status eq "NOPROCESS"}'>
 							<button type="button" class="am-btn am-btn-success am-radius" onclick="agree('${item.content.id}');">同意</button>
 							<button type="button" class="am-btn am-btn-danger am-radius"  onclick="reject('${item.content.id}');">拒绝</button>
