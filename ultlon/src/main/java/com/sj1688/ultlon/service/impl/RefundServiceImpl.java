@@ -69,7 +69,9 @@ public class RefundServiceImpl implements RefundService {
 				e.printStackTrace();
 			}
 			entity.setStatus(status);
-			entity.setRemark(remark);
+			if(remark != null && !"".equals(remark)){
+				entity.setRemark(remark);
+			}
 			RefundForm save = rfr.save(entity);
 			ctx.publishEvent(new RefundFormUpdateEvent(save, old));
 		}
