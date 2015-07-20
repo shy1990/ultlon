@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sj1688.ultlon.domain.FormAuditStatus;
@@ -71,10 +72,11 @@ public class RefundAdminController {
 	private TaskService taskService;
 	@RequestMapping(value = "/{refundId}/{status}", method = RequestMethod.POST)
 	@ResponseBody
-	public String update(@PathVariable(value = "refundId")RefundForm refundForm,@PathVariable(value = "status")String status) {
-		refundService.updateStatus(refundForm,FormAuditStatus.valueOf(status));
+	public String update(@PathVariable(value = "refundId")RefundForm refundForm,@PathVariable(value = "status")String status,@RequestParam(value = "remark", required = false) String remark) {
+		refundService.updateStatus(refundForm,FormAuditStatus.valueOf(status),remark);
 		String mobile = taskService.findMobileByOrderNum1(refundForm.getTaskForm().getAfterSaleForm().getOrderNum());
 		System.out.println(mobile);
+		System.out.println(refundForm.getRemark());
 //			String msg = "审批已完成，请注意查看。。。。。。";
 //		MsgUtil.sendMessage("mobile", msg, "SMS");
 		return "ok";

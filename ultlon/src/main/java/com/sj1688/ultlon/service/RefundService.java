@@ -28,7 +28,7 @@ public interface RefundService {
 	
 	public Page<RefundForm> get(Pageable page);
 	
-	public void updateStatus(RefundForm entity,FormAuditStatus statusToUpdate);
+	public void updateStatus(RefundForm entity,FormAuditStatus statusToUpdate,String remark);
 
 	public Page<RefundForm> findAll(Pageable pageable);
 	public List<Map<String, Serializable>> findMobileByOrderNum(String orderNum);

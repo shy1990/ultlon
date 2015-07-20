@@ -57,7 +57,7 @@ public class RefundServiceImpl implements RefundService {
 	}
 
 	@Override
-	public void updateStatus(RefundForm entity, FormAuditStatus status) {
+	public void updateStatus(RefundForm entity, FormAuditStatus status,String remark) {
 		Boolean processed = entity.getStatus().equals(
 				FormAuditStatus.AGREE)|| entity.getStatus().equals(
 						FormAuditStatus.REJECT);
@@ -69,6 +69,7 @@ public class RefundServiceImpl implements RefundService {
 				e.printStackTrace();
 			}
 			entity.setStatus(status);
+			entity.setRemark(remark);
 			RefundForm save = rfr.save(entity);
 			ctx.publishEvent(new RefundFormUpdateEvent(save, old));
 		}
