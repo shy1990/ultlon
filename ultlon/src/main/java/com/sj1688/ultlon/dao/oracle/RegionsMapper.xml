@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sj1688.ultlon.dao.oracle.RegionsMapper">
+  <resultMap id="BaseResultMap" type="com.sj1688.ultlon.domain.Regions">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PID" jdbcType="VARCHAR" property="pid" />
+    <result column="PTREE" jdbcType="VARCHAR" property="ptree" />
+    <result column="GRADE" jdbcType="DECIMAL" property="grade" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="DISABLED" jdbcType="VARCHAR" property="disabled" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PID, PTREE, GRADE, NAME, DISABLED
+  </sql>
+  <select id="gainRegionByPid" resultMap="BaseResultMap" parameterType="java.util.Map">
+       select r.id,r.pid,r.name from sj_tb_regions r where 1 = 1
+        
+       <if test="pid == null or pid == ''">
+         and r.pid is null 
+       </if> 
+       <if test="pid != null and pid != ''">
+         and r.pid in  <foreach collection="list" item="pid"  open="(" separator="," close=")">#{pid}</foreach> 
+       </if>
+     </select>
+</mapper>

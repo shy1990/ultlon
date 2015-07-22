@@ -13,7 +13,10 @@
 </shiro:hasRole> 
 <shiro:hasRole name="excel">
 	<meta http-equiv="refresh" content="0;url=excel"/> 
-</shiro:hasRole>        
+</shiro:hasRole> 
+<shiro:hasRole name="register">
+	<meta http-equiv="refresh" content="0;url=register"/> 
+</shiro:hasRole>         
 <title>售后</title>
 </head>
 <body>
