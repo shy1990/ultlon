@@ -17,6 +17,7 @@
 <script type="text/javascript" src="js/jquery.scroll-follow.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/amazeui.min.js"></script>
+
 <title>退货退款申请</title>
 <script type="text/javascript">
 		function agree(id) {
@@ -36,7 +37,7 @@
 		} */
 		
 		$(function() {
-			
+		
 		    function conPosition() {
 		        var oBackground = document.getElementById("background");
 		        var dw = $(document).width();
@@ -104,6 +105,8 @@
 				.remark_right{width: 90%; text-align: left; float: left;}
 				#cl_reject{font-size: 16px;}
 				.clear{clear:both}
+				/*----------- 分页 start------------- */
+.phone_main_07{ padding-top:20px; width:500px; margin:0 auto;}
 </style>
 </head>
 <body>
@@ -155,6 +158,38 @@
 				    <button class="ultlon_gather ultlon_content_body_btn" id="cl_reject">取消</button>
 			    </div>
 			</div>
+	<div class="phone_main_07">
+		
+			<p id="p"></p>
+			<!-- <ul id="phone_list_page_ul"> -->
+			     <ul data-am-widget="pagination" class="am-pagination am-pagination-select">
+				  <li class="am-pagination-prev ">
+				  <c:choose>
+				  	<c:when test="${data.metadata.number ==0}">
+				  		<a>上一页</a>
+				  	</c:when>
+					<c:otherwise>
+					  <a href="admin/refund?sort=createdDate,desc&page=${data.metadata.number-1}"class="">上一页</a>
+					</c:otherwise>
+				   </c:choose>
+				  </li>
+				  <li class="am-pagination-select">
+				    ${data.metadata.number+1} / ${data.metadata.totalPages}
+				  </li>
+				  <li class="am-pagination-next ">
+				  <c:choose>
+				  	<c:when test="${ data.metadata.number+1 == data.metadata.totalPages}">
+				  		<a>下一页</a>
+				  	</c:when>
+				  
+					<c:otherwise>
+					  <a href="admin/refund?sort=createdDate,desc&page=${data.metadata.number+1}" class="">下一页</a>
+					</c:otherwise>
+				    </c:choose>
+				  </li>
+				</ul>
+			<!-- </ul> -->
+		</div>
 	
 </body>
 </html>

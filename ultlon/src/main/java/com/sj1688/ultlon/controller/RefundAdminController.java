@@ -66,6 +66,10 @@ public class RefundAdminController {
 			PagedResourcesAssembler<RefundForm> assembler, Model model) {
 		Page<RefundForm> refundForms = refundService.findAll(pageable);
 		model.addAttribute("data", assembler.toResource(refundForms));
+		model.addAttribute("meta", assembler.toResource(refundForms).getMetadata());
+		//System.out.println("+++++++++++++++++++++++++++++++++++++");
+		//System.out.println(JSON.toJSONString(model));
+		
 		return "admin/refund/list";
 	}
 	@Autowired
