@@ -1,5 +1,7 @@
 package com.sj1688.ultlon.dao.mysql;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sj1688.ultlon.domain.AfterSaleOrder;
@@ -13,7 +15,7 @@ public interface AfterSaleOrderRepository extends JpaRepository<AfterSaleOrder,L
 	 * @param imei
 	 * @return
 	 */
-	public AfterSaleOrder findByImei(String imei); 
+	public List<AfterSaleOrder> findByImei(String imei); 
 	
    
 	
