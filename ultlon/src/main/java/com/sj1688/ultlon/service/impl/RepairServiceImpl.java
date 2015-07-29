@@ -49,7 +49,7 @@ public class RepairServiceImpl implements RepairService{
 	}
 
 	@Override
-	public void updateStatus(RepairForm entity,FormAuditStatus status) {
+	public void updateStatus(RepairForm entity,FormAuditStatus status,String remark,String track_no) {
 		Boolean processed = entity.getStatus().equals(
 				FormAuditStatus.AGREE)|| entity.getStatus().equals(
 						FormAuditStatus.REJECT);
@@ -61,6 +61,10 @@ public class RepairServiceImpl implements RepairService{
 				e.printStackTrace();
 			}
 			entity.setStatus(status);
+			entity.setTrack_no(track_no);
+			if(remark != null && !"".equals(remark)){
+				entity.setRemark(remark);
+			}
 			RepairForm save = rfr.save(entity);
 			ctx.publishEvent(new RepairFormUpdateEvent(save,old));
 		}

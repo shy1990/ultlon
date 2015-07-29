@@ -73,8 +73,10 @@ public class RepairAdminController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public String cost(@RequestParam(value = "id")RepairForm repairForm,BigDecimal cost) {
+	public String cost(@RequestParam(value = "id")RepairForm repairForm,BigDecimal cost,String remark,FormAuditStatus status) {
 		repairForm.setCost(cost);
+		repairForm.setRemark(remark);
+		repairForm.setStatus(status);
 		repairService.update(repairForm);
 		return "ok";
 	}
@@ -82,8 +84,8 @@ public class RepairAdminController {
 	private TaskService taskService;
 	@RequestMapping(value = "/{repairId}/{status}", method = RequestMethod.POST)
 	@ResponseBody
-	public String update(@PathVariable(value = "repairId")RepairForm repairForm,@PathVariable(value = "status")String status) {
-		repairService.updateStatus(repairForm,FormAuditStatus.valueOf(status));
+	public String update(@PathVariable(value = "repairId")RepairForm repairForm,@PathVariable(value = "status")String status,@RequestParam(value = "remark", required = false) String remark,String track_no) {
+		repairService.updateStatus(repairForm,FormAuditStatus.valueOf(status),remark,track_no);
 		String mobile = taskService.findMobileByOrderNum1(repairForm.getTaskForm().getAfterSaleForm().getOrderNum());
 		System.out.println(mobile);
 //			String msg = "审批已完成，请注意查看。。。。。。";

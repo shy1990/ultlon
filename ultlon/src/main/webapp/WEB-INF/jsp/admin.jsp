@@ -22,6 +22,7 @@
 <title>售后管理页面</title>
 </head>
 <body>
+<%@include file="../common/afterbar.jsp"%>
 <a class="am-btn am-btn-primary am-btn-block" href="admin/refund?sort=createdDate,desc">退货退款单</a>
 <a class="am-btn am-btn-warning am-btn-block" href="admin/change?sort=createdDate,desc">换货单</a>
 <a class="am-btn am-btn-success am-btn-block" href="admin/repair?sort=createdDate,desc">维修单</a>
