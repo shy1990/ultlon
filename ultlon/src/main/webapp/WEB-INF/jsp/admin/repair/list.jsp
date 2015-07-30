@@ -29,6 +29,9 @@
 <script src="js/amazeui.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		
+		
+		
 		//限制字符个数
 		$(".remark").each(function(){
 		    var maxwidth=14;
@@ -37,6 +40,17 @@
 		        $(this).html($(this).html()+'…');
 		    }
 		});
+		
+		$("#cost").keyup(function () {
+            var reg = $(this).val().match(/\d+\.?\d{0,2}/);
+            var txt = '';
+            if (reg != null) {
+                txt = reg[0];
+            }
+            $(this).val(txt);
+        }).change(function () {
+            $(this).keyup();
+        });
 		
 	});
 	
@@ -95,6 +109,16 @@
 
 		});
 	}
+	
+	
+	
+	/* $('#username').blur(function (){
+			if ($('#username').val() ) {
+			$('#q').text('用户名已存在！')
+			}
+			else { $('#q').text('ok!') }
+			}) */
+	
 	/* function reject(id) {
 		$.post("admin/repair/" + id + "/REJECT", function(data) {
 			if (data === 'ok') {
@@ -148,7 +172,7 @@
 		<div class="am-modal-dialog">
 			<div class="am-modal-hd">三际商城</div>
 			<div class="am-modal-bd">
-				请输入维修报价: <input type="number" class="am-modal-prompt-input" placeholder="请输入维修报价">
+				请输入维修报价: <input type="text" class="am-modal-prompt-input" placeholder="请输入维修报价" id="cost" >
 				
 				<div><div class="remark_left">请填写备注:</div><div class="remark_right"><textarea name="MSG" id="remark_a" cols=43.5 rows=6 placeholder="请输入备注"></textarea></div></div>
 				    	

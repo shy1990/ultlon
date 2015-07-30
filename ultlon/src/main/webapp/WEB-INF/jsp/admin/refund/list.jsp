@@ -105,9 +105,6 @@
 		var id = $("#common_id").val();
 		var sa=$("#sa").val();
 		var sr=$("#sr").val();
-		alert(id);
-		alert(sa);
-		alert(sr);
 		if("同意"==sa && sr==""){
 			$.post("admin/refund/" + id + "/AGREE", {remark : $('#remark').val()}, function(data) {
 				if (data === 'ok') {
