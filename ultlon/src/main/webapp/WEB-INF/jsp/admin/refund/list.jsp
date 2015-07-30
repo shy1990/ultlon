@@ -71,7 +71,6 @@
 			$("#reject").click(function() {
 				 var id=$(this).attr('testvalue');
 				 var status=$("#reject").text();
-				 alert(status);
 					$("#background, #content").show();
 					
 					conPosition();
