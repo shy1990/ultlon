@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSON;
 import com.sj1688.ultlon.UltlonApplication;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
 
@@ -18,7 +19,6 @@ import com.sj1688.ultlon.dao.oracle.B2BDao;
 public class B2BDaoTest {
 	 @Autowired
 	    private B2BDao b2bDao;
-	    @Test
 	    public void selectSomething(){
 	        List<Map<String, Serializable>> findSomthing = b2bDao.findSomthing("宋");
 	        for (Map<String, Serializable> map : findSomthing) {
@@ -29,10 +29,21 @@ public class B2BDaoTest {
 	        }
 	    }
 	    
-	    @Test
 	    public void selectSomething1(){
 	    	List<Map<String, Serializable>> aa = b2bDao.findMobileByOrderNum("20150123161739495");
-	    	System.out.println(aa);
+	    	System.out.println("+++++++++++++++=");
+	    	System.out.println(JSON.toJSONString(aa));
+	    }
+	    
+	    @Test
+	    public void findNRGBy(){
+	    	Map<String, Serializable> aa = b2bDao.findNRGBy("10513602","DD11111111");
+	    	System.out.println("+++++++++++++++=");
+	    	System.out.println(JSON.toJSONString(aa));
+	    	
+	    	 aa = b2bDao.findNRGBy("10509802","DD02913368");
+	    	System.out.println("+++++++++++++++=");
+	    	System.out.println(JSON.toJSONString(aa));
 	    }
 	
 }

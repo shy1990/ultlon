@@ -62,7 +62,9 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	 */
 	private Map<String, Serializable> getOrderDetialMap(
 			Map<String, String> orderMap) {
-		Map<String, Serializable> result=b2bdao.findNRGBy(orderMap.get("skucode"),orderMap.get("ddnum"));
+		System.out.println("查询前："+orderMap);
+		Map<String, Serializable> result = b2bdao.findNRGBy(orderMap.get("skucode").trim(),orderMap.get("ddnum").trim());
+		System.out.println("查询结果："+result);
 		return result;
 	}
 	
