@@ -20,7 +20,14 @@ public class RepairForm extends AbstractAuditable<User, Long>{
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;
 	private String remark;
+	private String track_no;
 	
+	public String getTrack_no() {
+		return track_no;
+	}
+	public void setTrack_no(String track_no) {
+		this.track_no = track_no;
+	}
 	public RepairForm() {
 		super();
 	}

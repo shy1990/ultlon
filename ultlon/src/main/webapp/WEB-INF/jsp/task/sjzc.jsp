@@ -26,8 +26,9 @@
       	}
       	
       	.content {
-			text-align: center;
-			padding: 50px 0;
+      		margin:0px auto;
+      		width:80%;
+			padding: 30px 0;
 		}
       
       </style>
@@ -40,9 +41,9 @@
 	<div class="container-fluid" id="LG">
 	<div class="row-fluid">
 		
-		<div class="col-xs-6 span9">
+		<div class="col-xs-6 span12">
 		
-			<div id="content">
+			<div class="content">
 			<dl>
 				<dt>
 					退换货政策

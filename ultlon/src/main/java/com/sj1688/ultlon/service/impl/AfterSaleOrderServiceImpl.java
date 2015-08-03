@@ -2,6 +2,7 @@ package com.sj1688.ultlon.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 	@Override
 	public Map<String, Object> getOrder(String imei, String userId) {
 		Map<String, Object> map = null;
-		AfterSaleOrder uo = or.findByImei(imei);
+		List<AfterSaleOrder> ors = or.findByImei(imei);
+		AfterSaleOrder uo = ors!=null?ors.get(0):null;
 		if(null!=uo && !uo.getEcerpNo().isEmpty()){
 			map = om.selectByUidAndErp(userId, uo.getEcerpNo());
 		}
@@ -61,8 +63,8 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 
 	@Override
 	public AfterSaleOrder findByImei(String imei) {
-		// TODO Auto-generated method stub
-		return or.findByImei(imei);
+		List<AfterSaleOrder> ors = or.findByImei(imei);
+		return ors!=null?ors.get(0):null;
 	}
 
 	@Override

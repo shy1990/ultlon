@@ -13,15 +13,133 @@
 <base href="<%=basePath%>" />
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/amazeui.min.css" />
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.scroll-follow.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/amazeui.min.js"></script>
 <title>換新申请</title>
-<style>
+<script type="text/javascript">
+		
+		$(function() {
+			
+			$("#id").val("");
+			$("#sa").val("");
+			$("#sr").val("");
+			$("#remark").val("");
+		    function conPosition() {
+		        var oBackground = document.getElementById("background");
+		        var dw = $(document).width();
+		        var dh = $(document).height();
+		        oBackground.style.width = dw+'px';
+		        oBackground.style.height = dh+'px';
+		        var oContent = document.getElementById("content");
+		        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		        var l = (document.documentElement.clientWidth - oContent.offsetWidth) / 2;
+		        var t = ((document.documentElement.clientHeight - oContent.offsetHeight) / 4) + scrollTop;
+		        oContent.style.left = l + 'px';
+		        oContent.style.top = t + 'px';
+		    }
+		    
+		    $("#agree").click(function() {
+				 var id=$(this).attr('testvalue');
+				 var status=$("#agree").text();
+				 $("#background, #content").show();
+					
+				 conPosition();
+
+				 $("#common_id").val(id);
+				 $("#sa").val(status);
+				});    
+		    
+			$("#reject").click(function() {
+				 var id=$(this).attr('testvalue');
+				 var status=$("#reject").text();
+					$("#background, #content").show();
+					
+					conPosition();
+	
+					$("#common_id").val(id);
+					$("#sr").val(status);
+				});
+
+		$("#background,#cl_cancel").click(function() {
+			$("#background, #content").hide();
+		});
+		//点击黑色背景隐藏弹出层，当然可以绑定在任意一个按钮上
+		$(window).resize(function() {
+			conPosition();
+		});
+		//$(window).scroll(function() {conPosition();});
+		//开启内容跟随垂直滚动条（水平滚动条需要处理的问题更多，暂时没有考虑）
+		
+		//限制字符个数
+	    $(".remark").each(function(){
+	        var maxwidth=14;
+	        if($(this).text().length>maxwidth){ 
+	           $(this).text($(this).text().substring(0,maxwidth));
+	            $(this).html($(this).html()+'…');
+	        }
+	    });
+		
+	});
+
+	function btn_ok() {
+		var id = $("#common_id").val();
+		var sa=$("#sa").val();
+		var sr=$("#sr").val();
+		if("同意"==sa && sr==""){
+			$.post("admin/change/" + id + "/AGREE", {remark : $('#remark').val()}, function(data) {
+				if (data === 'ok') {
+					location.reload();
+				}
+			});
+			
+		}
+		if("拒绝"==sr && sa==""){
+			$.post("admin/change/" + id + "/REJECT", {remark : $('#remark').val()}, function(data) {
+				if (data === 'ok') {
+					location.reload();
+				}
+			});
+			
+		}
+		
+	}
+	
+</script>
+<style type="text/css">
 .content {
 	text-align: center;
 	padding: 50px 0;
 }
+				#background {position:absolute; z-index:998; top:0px; left:0px; background:rgb(50,50,50);background:rgba(0,0,0,0.5); display:none;}
+				#content {position:absolute; width:580px; z-index:999; padding:10px; background:#fff; border-radius:5px; display:none;}
+				.ultlon_content_body{text-align: center;}	 
+				.ultlon_gather{margin-top:25px;font-size: 22px;}
+				.ultlon_content_body_btn{border: 1px solid #ccc;
+					  background: #F9F9F9;
+					  width: 250px;
+					  margin: 20px auto;
+					  height: 30px;
+					  line-height: 30px;
+					  cursor: pointer;
+					  font-size: 18px;
+				}
+				
+				.remark{
+					width:260px;
+					
+				}
+				.remark_left{width: 10%; text-align: right; float: left;}
+				.remark_right{width: 90%; text-align: left; float: left;}
+				#cl_cancel{font-size: 16px;}
+				.clear{clear:both}
+				/*----------- 分页 start------------- */
+.phone_main_07{ padding-top:20px; width:500px; margin:0 auto;}
 </style>
 </head>
 <body>
+<%@include file="../../../common/afterbar.jsp"%>
 	<table
 		class="am-table am-table-bordered am-table-striped am-table-hover">
 		<thead>
@@ -40,19 +158,34 @@
 					<td>${item.content.taskForm.afterSaleForm.username }</td>
 					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
 					<td>${item.content.taskForm.afterSaleForm.imei }</td>
-					<td>${item.content.remark } ${item.content.lastModifiedBy.username } </td>
+					<td class="remark" title="${item.content.remark.toString()} ${item.content.lastModifiedBy.username }">${item.content.remark } ${item.content.lastModifiedBy.username } </td>
 					<td>${item.content.status }</td>
-					<td><c:if test='${item.content.status eq "NOPROCESS"}'>
-							<button type="button" class="am-btn am-btn-success am-radius" onclick="agree('${item.content.id}');">同意</button>
-							<button type="button" class="am-btn am-btn-danger am-radius"  onclick="reject('${item.content.id}');">拒绝</button>
+					<td style="width:200px;"><c:if test='${item.content.status eq "NOPROCESS"}'>
+							<button type="button" class="am-btn am-btn-success am-radius" id="agree" testvalue="${item.content.id}">同意</button>
+							<button type="button" class="am-btn am-btn-danger am-radius"  id="reject" testvalue="${item.content.id}">拒绝</button>
 						</c:if></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
-
-	<script src="js/jquery.min.js"></script>
+	<!-- 弹窗 -->
+			<div id="background"></div>
+			<div id="content">
+			    <div class="ultlon_content_body">
+				    	
+					<div><div class="remark_left">备注：</div><div class="remark_right"><textarea name="MSG" id="remark" cols=50 rows=6></textarea></div></div>
+				    	
+				    <input type="hidden" name="type" value="" id="common_id">
+				    <input type="hidden" name="type" value="" id="sa">
+				    <input type="hidden" name="type" value="" id="sr">
+				    
+				    <button type="button" class="ultlon_gather ultlon_content_body_btn" style="background:red;" id="btn_ok" onclick="btn_ok();">确定</button>
+				    <button class="ultlon_gather ultlon_content_body_btn" id="cl_cancel">取消</button>
+			    </div>
+			</div>
+			
+	<!-- <script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
 	<script type="text/javascript">
 		function agree(id) {
@@ -68,7 +201,7 @@
 					location.reload();
 				}
 			});
-		}
+		} -->
 	</script>
 </body>
 

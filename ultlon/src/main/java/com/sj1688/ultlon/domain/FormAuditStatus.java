@@ -5,7 +5,8 @@ public enum FormAuditStatus {
 	NOPROCESS("未处理"),
 	PROCESSING("处理中"),
 	AGREE("同意"),
-	REJECT("拒绝");
+	REJECT("拒绝"),
+	FINISH("已完成");
 	
 	private String name;
 	

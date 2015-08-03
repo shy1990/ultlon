@@ -52,11 +52,11 @@ public class ExcelReader {
 	        }  
             
 	        pool.shutdown();
-	        while (true) {
+	        /*while (true) {
 	            if (pool.isTerminated()) {// 地址转换完成
 	            	break;
 	            }
-            }
+            }*/
 	        System.gc(); 
 		return "";
 	}

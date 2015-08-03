@@ -44,7 +44,7 @@ public class ChangeServiceImpl implements ChangeService{
 	}
 
 	@Override
-	public void updateStatus(ChangeForm entity,FormAuditStatus status) {
+	public void updateStatus(ChangeForm entity,FormAuditStatus status,String remark) {
 		Boolean processed = entity.getStatus().equals(
 				FormAuditStatus.AGREE)|| entity.getStatus().equals(
 						FormAuditStatus.REJECT);
@@ -56,6 +56,9 @@ public class ChangeServiceImpl implements ChangeService{
 				e.printStackTrace();
 			}
 			entity.setStatus(status);
+			if(remark != null && !"".equals(remark)){
+				entity.setRemark(remark);
+			}
 			ChangeForm save = rfr.save(entity);
 			ctx.publishEvent(new ChangeFormUpdateEvent(save,old));
 		}

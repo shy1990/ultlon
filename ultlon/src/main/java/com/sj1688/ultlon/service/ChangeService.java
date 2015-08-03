@@ -24,7 +24,7 @@ public interface ChangeService {
 	
 	public Page<ChangeForm> get(Pageable page);
 	
-	public void updateStatus(ChangeForm entity,FormAuditStatus statusToUpdate);
+	public void updateStatus(ChangeForm entity,FormAuditStatus statusToUpdate,String remark);
 
 	public Page<ChangeForm> findAll(Pageable pageable);
 }
