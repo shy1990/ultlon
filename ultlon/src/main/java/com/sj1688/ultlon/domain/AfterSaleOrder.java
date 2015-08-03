@@ -35,15 +35,15 @@ public class AfterSaleOrder extends AbstractAuditable<User, Long>{
 	}
 	@Column(name = "ecerp_no")
 	public String getEcerpNo() {
-		return ecerpNo;
+		return ecerpNo.toUpperCase();
 	}
 	public void setEcerpNo(String ecerpNo) {
-		this.ecerpNo = ecerpNo.toLowerCase();
+		this.ecerpNo = ecerpNo.toUpperCase();
 	}
 	
 	@Column(name = "norms_code")
 	public String getNormsCode() {
-		return normsCode.toLowerCase();
+		return normsCode.toUpperCase();
 	}
 	public void setNormsCode(String normsCode){
 		this.normsCode = normsCode;
