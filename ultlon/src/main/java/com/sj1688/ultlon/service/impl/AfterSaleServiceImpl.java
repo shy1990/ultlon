@@ -76,7 +76,7 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	private Map<String, String> getOrderMap(String imei) {
 		Map<String, String> result=new HashMap<String, String>();
 		List<AfterSaleOrder> ors = asor.findByImei(imei);
-		AfterSaleOrder aso = ors!=null?ors.get(0):null;
+		AfterSaleOrder aso = ors!=null&&ors.size()>0?ors.get(0):null;
 		//AfterSaleOrder aso = asor.findByImei(imei);
 		if(aso!=null){
 			result.put("skucode", aso.getNormsCode());
