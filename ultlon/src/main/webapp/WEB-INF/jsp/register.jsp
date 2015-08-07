@@ -68,8 +68,6 @@
 				  provinceData = '';
 				  provinceData +=value+','; 
 			   } 
-			   
-
 	  }
 	  
 	  
@@ -81,7 +79,6 @@
 			  cityData = '';
 			  cityData +=value+',';
 		   }
-	  
 	  }
 	  
 	  function setAreaData(){
@@ -91,7 +88,6 @@
 			  areaData = '';
 			  areaData +=value;
 		  }
-		 // alert(regionsData);
 	  }
 	  
 	  function setRegionsData(){
@@ -120,14 +116,7 @@
 				 <label for="mobile">手机号:</label>
 				<input type="tel" name="mobile" id="password" value="">
 				<br/> 
-				    <label for="roler">职&nbsp;&nbsp;&nbsp;&nbsp;位:</label>
-					<select name="roler"  onchange="setRegionsData()">
-					  <option >点击选择</option>
-					  <option value="app">业务经理</option>
-					  <option value="admin">售后</option>
-					  <option value="admin">财务</option>
-					  <option value="meuser">管理員</option>
-		           </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/>
+				   
 				    <!-- 获取省级数据 -->
 				    <label for="province">省:&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					<select id="province" name="province" multiple data-am-selected onchange="getCity()" >
@@ -142,6 +131,16 @@
 					</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
 					<br/><br/>
+					
+					<label for="roler">职&nbsp;&nbsp;&nbsp;&nbsp;位:</label>
+					<select name="roler" data-am-selected onchange="setRegionsData()">
+					  <option >点击选择</option>
+					  <option value="app">业务经理</option>
+					  <option value="admin">售后</option>
+					  <option value="admin">财务</option>
+					  <option value="meuser">管理員</option>
+		           </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/>
+					<br/>
 				
 				<div class="am-cf">
 					<input type="submit" name="submit" value="保  存"
