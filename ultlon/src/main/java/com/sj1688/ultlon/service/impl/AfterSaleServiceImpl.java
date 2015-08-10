@@ -41,13 +41,16 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		
 		Map<String, String> orderMap=getOrderMap(imei);
 		
-		if(orderMap!=null){
+		if(orderMap!=null){//
 			asf.setSkuCode(orderMap.get("skucode"));
 			Map<String, Serializable> orderDetialMap=getOrderDetialMap(orderMap);
 			if(orderDetialMap!=null){
 				asf.setOrderNum((String) orderDetialMap.get("ORDER_NUM"));
 				asf.setReceiveTime(DateUtil.strToDate(orderDetialMap.get("RECEIVE_TIME").toString()));
 				asf.setGoodsName((String) orderDetialMap.get("GOODS_NAME"));
+				if(userId.equals("0")){//传入的用户id是0那么就是400代申请的
+					asf.setUsername((String) orderDetialMap.get("MEMBER_ID"));
+				}
 			}
 		}else{
 			//不属于咱们商品 直接维修
@@ -75,8 +78,9 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	 */
 	private Map<String, String> getOrderMap(String imei) {
 		Map<String, String> result=new HashMap<String, String>();
-		List<AfterSaleOrder> ors = asor.findByImei(imei);
+		List<AfterSaleOrder> ors = asor.findByImeiOrderByCreatedDateDesc(imei);
 		AfterSaleOrder aso = ors!=null&&ors.size()>0?ors.get(0):null;
+		System.out.println("------------"+ors.get(0));
 		//AfterSaleOrder aso = asor.findByImei(imei);
 		if(aso!=null){
 			result.put("skucode", aso.getNormsCode());
