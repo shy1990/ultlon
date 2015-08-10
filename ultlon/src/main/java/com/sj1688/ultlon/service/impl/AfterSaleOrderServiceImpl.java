@@ -27,7 +27,7 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 	@Override
 	public Map<String, Object> getOrder(String imei, String userId) {
 		Map<String, Object> map = null;
-		List<AfterSaleOrder> ors = or.findByImei(imei);
+		List<AfterSaleOrder> ors = or.findByImeiOrderByCreatedDateDesc(imei);
 		AfterSaleOrder uo = ors!=null?ors.get(0):null;
 		if(null!=uo && !uo.getEcerpNo().isEmpty()){
 			map = om.selectByUidAndErp(userId, uo.getEcerpNo());
@@ -63,7 +63,7 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 
 	@Override
 	public AfterSaleOrder findByImei(String imei) {
-		List<AfterSaleOrder> ors = or.findByImei(imei);
+		List<AfterSaleOrder> ors = or.findByImeiOrderByCreatedDateDesc(imei);
 		return ors!=null?ors.get(0):null;
 	}
 
