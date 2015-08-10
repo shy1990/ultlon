@@ -6,7 +6,7 @@
 	</select>
 
 	<select id="findNRGBy" resultType="map">
-		select o.order_num,o.signfortime RECEIVE_TIME ,g.name GOODS_NAME
+		select o.order_num,o.MEMBER_ID,o.signfortime RECEIVE_TIME ,g.name GOODS_NAME
 		from sj_tb_order o
 		left join sj_tb_order_items oi on o.id=oi.order_id
 		left join sj_tb_goods_sku s on oi.target_id=s.id

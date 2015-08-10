@@ -14,8 +14,10 @@ import com.sj1688.ultlon.domain.User;
 @SpringApplicationConfiguration(classes = UltlonApplication.class)
 @TransactionConfiguration(defaultRollback=false)
 public class UserRepositoryTest {
+	
 	@Autowired
 	private UserRepository ur;
+	
 	@Test
 	public void saveTest(){
 		User user=new User();

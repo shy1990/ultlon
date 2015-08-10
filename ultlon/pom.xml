@@ -74,6 +74,14 @@
 			<version>10.2.0.4.0</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!--sqlserver驱动  -->
+		<dependency>
+		    <groupId>com.microsoft.sqlserver</groupId>
+		    <artifactId>sqljdbc-4</artifactId>
+		    <version>1</version>
+		</dependency>
+		
+		
 		<!-- 加入fastjson依赖包 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -145,7 +153,7 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.jbundle.util.osgi.wrapped</groupId>
 			<artifactId>org.jbundle.util.osgi.wrapped.org.apache.http.client</artifactId>

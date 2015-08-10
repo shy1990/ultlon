@@ -15,7 +15,7 @@ public interface AfterSaleOrderRepository extends JpaRepository<AfterSaleOrder,L
 	 * @param imei
 	 * @return
 	 */
-	public List<AfterSaleOrder> findByImei(String imei); 
+	public List<AfterSaleOrder> findByImeiOrderByCreatedDateDesc(String imei); 
 	
    
 	
