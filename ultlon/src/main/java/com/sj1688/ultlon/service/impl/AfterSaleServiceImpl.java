@@ -13,12 +13,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
+import com.sj1688.ultlon.dao.mssql.CktCodeOutRepository;
 import com.sj1688.ultlon.dao.mysql.AfterSaleFormRepository;
 import com.sj1688.ultlon.dao.mysql.AfterSaleOrderRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.AfterSaleOrder;
 import com.sj1688.ultlon.domain.AfterSaleType;
+import com.sj1688.ultlon.domain.sz.CktCodeOut;
 import com.sj1688.ultlon.event.AfterSaleFormCreateEvent;
 import com.sj1688.ultlon.service.AfterSaleService;
 import com.sj1688.ultlon.service.exception.NotSuportException;
@@ -34,6 +37,8 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	private AfterSaleFormRepository asfRepository;
 	@Autowired
 	private AfterSaleOrderRepository asor;
+	@Autowired
+	private CktCodeOutRepository ccor;
 	
 	@Override
 	public AfterSaleForm genrateAfterSaleForm(String imei, String userId) {
@@ -46,11 +51,11 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 			Map<String, Serializable> orderDetialMap=getOrderDetialMap(orderMap);
 			if(orderDetialMap!=null){
 				asf.setOrderNum((String) orderDetialMap.get("ORDER_NUM"));
-				asf.setReceiveTime(DateUtil.strToDate(orderDetialMap.get("RECEIVE_TIME").toString()));
+				asf.setReceiveTime(orderDetialMap.containsKey("RECEIVE_TIME")&&orderDetialMap.get("RECEIVE_TIME")!=null?DateUtil.strToDate(orderDetialMap.get("RECEIVE_TIME").toString()):null);
 				asf.setGoodsName((String) orderDetialMap.get("GOODS_NAME"));
-				if(userId.equals("0")){//传入的用户id是0那么就是400代申请的
+				//if(userId.equals("0")){//传入的用户id是0那么就是400代申请的
 					asf.setUsername((String) orderDetialMap.get("MEMBER_ID"));
-				}
+				//}
 			}
 		}else{
 			//不属于咱们商品 直接维修
@@ -78,9 +83,33 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	 */
 	private Map<String, String> getOrderMap(String imei) {
 		Map<String, String> result=new HashMap<String, String>();
-		List<AfterSaleOrder> ors = asor.findByImeiOrderByCreatedDateDesc(imei);
+		//List<AfterSaleOrder> ors = asor.findByImeiOrderByCreatedDateDesc(imei);
+		List<CktCodeOut> ccos = ccor.findByCodeID(imei);
+		List<AfterSaleOrder> ors = new ArrayList<AfterSaleOrder>();
+		for(CktCodeOut cco:ccos){
+			String[] config = cco.getConfig().split(":");
+			System.out.println(cco.getConfig()+"   "+config.length);
+			if(config.length>1){
+				AfterSaleOrder a = new AfterSaleOrder();
+				a.setEcerpNo(cco.getRemark());
+				a.setBarCode(config[2]);
+				a.setNormsCode(config[2]);
+				a.setImei(cco.getCodeID());
+				ors.add(a);
+			}
+		}
+		
+		//System.out.println("神州串码数据："+JSON.toJSONString(ors));
+		
+		if(ors.size()==0){//没有从神州查到数据，从串码数据库查询
+			ors = asor.findByImeiOrderByCreatedDateDesc(imei);
+		}
+		
+		//System.out.println("神州串码数据2："+JSON.toJSONString(ors));
+		
+		
 		AfterSaleOrder aso = ors!=null&&ors.size()>0?ors.get(0):null;
-		System.out.println("------------"+ors.get(0));
+		//System.out.println("------------"+ors.get(0));
 		//AfterSaleOrder aso = asor.findByImei(imei);
 		if(aso!=null){
 			result.put("skucode", aso.getNormsCode());

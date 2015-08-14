@@ -104,4 +104,18 @@ public interface B2BDao {
 	 */
 	Map<String, Object> selectByArea(@Param("ecerpNo") String ecerpNo,
 			@Param("goodsId") String goodsId);
+	
+	/**
+	 * 获取用户浏览记录
+	 * @param map
+	 * @return
+	 */
+	List<Map<String, Object>> getUserGoodsRecords(Map map);
+	
+	/**
+	 * 获取用户浏览记录总个数
+	 * @param map
+	 * @return
+	 */
+	String getUserGoodsRecordCount(Map map);
 }
