@@ -29,4 +29,5 @@
 	<span id="username"><shiro:principal property="username"></shiro:principal></span>
 	正在转向首页..
 </body>
+
 </html>

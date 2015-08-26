@@ -97,6 +97,48 @@
 	<select id="findPointByUsername" parameterType="java.lang.String" resultType="int">
 		select point from sj_tb_members where username=#{username,jdbcType=VARCHAR}
 	</select>
+  
+  <!-- 用户浏览记录 -->
+  <select id="getUserGoodsRecords" parameterType="java.util.Map" resultType="map">
+  	SELECT r.username, r.name, r.create_time
+	  FROM (SELECT r.*, ROWNUM RN
+	          FROM (
+	          	SELECT m.username, g.name, r.create_time 
+	          	from sj_tb_user_goods_record r 
+	          	join sj_tb_members m on r.user_id = m.id
+	         	join sj_tb_goods g on r.goods_num = g.goods_num
+	         	where 1=1
+	         	<if test="userName != null and userName != ''">
+			    	and m.username=#{userName,jdbcType=VARCHAR}
+				</if> 
+				<if test="goodsName != null and goodsName != ''">
+			    	and g.name like '%${goodsName}%' 
+				</if> 
+				<if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+			    	and to_char(r.create_time,'yyyy-mm-dd hh24:mi')  between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+				</if> 
+	          	order by r.create_time desc
+	          	) r
+	         WHERE ROWNUM <![CDATA[<=]]> #{page}*#{rows}) r
+	 WHERE RN <![CDATA[>=]]> (#{page}-1)*#{rows}
+  </select>
+  
+  <!-- 查询记录总个数 -->
+  <select id="getUserGoodsRecordCount" parameterType="java.util.Map" resultType="java.lang.String">
+  	select count(r.id) count from sj_tb_user_goods_record r
+  		join sj_tb_members m on r.user_id = m.id
+       	join sj_tb_goods g on r.goods_num = g.goods_num
+       	where 1=1
+         	<if test="userName != null and userName != ''">
+		    	and m.username=#{userName,jdbcType=VARCHAR}
+			</if> 
+			<if test="goodsName != null and goodsName != ''">
+		    	and g.name like '%${goodsName}%' 
+			</if> 
+			<if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+		    	and to_char(r.create_time,'yyyy-mm-dd hh24:mi')  between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+			</if> 
+  </select>
 	
 	<!-- 根据用户名更新积分 -->
   <update id="updatePoint" >

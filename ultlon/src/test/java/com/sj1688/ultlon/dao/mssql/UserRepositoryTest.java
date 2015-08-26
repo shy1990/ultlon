@@ -1,4 +1,4 @@
-package com.sj1688.ultlon.dao.mysql;
+package com.sj1688.ultlon.dao.mssql;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,8 +7,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import com.alibaba.fastjson.JSON;
 import com.sj1688.ultlon.UltlonApplication;
-import com.sj1688.ultlon.domain.User;
+import com.sj1688.ultlon.domain.sz.CktCodeOut;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = UltlonApplication.class)
@@ -16,14 +17,11 @@ import com.sj1688.ultlon.domain.User;
 public class UserRepositoryTest {
 	
 	@Autowired
-	private UserRepository ur;
+	private CktCodeOutRepository dao;
 	
 	@Test
 	public void saveTest(){
-		User user=new User();
-		user.setPassword("123456");
-		user.setRegions("111");
-		user.setUsername("李四");
-		ur.save(user);
+		CktCodeOut cco = dao.findOne("013148009919756");
+		System.out.println(JSON.toJSONString(cco));
 	}
 }
