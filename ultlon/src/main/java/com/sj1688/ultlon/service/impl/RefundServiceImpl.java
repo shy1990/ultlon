@@ -19,7 +19,6 @@ import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.FinanceForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
-import com.sj1688.ultlon.domain.RepairForm;
 import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.event.RefundFormCreateEvent;
 import com.sj1688.ultlon.event.RefundFormUpdateEvent;
