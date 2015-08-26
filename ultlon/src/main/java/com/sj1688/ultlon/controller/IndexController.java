@@ -22,8 +22,15 @@ public class IndexController {
 	public String unauthorized(){
 		return "unauthorized";
 	}
+	
 	@RequestMapping(value={"/register"})
 	public String register(){
 		return "register";
 	}
+	
+	@RequestMapping(value={"/finance"})
+	public String finance(){
+		return "finance";
+	}
+	
 }

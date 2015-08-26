@@ -16,7 +16,13 @@
 </shiro:hasRole> 
 <shiro:hasRole name="register">
 	<meta http-equiv="refresh" content="0;url=register"/> 
-</shiro:hasRole>         
+</shiro:hasRole>   
+<shiro:hasRole name="skynet">
+	<meta http-equiv="refresh" content="0;url=ugrc/1"/> 
+</shiro:hasRole>   
+<shiro:hasRole name="finance">
+	<meta http-equiv="refresh" content="0;url=finance"/>
+</shiro:hasRole>
 <title>售后</title>
 </head>
 <body>

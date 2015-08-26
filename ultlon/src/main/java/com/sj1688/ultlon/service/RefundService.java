@@ -7,8 +7,10 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.sj1688.ultlon.domain.FinanceForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
+import com.sj1688.ultlon.domain.RepairForm;
 import com.sj1688.ultlon.domain.TaskForm;
 
 /**
@@ -26,6 +28,10 @@ public interface RefundService {
 	
 	public void save(RefundForm entity);
 	
+	public void save(FinanceForm financeForm);
+	
+	public void update(RefundForm entity) ;
+	
 	public Page<RefundForm> get(Pageable page);
 	
 	public void updateStatus(RefundForm entity,FormAuditStatus statusToUpdate,String remark);
@@ -39,4 +45,6 @@ public interface RefundService {
 	public void refundMoney(RefundForm form);
 	
 	RefundForm findByTaskForm(TaskForm tf);
+
+	public FinanceForm genrateFinanceForm(TaskForm taskForm);
 }

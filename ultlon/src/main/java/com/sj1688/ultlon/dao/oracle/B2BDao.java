@@ -104,4 +104,33 @@ public interface B2BDao {
 	 */
 	Map<String, Object> selectByArea(@Param("ecerpNo") String ecerpNo,
 			@Param("goodsId") String goodsId);
+	
+	
+	/**
+	 * 根据用户名查询用户积分
+	 * @param username
+	 * @return
+	 */
+	public int findPointByUsername(String username);
+	
+	/**
+	 * 根据用户名修改用户积分
+	 * @param username
+	 * @return
+	 */
+	public void updatePoint(@Param("username") String username,@Param("point") int point);
+	
+	/**
+	 * 获取用户浏览记录
+	 * @param map
+	 * @return
+	 */
+	List<Map<String, Object>> getUserGoodsRecords(Map map);
+	
+	/**
+	 * 获取用户浏览记录总个数
+	 * @param map
+	 * @return
+	 */
+	String getUserGoodsRecordCount(Map map);
 }

@@ -18,11 +18,12 @@ import com.sj1688.ultlon.domain.FinanceForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
 import com.sj1688.ultlon.domain.RepairForm;
+import com.sj1688.ultlon.service.FinanceService;
 import com.sj1688.ultlon.service.RefundService;
 import com.sj1688.ultlon.service.TaskService;
 
 /**
- * 退货单管理控制器 <br>
+ * 财审单管理控制器 <br>
  * <table>
  * <tbody>
  * <tr>
@@ -32,12 +33,12 @@ import com.sj1688.ultlon.service.TaskService;
  * </tr>
  * <tr>
  * <td>POST</td>
- * <td>/refund</td>
+ * <td>/finance</td>
  * <td>新增退货单管理</td>
  * </tr>
  * <tr>
  * <td>GET</td>
- * <td>/refund</td>
+ * <td>/finance</td>
  * <td>获取列表,?page=1&size=2&sort=id,desc</td>
  * </tr>
  * <tr>
@@ -47,7 +48,7 @@ import com.sj1688.ultlon.service.TaskService;
  * </tr>
  * <tr>
  * <td>GET</td>
- * <td>/refund/edit</td>
+ * <td>/finance/edit</td>
  * <td>修改页面</td>
  * </tr>
  * </tbody>
@@ -60,51 +61,38 @@ import com.sj1688.ultlon.service.TaskService;
  * 
  */
 @Controller
-@RequestMapping("/admin/refund")
-public class RefundAdminController {
+@RequestMapping("/finance/refund")
+public class FinanceAdminController {
 	@Autowired
-	private RefundService refundService;
+	private FinanceService financeService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
-			PagedResourcesAssembler<RefundForm> assembler, Model model) {
-		Page<RefundForm> refundForms = refundService.findAll(pageable);
-		model.addAttribute("data", assembler.toResource(refundForms));
-		model.addAttribute("meta", assembler.toResource(refundForms).getMetadata());
+			PagedResourcesAssembler<FinanceForm> assembler, Model model) {
+		Page<FinanceForm> financeForms = financeService.findAll(pageable);
+		model.addAttribute("data", assembler.toResource(financeForms));
+		model.addAttribute("meta", assembler.toResource(financeForms).getMetadata());
 		//System.out.println("+++++++++++++++++++++++++++++++++++++");
 		//System.out.println(JSON.toJSONString(model));
 		
-		return "admin/refund/list";
+		return "finance/refund/list";
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
-	@ResponseBody
-	public String status(@RequestParam(value = "id")RefundForm refundForm,String remark,FormAuditStatus status,FinanceForm financeForm) {
-		System.out.println("----------"+refundForm.getId());
-		System.out.println("----------"+refundForm.getTaskForm().getDeal_price());
-		financeForm.setRefundForm(refundForm);
-		refundService.save(financeForm);
-		
-		System.out.println("----------"+financeForm.getRefundForm().getCurrentPrice());
-		System.out.println("----------"+financeForm.getCurrentPrice());
-		System.out.println("----------"+financeForm.getRefundForm().getTaskForm());
-		refundForm.setRemark(remark);
-		refundForm.setStatus(status);
-		refundService.update(refundForm);
-		
-		return "ok";
-	}
 	
 	@Autowired
 	private TaskService taskService;
 	@RequestMapping(value = "/{refundId}/{status}", method = RequestMethod.POST)
 	@ResponseBody
-	public String update(@PathVariable(value = "refundId")RefundForm refundForm,@PathVariable(value = "status")String status,@RequestParam(value = "remark", required = false) String remark) {
-		refundService.updateStatus(refundForm,FormAuditStatus.valueOf(status),remark);
-		String mobile = taskService.findMobileByOrderNum1(refundForm.getTaskForm().getAfterSaleForm().getOrderNum());
-		System.out.println(mobile);
-		System.out.println(refundForm.getRemark());
-//			String msg = "审批已完成，请注意查看。。。。。。";
+	public String update(@PathVariable(value = "refundId")FinanceForm financeForm,@PathVariable(value = "status")String status,@RequestParam(value = "remark", required = false) String remark,BigDecimal cost) {
+		financeService.updateStatus(financeForm,FormAuditStatus.valueOf(status),remark,cost);
+//		String mobile = taskService.findMobileByOrderNum1(financeForm.getTaskForm().getAfterSaleForm().getOrderNum());
+//		System.out.println(mobile);
+		String username=financeForm.getTaskForm().getAfterSaleForm().getUsername();
+		BigDecimal orderPrice=financeForm.getOrderPrice();
+		if("AGREE".equals(status)){
+			financeService.updatePoint(username,orderPrice);
+		}
+//		String msg = "审批已完成，请注意查看。。。。。。";
 //		MsgUtil.sendMessage("mobile", msg, "SMS");
 		return "ok";
 	}

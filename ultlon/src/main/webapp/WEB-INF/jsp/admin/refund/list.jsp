@@ -105,24 +105,30 @@
 		var sa=$("#sa").val();
 		var sr=$("#sr").val();
 		if("同意"==sa && sr==""){
-			$.post("admin/refund/" + id + "/AGREE", {remark : $('#remark').val()}, function(data) {
+			var remark=$('#remark').val();
+			$.post("admin/refund", {
+				"id":id,
+				"remark": remark,
+				"status":"AGREE"
+				}, function(data) {
+					if (data === 'ok') {
+						location.href = "admin/refund?sort=createdDate,desc";
+					}
+				});
+
+		}
+		if ("拒绝" == sr && sa == "") {
+			$.post("admin/refund/" + id + "/REJECT", {
+				remark : $('#remark').val()
+			}, function(data) {
 				if (data === 'ok') {
 					location.reload();
 				}
 			});
-			
+
 		}
-		if("拒绝"==sr && sa==""){
-			$.post("admin/refund/" + id + "/REJECT", {remark : $('#remark').val()}, function(data) {
-				if (data === 'ok') {
-					location.reload();
-				}
-			});
-			
-		}
-		
+
 	}
-	
 </script>
 <style type="text/css">
 .content {
@@ -131,7 +137,7 @@
 }
 				#background {position:absolute; z-index:998; top:0px; left:0px; background:rgb(50,50,50);background:rgba(0,0,0,0.5); display:none;}
 				#content {position:absolute; width:580px; z-index:999; padding:10px; background:#fff; border-radius:5px; display:none;}
-				.ultlon_content_body{text-align: center;}	 
+				.ultlon_content_body{text-align: center; width:560px;}	 
 				.ultlon_gather{margin-top:25px;font-size: 22px;}
 				.ultlon_content_body_btn{border: 1px solid #ccc;
 					  background: #F9F9F9;
@@ -144,7 +150,7 @@
 				}
 				
 				.remark{
-					width:260px;
+					width:20%;
 					
 				}
 				.remark_left{width: 10%; text-align: right; float: left;}

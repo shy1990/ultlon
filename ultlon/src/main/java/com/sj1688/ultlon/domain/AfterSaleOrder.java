@@ -1,5 +1,7 @@
 package com.sj1688.ultlon.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -26,6 +28,7 @@ public class AfterSaleOrder extends AbstractAuditable<User, Long>{
 	public void setImei(String imei) {
 		this.imei = imei;
 	}
+	
 	@Column(name = "bar_code")
 	public String getBarCode() {
 		return barCode;
