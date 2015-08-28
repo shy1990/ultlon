@@ -80,14 +80,10 @@ public class RefundAdminController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public String status(@RequestParam(value = "id")RefundForm refundForm,String remark,FormAuditStatus status,FinanceForm financeForm) {
-		System.out.println("----------"+refundForm.getId());
-		System.out.println("----------"+refundForm.getTaskForm().getDeal_price());
+		
 		financeForm.setRefundForm(refundForm);
 		refundService.save(financeForm);
 		
-		System.out.println("----------"+financeForm.getRefundForm().getCurrentPrice());
-		System.out.println("----------"+financeForm.getCurrentPrice());
-		System.out.println("----------"+financeForm.getRefundForm().getTaskForm());
 		refundForm.setRemark(remark);
 		refundForm.setStatus(status);
 		refundService.update(refundForm);

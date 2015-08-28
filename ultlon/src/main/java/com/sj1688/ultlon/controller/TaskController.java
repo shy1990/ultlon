@@ -111,7 +111,7 @@ public class TaskController {
 		//根据taskForm的信息去b2bDao查询相关信息
 		//然后把查出的相关信息返回到页面
 	System.out.println(JSON.toJSONString(map));
-		model.addAttribute("orderInfo", map.get(0));
+		model.addAttribute("orderInfo", map.size()>0?map.get(0):null);
 		return "task/edit";
 	}  
 
