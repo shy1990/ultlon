@@ -118,11 +118,11 @@ public class RefundServiceImpl implements RefundService {
 				.getAfterSaleForm().getOrderNum());
 		BigDecimal realRefundMoney = form.getRealRefundMoney();
 		if (!realRefundMoney.equals(BigDecimal.ZERO)) {
-			doRefundMoney(orderId, realRefundMoney);
+//			doRefundMoney(orderId, realRefundMoney);
 		}
 	}
 
-	private void doRefundMoney(String orderId, BigDecimal realRefundMoney) {
+	/*private void doRefundMoney(String orderId, BigDecimal realRefundMoney) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("orderId", orderId);
 		params.put("reFundAmt", String.valueOf(realRefundMoney));
@@ -130,7 +130,7 @@ public class RefundServiceImpl implements RefundService {
 		HttpClientUtils.sendPostSSLRequest(
 				"http://www.3j1688.com/yeePay/toRefund.html", params);
 		
-	}
+	}*/
 
 	@Override
 	public RefundForm findByTaskForm(TaskForm tf) {
