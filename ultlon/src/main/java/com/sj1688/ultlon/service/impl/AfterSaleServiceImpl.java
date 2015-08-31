@@ -92,8 +92,8 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 			if(config.length>1){
 				AfterSaleOrder a = new AfterSaleOrder();
 				a.setEcerpNo(cco.getRemark());
-				a.setBarCode(config[2]);
-				a.setNormsCode(config[2]);
+				a.setBarCode(config[1]);
+				a.setNormsCode(config[1]);
 				a.setImei(cco.getCodeID());
 				ors.add(a);
 			}
