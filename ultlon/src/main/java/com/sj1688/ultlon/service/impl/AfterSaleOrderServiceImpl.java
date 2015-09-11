@@ -38,7 +38,7 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 		List<AfterSaleOrder> ors = new ArrayList<AfterSaleOrder>();
 		for(CktCodeOut cco:ccos){
 			String[] config = cco.getConfig().split(":");
-			if(config.length>0){
+			if(config.length>2){
 				AfterSaleOrder a = new AfterSaleOrder();
 				a.setEcerpNo(cco.getRemark());
 				a.setBarCode(config[2]);
