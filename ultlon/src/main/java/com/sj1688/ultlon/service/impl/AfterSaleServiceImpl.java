@@ -89,7 +89,7 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		for(CktCodeOut cco:ccos){
 			String[] config = cco.getConfig().split(":");
 			System.out.println(cco.getConfig()+"   "+config.length);
-			if(config.length>1){
+			if(config.length>2){
 				AfterSaleOrder a = new AfterSaleOrder();
 				a.setEcerpNo(cco.getRemark());
 				a.setBarCode(config[2]);
@@ -172,6 +172,13 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 			}
 		}
 		return resultList;
+	}
+	@Override
+	public AfterSaleForm findByImei(String imei) {
+		// TODO Auto-generated method stub
+		List<AfterSaleForm> list= asfRepository.findByImei(imei);
+		
+		return list!=null&&list.size()>0?list.get(0):null;
 	}
 
 }
