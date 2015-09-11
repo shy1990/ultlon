@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
 	<nav class="navbar navbar-default" role="navigation">
 	   <div class="navbar-header">
 	      <div class="navbar-brand" >用户浏览记录</div>
@@ -42,7 +41,6 @@
 	      </form>  
 	   </div>
 	</nav>
-
     <div class="container-fluid">
 	   <div class="row in-out-row">
 	      <div class="col-md-12 col-lg-12">
@@ -67,23 +65,20 @@
 		  </div><!-- in-col End -->
 	   </div>
 	</div>
-	
 	<nav>
 	  <ul class="pager">
 	    <c:if test="${page>1}">
 	    	<li class="previous"><a href="${ctx}/ugrc/${page-1}?userName=${param.userName}&goodsName=${param.goodsName}&startTime=${param.startTime}&endTime=${param.endTime}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
 	    </c:if>
-	    ${page } / ${countPage}
+	    	${page } / ${countPage}
 	    <c:if test="${page<countPage}">
 	    	<li class="next"><a href="${ctx}/ugrc/${page+1}?userName=${param.userName}&goodsName=${param.goodsName}&startTime=${param.startTime}&endTime=${param.endTime}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
 	    </c:if>
 	  </ul>
 	</nav>
-	
 	<script type="text/javascript">
 	    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
 	</script>  
-	
 </body>
 </html>
 
