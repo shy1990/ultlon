@@ -41,7 +41,7 @@ public class RefundServiceImpl implements RefundService {
 		RefundForm rf = null;
 		AfterSaleForm afterForm = taskForm.getAfterSaleForm();
 		Map<String, BigDecimal> prices = b2bDao.findOrderPirceAndCurrentPrice(
-				afterForm.getSkuCode(), afterForm.getOrderNum());
+				afterForm.getSkuCode().trim(), afterForm.getOrderNum().trim());
 		rf = new RefundForm(taskForm, prices.get("ORDER_PRICE"),
 				prices.get("CURRENT_PRICE"));
 		return rf;
