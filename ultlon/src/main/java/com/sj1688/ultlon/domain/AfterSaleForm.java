@@ -41,7 +41,7 @@ public class AfterSaleForm extends AbstractAuditable<User, Long>{
 		return skuCode;
 	}
 	public void setSkuCode(String skuCode) {
-		this.skuCode = skuCode;
+		this.skuCode = skuCode == null ? null : skuCode.trim();
 	}
 	public String getUsername() {
 		return username;
@@ -65,7 +65,7 @@ public class AfterSaleForm extends AbstractAuditable<User, Long>{
 		return orderNum;
 	}
 	public void setOrderNum(String orderNum) {
-		this.orderNum = orderNum;
+		this.orderNum = orderNum == null ? null : orderNum.trim();
 	}
 	public AfterSaleType getType() {
 		return type;
@@ -83,7 +83,7 @@ public class AfterSaleForm extends AbstractAuditable<User, Long>{
 		return goodsName;
 	}
 	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
+		this.goodsName = goodsName == null ? null : goodsName.trim();
 	}
 	public String getResult() {
 		return result;

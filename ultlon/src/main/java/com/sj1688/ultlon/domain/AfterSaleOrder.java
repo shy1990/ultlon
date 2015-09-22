@@ -26,7 +26,7 @@ public class AfterSaleOrder extends AbstractAuditable<User, Long>{
 		return imei;
 	}
 	public void setImei(String imei) {
-		this.imei = imei;
+		this.imei = imei == null ? null : imei.trim();
 	}
 	
 	@Column(name = "bar_code")
@@ -34,7 +34,7 @@ public class AfterSaleOrder extends AbstractAuditable<User, Long>{
 		return barCode;
 	}
 	public void setBarCode(String barCode) {
-		this.barCode = barCode;
+		this.barCode = barCode == null ? null : barCode.trim();
 	}
 	@Column(name = "ecerp_no")
 	public String getEcerpNo() {
@@ -49,7 +49,7 @@ public class AfterSaleOrder extends AbstractAuditable<User, Long>{
 		return normsCode.toUpperCase();
 	}
 	public void setNormsCode(String normsCode){
-		this.normsCode = normsCode;
+		this.normsCode = normsCode == null ? null : normsCode.trim();
 	}
 	
 
