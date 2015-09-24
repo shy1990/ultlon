@@ -68,6 +68,7 @@ public class RepairAdminController {
 			PagedResourcesAssembler<RepairForm> assembler, Model model) {
 		Page<RepairForm> repairForms = repairService.findAll(pageable);
 		model.addAttribute("data", assembler.toResource(repairForms));
+		model.addAttribute("meta", assembler.toResource(repairForms).getMetadata());
 		return "admin/repair/list";
 	}
 
