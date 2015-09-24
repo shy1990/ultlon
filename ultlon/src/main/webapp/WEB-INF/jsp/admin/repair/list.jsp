@@ -67,7 +67,7 @@
 					"status":"PROCESSING"
 				}, function(data) {
 					if (data === 'ok') {
-						location.href = "admin/repair?sort=createdDate,desc";
+						location.href = "admin/repair?sort=createdDate,desc&page=${data.metadata.number+1}";
 					}
 				});
 

@@ -112,7 +112,7 @@
 				"status":"AGREE"
 				}, function(data) {
 					if (data === 'ok') {
-						location.href = "admin/refund?sort=createdDate,desc";
+						location.href = "admin/refund?sort=createdDate,desc&page=${data.metadata.number+1}";
 					}
 				});
 
