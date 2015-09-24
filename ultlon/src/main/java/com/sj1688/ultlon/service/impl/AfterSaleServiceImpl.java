@@ -173,13 +173,6 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		}
 		return resultList;
 	}
-	@Override
-	public AfterSaleForm findByImei(String imei) {
-		// TODO Auto-generated method stub
-		List<AfterSaleForm> list= asfRepository.findByImei(imei);
-		
-		return list!=null&&list.size()>0?list.get(0):null;
-	}
 
 }
 
