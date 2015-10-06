@@ -87,7 +87,11 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		List<CktCodeOut> ccos = ccor.findByCodeID(imei);
 		List<AfterSaleOrder> ors = new ArrayList<AfterSaleOrder>();
 		for(CktCodeOut cco:ccos){
-			String[] config = cco.getConfig().split(":");
+			String str=cco.getConfig();
+			if(str.contains("：")){
+				str=str.replaceAll("：", ":");
+			}
+			String[] config = str.split(":");
 			System.out.println(cco.getConfig()+"   "+config.length);
 			if(config.length>2){
 				AfterSaleOrder a = new AfterSaleOrder();
@@ -112,8 +116,8 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		//System.out.println("------------"+ors.get(0));
 		//AfterSaleOrder aso = asor.findByImei(imei);
 		if(aso!=null){
-			result.put("skucode", aso.getNormsCode());
-			result.put("ddnum", aso.getEcerpNo());
+			result.put("skucode", aso.getNormsCode().trim());
+			result.put("ddnum", aso.getEcerpNo().trim());
 			return result;
 		}
 		return null;

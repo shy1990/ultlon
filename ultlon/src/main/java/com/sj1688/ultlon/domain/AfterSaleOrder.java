@@ -46,7 +46,7 @@ public class AfterSaleOrder extends AbstractAuditable<User, Long>{
 	
 	@Column(name = "norms_code")
 	public String getNormsCode() {
-		return normsCode.toUpperCase();
+		return normsCode.toUpperCase() == null ? null : normsCode.toUpperCase().trim();
 	}
 	public void setNormsCode(String normsCode){
 		this.normsCode = normsCode == null ? null : normsCode.trim();
