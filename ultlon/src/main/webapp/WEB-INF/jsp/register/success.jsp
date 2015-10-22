@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="1;url=./">
+<meta http-equiv="refresh" content="1;url=../">
 <link rel="stylesheet" href="css/amazeui.min.css" />
 <title>修改维修单</title>
 <style>
