@@ -10,8 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestTemplate;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sj1688.ultlon.dao.mysql.FinanceFormRepository;
 import com.sj1688.ultlon.dao.mysql.RefundFormRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
@@ -67,7 +74,44 @@ public class FinanceServiceImpl implements FinanceService {
 				entity.setRealPrice(cost);
 			}
 			FinanceForm save = ffr.save(entity);
+			addTrading(save);
 			ctx.publishEvent(new FinanceFormUpdateEvent(save, old));
+		}
+	}
+	
+	public void addTrading(FinanceForm ff){
+		try {
+
+			RestTemplate restTemplate = new RestTemplate();
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("type", "REFUND");//退款
+			param.put("description", ff.getRemark());
+			param.put("amount", ff.getCurrentPrice());//现在的价格
+			param.put("url", "http://www.3j1688.com/xxx");
+			//param.put("payPassword", payPwd);
+
+			/*List messageConverters = new ArrayList();
+			messageConverters.add(new SourceHttpMessageConverter());
+			messageConverters.add(new FormHttpMessageConverter());
+			messageConverters.add(new MappingJacksonHttpMessageConverter());
+			restTemplate.setMessageConverters(messageConverters);*/
+
+			HttpHeaders httpHeaders = new HttpHeaders(); // 设置HTTP请求的请求头信息
+			// 设置相应内容，相应内容将被转换为json格式返回
+			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+			// 设置HttpEntity的Body类型为String，调用StringHttpMessageConverter转换报文体参数
+			HttpEntity<Object> httpEntity = new HttpEntity<Object>(param, httpHeaders);
+
+			ResponseEntity<JSONObject> obj = restTemplate.postForEntity("http://192.168.2.247:58080/v2/tradings/", httpEntity, JSONObject.class);
+
+			JSONObject o = obj.getBody();
+			
+
+		} catch (HttpServerErrorException e) {
+			System.out.println("异常：" + e.getStatusCode() + "   ::  " + e.getStatusText());
+			System.out.println("请求错误" + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
