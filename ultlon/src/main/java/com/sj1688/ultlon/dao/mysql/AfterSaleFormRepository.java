@@ -8,4 +8,11 @@ import com.sj1688.ultlon.domain.AfterSaleForm;
 
 public interface AfterSaleFormRepository extends JpaRepository<AfterSaleForm, Long> {
 	public Page<AfterSaleForm> findByUsername(String username,Pageable page);
+	
+	/**
+	 * 根据钱包记录编号获取售后申请信息
+	 * @param tradingId
+	 * @return
+	 */
+	AfterSaleForm findByTradingId(String tradingId); 
 }

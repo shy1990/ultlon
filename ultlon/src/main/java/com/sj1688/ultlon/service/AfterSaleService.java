@@ -32,4 +32,13 @@ public interface AfterSaleService {
 	 * @return
 	 */
 	public List<AfterSaleType> getTypes(Date receiveTime,String goodsName);
+	
+	/**
+	 * 根据钱包记录编号获取售后申请信息
+	 * @param tradingId
+	 * @return
+	 */
+	public AfterSaleForm findByTradingId(String tradingId);
+	
+	
 }

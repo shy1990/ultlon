@@ -96,20 +96,21 @@ public class FinanceServiceImpl implements FinanceService {
 			messageConverters.add(new MappingJacksonHttpMessageConverter());
 			restTemplate.setMessageConverters(messageConverters);*/
 
-			HttpHeaders httpHeaders = new HttpHeaders(); // 设置HTTP请求的请求头信息
+			/*HttpHeaders httpHeaders = new HttpHeaders(); // 设置HTTP请求的请求头信息
 			// 设置相应内容，相应内容将被转换为json格式返回
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
 			// 设置HttpEntity的Body类型为String，调用StringHttpMessageConverter转换报文体参数
-			HttpEntity<Object> httpEntity = new HttpEntity<Object>(param, httpHeaders);
-
-			ResponseEntity<JSONObject> obj = restTemplate.postForEntity("http://192.168.2.247:58080/v2/tradings/", httpEntity, JSONObject.class);
+			HttpEntity<Object> httpEntity = new HttpEntity<Object>(param, httpHeaders);*/
+			String userName = ff.getTaskForm().getAfterSaleForm().getUsername();
+			String url = "http://192.168.2.247:58080/v1/account/"+userName+ "/tradings/";
+			System.out.println(url);
+			ResponseEntity<JSONObject> obj = restTemplate.postForEntity(url, param, JSONObject.class);
 
 			JSONObject o = obj.getBody();
 			
 
-		} catch (HttpServerErrorException e) {
-			System.out.println("异常：" + e.getStatusCode() + "   ::  " + e.getStatusText());
+		} catch (Exception e) {
 			System.out.println("请求错误" + e.getMessage());
 			e.printStackTrace();
 		}

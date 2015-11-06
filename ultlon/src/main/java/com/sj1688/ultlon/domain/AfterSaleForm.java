@@ -25,9 +25,14 @@ public class AfterSaleForm extends AbstractAuditable<User, Long>{
 	private String result="未处理";//处理结果
 	private String remark;
 	private String username;
+	private String tradingId;//
 	
-	
-
+	public String getTradingId() {
+		return tradingId;
+	}
+	public void setTradingId(String tradingId) {
+		this.tradingId = tradingId;
+	}
 	public AfterSaleForm() {
 		super();
 	}

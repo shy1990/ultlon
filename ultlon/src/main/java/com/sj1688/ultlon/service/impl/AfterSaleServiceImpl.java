@@ -177,6 +177,10 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		}
 		return resultList;
 	}
+	@Override
+	public AfterSaleForm findByTradingId(String tradingId) {
+		return asfRepository.findByTradingId(tradingId);
+	}
 
 }
 
