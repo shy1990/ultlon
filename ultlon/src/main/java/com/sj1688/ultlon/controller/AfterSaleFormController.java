@@ -164,14 +164,14 @@ public class AfterSaleFormController {
 	 * @param tradingId 钱包记录编号
 	 * /aftersale/{tradingId}/{result}
 	 * tradingId 钱包记录id，状态（成功，失败）
-	 */
+	 *//*
 	@ResponseBody
 	@RequestMapping(value = "/{tradingId}/{result}",method = RequestMethod.GET)
 	public void updateResut(@PathVariable("tradingId")String tradingId,@PathVariable("result")String result){
 		AfterSaleForm asf = afterSaleService.findByTradingId(tradingId);
 		asf.setResult(result);
 		afterSaleService.update(asf);
-	}
+	}*/
 	
 	
 }
