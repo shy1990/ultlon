@@ -126,14 +126,14 @@ public class AfterSaleFormController {
 		return "aftersale/show";
 	}
 
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET,params={"receiveTime","goodsName"})
+	@RequestMapping(value = "/{userId}", method = RequestMethod.GET,params={"receiveTime","goodsName","skuCode"})
 	@ResponseBody
-	public List<AfterSaleType> type(@PathVariable("userId") String userId,Long receiveTime,String goodsName,Model model) {
+	public List<AfterSaleType> type(@PathVariable("userId") String userId,Long receiveTime,String goodsName,String skuCode,Model model) {
 			Date parseDate = null;
 			if(receiveTime!=null){
 				parseDate = DateUtil.longStrToDate(receiveTime.toString());
 			}
-			return afterSaleService.getTypes(parseDate, goodsName);
+			return afterSaleService.getTypes(parseDate, goodsName,skuCode);
 	}
 
 	@RequestMapping(value="testadd",method = RequestMethod.POST)
