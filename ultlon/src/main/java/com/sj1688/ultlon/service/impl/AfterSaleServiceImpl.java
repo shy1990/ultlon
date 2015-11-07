@@ -125,7 +125,7 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 
 	@Override
 	public void save(AfterSaleForm entity) {
-		List<AfterSaleType> types = getTypes(entity.getReceiveTime(), entity.getGoodsName());
+		List<AfterSaleType> types = getTypes(entity.getReceiveTime(), entity.getGoodsName(),entity.getSkuCode());
 		if(types.contains(entity.getType())){
 			AfterSaleForm save = asfRepository.save(entity);
 			ctx.publishEvent(new AfterSaleFormCreateEvent(save));
@@ -145,7 +145,7 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	}
 	
 	@Override
-	public List<AfterSaleType> getTypes(Date receiveTime, String goodsName) {
+	public List<AfterSaleType> getTypes(Date receiveTime, String goodsName,String skuCode) {
 		// TODO 计算可享受服务 不准确！！！
 		List<AfterSaleType> resultList=new ArrayList<AfterSaleType>();
 		
@@ -153,7 +153,11 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 			//没有签收时间和签收时间为空。可以享受所有服务
 			if(null!=goodsName&&!"".equals(goodsName)){
 				resultList.add(AfterSaleType.KXS);
-				resultList.add(AfterSaleType.THH30);
+				//编码中包含一个字母的不能退换货(有字母的是定制机)
+				int count=getLetter(skuCode);
+				if(count != 1){
+					resultList.add(AfterSaleType.THH30);
+				}
 			}
 			resultList.add(AfterSaleType.WX);
 			if(goodsName.indexOf("多美达")>-1){
@@ -166,7 +170,10 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 				resultList.add(AfterSaleType.KXS);
 			}
 			if(ApplicationUtil.getThh30()>=Poor){//退换货
-				resultList.add(AfterSaleType.THH30);
+				int count=getLetter(skuCode);
+				if(count != 1){
+					resultList.add(AfterSaleType.THH30);
+				}
 			}
 			//if(ApplicationUtil.getWx()>=Poor){//维修
 				resultList.add(AfterSaleType.WX);
@@ -177,6 +184,21 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		}
 		return resultList;
 	}
-
+	@Override
+	public AfterSaleForm findByTradingId(String tradingId) {
+		return asfRepository.findByTradingId(tradingId);
+	}
+	
+	public int getLetter(String skuCode){
+		int nLetter=0;
+		for(int i=0;i<skuCode.length();i++){
+			if(Character.isLetter(skuCode.charAt(i))){
+				nLetter++;
+			}
+		}
+		System.out.println("字母个数:"+nLetter);
+		return nLetter;
+	}
+	
 }
 
