@@ -199,6 +199,5 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		System.out.println("字母个数:"+nLetter);
 		return nLetter;
 	}
-	
 }
 

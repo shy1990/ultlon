@@ -31,7 +31,7 @@ public interface AfterSaleService {
 	 * @param goodsName
 	 * @return
 	 */
-	public List<AfterSaleType> getTypes(Date receiveTime,String goodsName);
+	public List<AfterSaleType> getTypes(Date receiveTime,String goodsName,String skuCode);
 	
 	/**
 	 * 根据钱包记录编号获取售后申请信息
