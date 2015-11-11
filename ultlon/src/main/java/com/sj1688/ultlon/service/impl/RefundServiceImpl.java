@@ -84,7 +84,7 @@ public class RefundServiceImpl implements RefundService {
 		genrateFinanceForm.setRemark(entity.getRemark());
 		genrateFinanceForm.setOrderPrice(entity.getRefundForm().getOrderPrice());
 		FinanceForm save = ffr.save(genrateFinanceForm);
-		addTrading(save);
+		//addTrading(save);
 //		ctx.publishEvent(new RefundFormCreateEvent(save));
 	}
 	
@@ -97,13 +97,6 @@ public class RefundServiceImpl implements RefundService {
 			param.put("description", ff.getRemark());
 			param.put("amount", ff.getCurrentPrice());//现在的价格
 			param.put("url", "http://www.3j1688.com/xxx");
-			//param.put("payPassword", payPwd);
-
-			/*List messageConverters = new ArrayList();
-			messageConverters.add(new SourceHttpMessageConverter());
-			messageConverters.add(new FormHttpMessageConverter());
-			messageConverters.add(new MappingJacksonHttpMessageConverter());
-			restTemplate.setMessageConverters(messageConverters);*/
 
 			HttpHeaders httpHeaders = new HttpHeaders(); // 设置HTTP请求的请求头信息
 			// 设置相应内容，相应内容将被转换为json格式返回

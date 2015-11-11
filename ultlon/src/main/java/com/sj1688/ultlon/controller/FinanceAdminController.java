@@ -1,11 +1,17 @@
 package com.sj1688.ultlon.controller;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.FinanceForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
@@ -96,5 +105,57 @@ public class FinanceAdminController {
 //		MsgUtil.sendMessage("mobile", msg, "SMS");
 		return "ok";
 	}
+	
+	@RequestMapping(value = "/{refundId}", method = RequestMethod.POST)
+	@ResponseBody
+	public String agree(@PathVariable(value = "refundId")FinanceForm financeForm,@RequestParam(value = "remark", required = false) String remark,BigDecimal cost){
+		if(addTrading(remark,cost,financeForm.getTaskForm().getAfterSaleForm().getUsername())){
+			financeService.updateStatus(financeForm,FormAuditStatus.AGREE,remark,cost);
+			String username=financeForm.getTaskForm().getAfterSaleForm().getUsername();
+			BigDecimal orderPrice=financeForm.getOrderPrice();
+			financeService.updatePoint(username,orderPrice);//更新用户积分
+			return "ok";
+		}else {
+			return "err";
+		}
+	}
+	
+	/**
+	 * 推送到新财务模块
+	 * @param ff
+	 */
+	public boolean addTrading(String remark,BigDecimal price,String userName){
+		boolean result = false;
+		try {
+
+			RestTemplate restTemplate = new RestTemplate();
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("type", "REFUND");//退款
+			param.put("description", remark);
+			param.put("amount", price);//现在的价格
+			param.put("url", "http://www.3j1688.com/xxx");
+
+			HttpHeaders httpHeaders = new HttpHeaders(); // 设置HTTP请求的请求头信息
+			// 设置相应内容，相应内容将被转换为json格式返回
+			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+			// 设置HttpEntity的Body类型为String，调用StringHttpMessageConverter转换报文体参数
+			HttpEntity<Object> httpEntity = new HttpEntity<Object>(param, httpHeaders);
+
+			//String userName = ff.getTaskForm().getAfterSaleForm().getUsername();
+			String url = "http://115.28.92.73:58080/v1/accounts/"+userName+ "/tradings/";
+			System.out.println(url);
+			ResponseEntity<JSONObject> obj = restTemplate.postForEntity(url, param, JSONObject.class);
+
+			JSONObject o = obj.getBody();
+			
+			result = true;
+		} catch (Exception e) {
+			System.out.println("请求错误" + e.getMessage());
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 
 }

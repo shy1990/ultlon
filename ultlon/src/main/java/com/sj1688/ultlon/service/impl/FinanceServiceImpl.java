@@ -74,12 +74,12 @@ public class FinanceServiceImpl implements FinanceService {
 				entity.setRealPrice(cost);
 			}
 			FinanceForm save = ffr.save(entity);
-			addTrading(save);
+			//addTrading(save);
 			ctx.publishEvent(new FinanceFormUpdateEvent(save, old));
 		}
 	}
 	
-	public void addTrading(FinanceForm ff){
+/*	public void addTrading(FinanceForm ff){
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();
@@ -88,20 +88,6 @@ public class FinanceServiceImpl implements FinanceService {
 			param.put("description", ff.getRemark());
 			param.put("amount", ff.getCurrentPrice());//现在的价格
 			param.put("url", "http://www.3j1688.com/xxx");
-			//param.put("payPassword", payPwd);
-
-			/*List messageConverters = new ArrayList();
-			messageConverters.add(new SourceHttpMessageConverter());
-			messageConverters.add(new FormHttpMessageConverter());
-			messageConverters.add(new MappingJacksonHttpMessageConverter());
-			restTemplate.setMessageConverters(messageConverters);*/
-
-			/*HttpHeaders httpHeaders = new HttpHeaders(); // 设置HTTP请求的请求头信息
-			// 设置相应内容，相应内容将被转换为json格式返回
-			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-
-			// 设置HttpEntity的Body类型为String，调用StringHttpMessageConverter转换报文体参数
-			HttpEntity<Object> httpEntity = new HttpEntity<Object>(param, httpHeaders);*/
 			String userName = ff.getTaskForm().getAfterSaleForm().getUsername();
 			String url = "http://192.168.2.247:58080/v1/account/"+userName+ "/tradings/";
 			System.out.println(url);
@@ -114,7 +100,7 @@ public class FinanceServiceImpl implements FinanceService {
 			System.out.println("请求错误" + e.getMessage());
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	@Override
 	public Page<FinanceForm> findAll(Pageable pageable) {
