@@ -22,6 +22,13 @@ public interface B2BDao {
 			@Param("skucode") String skucode, @Param("ddNum") String ddNum);
 
 	/**
+	 * 根据订单编号获取管易编号
+	 * @param orderNum
+	 * @return
+	 */
+	public Map<String, String> findByOrderNum(String orderNum);
+	
+	/**
 	 * @param skuCode
 	 * @param orderNum
 	 * @return ORDER_PRICE,CURRENT_PRICE

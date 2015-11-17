@@ -1,6 +1,7 @@
 package com.sj1688.ultlon.service;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,5 +31,12 @@ public interface FinanceService {
 
 	public Page<FinanceForm> findAll(Pageable pageable);
 //	public List<Map<String, Serializable>> findMobileByOrderNum(String orderNum);
+	
+	/**
+	 * 根据订单编号获取管易编号
+	 * @param orderNum
+	 * @return
+	 */
+	public Map<String, String> findByOrderNum(String orderNum);
 	
 }

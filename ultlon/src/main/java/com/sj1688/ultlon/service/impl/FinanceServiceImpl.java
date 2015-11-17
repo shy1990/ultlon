@@ -116,6 +116,11 @@ public class FinanceServiceImpl implements FinanceService {
 		b2bDao.updatePoint(username,op);
 	}
 
+	@Override
+	public Map<String, String> findByOrderNum(String orderNum) {
+		return b2bDao.findByOrderNum(orderNum);
+	}
+
 	
 
 	/*@Override

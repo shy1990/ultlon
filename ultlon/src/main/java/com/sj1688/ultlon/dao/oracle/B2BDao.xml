@@ -21,6 +21,12 @@
 		left join sj_tb_goods_sku s on i.target_id = s.id 
 		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR} and s.sku_num = #{skuCode,jdbcType=VARCHAR}
 	</select>
+	<!-- 根据订单编号获取dd号 -->
+	<select id="findByOrderNum" resultType="map">
+		select o.order_num,o.ecerp_no
+		from sj_tb_order o
+		where o.order_num=#{orderNum,jdbcType=VARCHAR}
+	</select>
 	
 	<select id="findPirceBySkuNum" resultType="map">
 		select s.price CURRENT_PRICE from sj_tb_order o 

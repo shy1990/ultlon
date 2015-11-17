@@ -109,7 +109,7 @@ public class FinanceAdminController {
 	@RequestMapping(value = "/{refundId}", method = RequestMethod.POST)
 	@ResponseBody
 	public String agree(@PathVariable(value = "refundId")FinanceForm financeForm,@RequestParam(value = "remark", required = false) String remark,BigDecimal cost){
-		if(addTrading(remark,cost,financeForm.getTaskForm().getAfterSaleForm().getUsername())){
+		if(addTrading(remark,cost,financeForm.getTaskForm().getAfterSaleForm().getUsername(),financeForm.getTaskForm().getAfterSaleForm().getOrderNum())){
 			financeService.updateStatus(financeForm,FormAuditStatus.AGREE,remark,cost);
 			String username=financeForm.getTaskForm().getAfterSaleForm().getUsername();
 			BigDecimal orderPrice=financeForm.getOrderPrice();
@@ -124,7 +124,7 @@ public class FinanceAdminController {
 	 * 推送到新财务模块
 	 * @param ff
 	 */
-	public boolean addTrading(String remark,BigDecimal price,String userName){
+	public boolean addTrading(String remark,BigDecimal price,String userName,String orderNum){
 		boolean result = false;
 		try {
 
@@ -133,7 +133,11 @@ public class FinanceAdminController {
 			param.put("type", "REFUND");//退款
 			param.put("description", remark);
 			param.put("amount", price);//现在的价格
-			param.put("url", "http://www.3j1688.com/xxx");
+			param.put("url", "http://www.3j1688.com/ultlon/list/1.html");
+			
+			Map<String, String> order = financeService.findByOrderNum(orderNum);
+			param.put("orderNum", orderNum);
+			param.put("ecerpNo", order!=null&&order.containsKey("ECERP_NO")?order.get("ECERP_NO"):"");
 
 			HttpHeaders httpHeaders = new HttpHeaders(); // 设置HTTP请求的请求头信息
 			// 设置相应内容，相应内容将被转换为json格式返回
