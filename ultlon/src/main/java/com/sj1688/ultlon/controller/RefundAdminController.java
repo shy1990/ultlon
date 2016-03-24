@@ -67,13 +67,13 @@ public class RefundAdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
-			PagedResourcesAssembler<RefundForm> assembler, Model model) {
-		Page<RefundForm> refundForms = refundService.findAll(pageable);
+			PagedResourcesAssembler<RefundForm> assembler, Model model,String imei) {
+		Page<RefundForm> refundForms = refundService.findAll(imei,pageable);
 		model.addAttribute("data", assembler.toResource(refundForms));
 		model.addAttribute("meta", assembler.toResource(refundForms).getMetadata());
 		//System.out.println("+++++++++++++++++++++++++++++++++++++");
 		//System.out.println(JSON.toJSONString(model));
-		
+		model.addAttribute("imei",imei);
 		return "admin/refund/list";
 	}
 	

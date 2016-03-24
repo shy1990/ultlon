@@ -57,7 +57,7 @@
 		        oContent.style.top = t + 'px';
 		    }
 		    
-		    $("#agree").click(function() {
+		    $(".am-btn-success").click(function() {
 				 var id=$(this).attr('testvalue');
 				 var status=$("#agree").text();
 				 $("#background, #content").show();
@@ -68,7 +68,7 @@
 				 $("#sa").val(status);
 				});    
 		    
-			$("#reject").click(function() {
+			$(".am-btn-danger").click(function() {
 				 var id=$(this).attr('testvalue');
 				 var status=$("#reject").text();
 					$("#background, #content").show();
@@ -80,6 +80,8 @@
 				});
 
 		$("#background,#cl_cancel").click(function() {
+			$("#sa").val("");
+			$("#sr").val("");
 			$("#background, #content").hide();
 		});
 		//点击黑色背景隐藏弹出层，当然可以绑定在任意一个按钮上
@@ -129,6 +131,16 @@
 		}
 
 	}
+	
+	function goSearch() {
+		var imei=$("#imei").val();
+		window.location.href = "admin/refund?sort=createdDate,desc&imei="+imei;
+	}
+	
+	function goAll() {
+		$("#imei").val("");
+		window.location.href = "admin/refund?sort=createdDate,desc";
+	}
 </script>
 <style type="text/css">
 .content {
@@ -163,6 +175,20 @@
 </head>
 <body>
 <%@include file="../../../common/afterbar.jsp"%>
+	<div class="am-collapse am-topbar-collapse" id="collapse-head">
+		<div class="am-topbar-right" style="margin-right: 200px;">
+			<div class="am-u-lg-6">
+				<div class="am-input-group">
+					<input type="text" class="am-form-field" style="width:300px" id="imei" placeholder="请输入要查询的串号" value="${imei }"> <span
+						class="am-input-group-btn">
+						<button class="am-btn am-btn-default" type="button" onclick="goSearch();" style="margin-right:5px;">搜索</button>
+						<button class="am-btn am-btn-default" type="button" onclick="goAll();">查询全部</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<table
 		class="am-table am-table-bordered am-table-striped am-table-hover">
 		<thead>

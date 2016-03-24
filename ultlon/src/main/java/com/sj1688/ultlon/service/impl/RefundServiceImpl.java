@@ -156,8 +156,12 @@ public class RefundServiceImpl implements RefundService {
 	}
 
 	@Override
-	public Page<RefundForm> findAll(Pageable pageable) {
-		return rfr.findAll(pageable);
+	public Page<RefundForm> findAll(String imei,Pageable pageable) {
+		if(imei != null && !"".equals(imei)){
+			return rfr.findByImei(imei,pageable);
+		}else{
+			return rfr.findAll(pageable);
+		}
 	}
 
 	@Override

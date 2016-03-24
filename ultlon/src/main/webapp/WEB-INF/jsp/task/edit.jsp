@@ -111,7 +111,7 @@
 					<div class="am-panel-hd">
 						<h4 class="am-panel-title"
 							data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
-							包装检测</h4>
+							包装检测(点此选择)</h4>
 					</div>
 					<div id="do-not-say-1" class="am-panel-collapse am-collapse">
 						<div class="am-panel-bd">
@@ -137,7 +137,7 @@
 					<div class="am-panel-hd">
 						<h4 class="am-panel-title"
 							data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">
-							手机检测</h4>
+							手机检测(点此选择)</h4>
 					</div>
 					<div id="do-not-say-2" class="am-panel-collapse am-collapse">
 						<div class="am-panel-bd">

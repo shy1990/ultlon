@@ -14,18 +14,18 @@
 			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
 		</button>
 
-		<div class="am-collapse am-topbar-collapse" id="collapse-head">
+		<div class="am-collapse am-topbar-collapse am-topbar-left" id="collapse-head">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<!-- <li class="am-active"><a href="./">首页</a></li> -->
 				<li><a href="${ctx }/task?sort=createdDate,desc">待处理售后</a></li>
 				<li><a href="${ctx }/task/historyList?sort=createdDate,desc">售后历史</a></li>
 				<li><a href="${ctx }/task/help">帮助中心</a></li>
 			</ul>
-			<div class="am-topbar-right">
+		</div>
+		<div class="am-topbar-right">
 				<a class="am-btn am-btn-primary am-topbar-btn am-btn-sm"
-					href="logout"> <span class="am-icon-user"></span> 退出
+					href="${ctx }/logout"> <span class="am-icon-user"></span> 点此退出系统
 				</a>
-			</div>
 		</div>
 	</div>
 </header>

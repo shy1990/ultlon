@@ -54,6 +54,11 @@
 						class="am-btn am-btn-default am-btn-sm am-fr">
 				</div>
 			</form>
+			<div class="divide-20"></div>
+								<div class="center">
+									<strong id="msg-error" style="color: rgba(110, 47, 47, 0.77)">${error }</strong>
+								</div>
+								<div class="divide-40"></div>
 			<hr>
 			<p>© 2015 网格技术部.</p>
 		</div>

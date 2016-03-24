@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.sj1688.ultlon.dao.mssql.CktCodeOutRepository;
 import com.sj1688.ultlon.dao.mysql.AfterSaleFormRepository;
 import com.sj1688.ultlon.dao.mysql.AfterSaleOrderRepository;
@@ -154,10 +153,10 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 			if(null!=goodsName&&!"".equals(goodsName)){
 				resultList.add(AfterSaleType.KXS);
 				//编码中包含一个字母的不能退换货(有字母的是定制机)
-				int count=getLetter(skuCode);
-				if(count != 1){
+//				int count=getLetter(skuCode);
+//				if(count != 1){
 					resultList.add(AfterSaleType.THH30);
-				}
+//				}
 			}
 			resultList.add(AfterSaleType.WX);
 			if(goodsName.indexOf("多美达")>-1){
@@ -170,10 +169,10 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 				resultList.add(AfterSaleType.KXS);
 			}
 			if(ApplicationUtil.getThh30()>=Poor){//退换货
-				int count=getLetter(skuCode);
-				if(count != 1){
+//				int count=getLetter(skuCode);
+//				if(count != 1){
 					resultList.add(AfterSaleType.THH30);
-				}
+//				}
 			}
 			//if(ApplicationUtil.getWx()>=Poor){//维修
 				resultList.add(AfterSaleType.WX);
