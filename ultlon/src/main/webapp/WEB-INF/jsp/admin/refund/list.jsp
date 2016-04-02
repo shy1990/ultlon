@@ -133,7 +133,8 @@
 	}
 	
 	function goSearch() {
-		var imei=$("#imei").val();
+		var imei=$("#imei").val().trim();
+		 
 		window.location.href = "admin/refund?sort=createdDate,desc&imei="+imei;
 	}
 	

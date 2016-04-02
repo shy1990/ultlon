@@ -63,11 +63,21 @@ public class ChangeAdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
-			PagedResourcesAssembler<ChangeForm> assembler, Model model) {
-		Page<ChangeForm> changeForms = changeService.findAll(pageable);
+			PagedResourcesAssembler<ChangeForm> assembler, Model model,String imei) {
+		Page<ChangeForm> changeForms = changeService.findAll(imei,pageable);
+//		System.out.println("aaaaa="+changeForms.getSize());
+//		System.out.println("bbbbb="+changeForms.getNumber());
+//		System.out.println("TotalPages"+changeForms.getTotalPages());
+		System.out.println(imei);
+//		System.out.println(imei.replaceAll(" ", ""));
+//    	System.out.println("imei="+imei.trim());
 		model.addAttribute("data", assembler.toResource(changeForms));
+		model.addAttribute("meta",assembler.toResource(changeForms).getMetadata());
+		model.addAttribute("imei",imei);
 		return "admin/change/list";
 	}
+	
+	
 	@Autowired
 	private TaskService taskService;
 	@RequestMapping(value = "/{changeId}/{status}", method = RequestMethod.POST)
