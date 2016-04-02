@@ -65,10 +65,11 @@ public class RepairAdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
-			PagedResourcesAssembler<RepairForm> assembler, Model model) {
-		Page<RepairForm> repairForms = repairService.findAll(pageable);
+			PagedResourcesAssembler<RepairForm> assembler, Model model,String imei) {
+		Page<RepairForm> repairForms = repairService.findAll(imei,pageable);
 		model.addAttribute("data", assembler.toResource(repairForms));
 		model.addAttribute("meta", assembler.toResource(repairForms).getMetadata());
+		model.addAttribute("imei",imei);
 		return "admin/repair/list";
 	}
 

@@ -71,8 +71,12 @@ public class RepairServiceImpl implements RepairService{
 	}
 
 	@Override
-	public Page<RepairForm> findAll(Pageable pageable) {
-		return rfr.findAll(pageable);
+	public Page<RepairForm> findAll(String imei,Pageable pageable) {
+		if(imei != null && !"".equals(imei)){
+			return rfr.findByImei(imei,pageable);
+		}else{
+			return rfr.findAll(pageable);
+		}
 	}
 
 	@Override

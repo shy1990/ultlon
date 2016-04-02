@@ -110,6 +110,15 @@
 		});
 	}
 	
+	function goSearch() {
+		var imei=$("#imei").val().trim();
+		window.location.href = "admin/repair?sort=createdDate,desc&imei="+imei;
+	}
+	
+	function goAll() {
+		$("#imei").val("");
+		window.location.href = "admin/repair?sort=createdDate,desc";
+	}
 	
 	
 	/* $('#username').blur(function (){
@@ -127,10 +136,53 @@
 		});
 	} */
 </script>
+<style type="text/css">
+.content {
+	text-align: center;
+	padding: 50px 0;
+}
+				#background {position:absolute; z-index:998; top:0px; left:0px; background:rgb(50,50,50);background:rgba(0,0,0,0.5); display:none;}
+				#content {position:absolute; width:580px; z-index:999; padding:10px; background:#fff; border-radius:5px; display:none;}
+				.ultlon_content_body{text-align: center;}	 
+				.ultlon_gather{margin-top:25px;font-size: 22px;}
+				.ultlon_content_body_btn{border: 1px solid #ccc;
+					  background: #F9F9F9;
+					  width: 250px;
+					  margin: 20px auto;
+					  height: 30px;
+					  line-height: 30px;
+					  cursor: pointer;
+					  font-size: 18px;
+				}
+				
+				.remark{
+					width:260px;
+					
+				}
+				.remark_left{width: 10%; text-align: right; float: left;}
+				.remark_right{width: 90%; text-align: left; float: left;}
+				#cl_cancel{font-size: 16px;}
+				.clear{clear:both}
+				/*----------- 分页 start------------- */
+.phone_main_07{ padding-top:20px; width:500px; margin:0 auto;}
+</style>
 
 </head>
 <body>
 <%@include file="../../../common/afterbar.jsp"%>
+	<div class="am-collapse am-topbar-collapse" id="collapse-head">
+		<div class="am-topbar-right" style="margin-right: 200px;">
+			<div class="am-u-lg-6">
+				<div class="am-input-group">
+					<input type="text" class="am-form-field" style="width:300px" id="imei" placeholder="请输入要查询的串号" value="${imei }"> <span
+						class="am-input-group-btn">
+						<button class="am-btn am-btn-default" type="button" onclick="goSearch();" style="margin-right:5px;">搜索</button>
+						<button class="am-btn am-btn-default" type="button" onclick="goAll();">查询全部</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
 	<table
 		class="am-table am-table-bordered am-table-striped am-table-hover">
 		<thead>
@@ -198,6 +250,37 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="phone_main_07">		
+			<p id="p"></p>
+			<!-- <ul id="phone_list_page_ul"> -->
+			     <ul data-am-widget="pagination" class="am-pagination am-pagination-select">
+				  <li class="am-pagination-prev ">
+				  <c:choose>
+				  	<c:when test="${data.metadata.number ==0}">
+				  		<a>上一页</a>
+				  	</c:when>
+					<c:otherwise>
+					  <a href="admin/repair?sort=createdDate,desc&page=${data.metadata.number-1}"class="">上一页</a>
+					</c:otherwise>
+				   </c:choose>
+				  </li>
+				  <li class="am-pagination-select">
+				    ${data.metadata.number+1} / ${data.metadata.totalPages}
+				  </li>
+				  <li class="am-pagination-next ">
+				  <c:choose>
+				  	<c:when test="${ data.metadata.number+1 == data.metadata.totalPages}">
+				  		<a>下一页</a>
+				  	</c:when>				  
+					<c:otherwise>
+					  <a href="admin/repair?sort=createdDate,desc&page=${data.metadata.number+1}" class="">下一页</a>
+					</c:otherwise>
+				    </c:choose>
+				  </li>
+				</ul>
+			<!-- </ul> -->
+		</div>
 
 </body>
 </html>
