@@ -15,11 +15,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-@Configuration
-@EnableJpaRepositories(entityManagerFactoryRef = "mssqlEntityManagerFactory", transactionManagerRef = "mssqlTransactionManager", basePackages = { "com.sj1688.ultlon.dao.mssql" })
+//@Configuration
+//@EnableJpaRepositories(entityManagerFactoryRef = "mssqlEntityManagerFactory", transactionManagerRef = "mssqlTransactionManager", basePackages = { "com.sj1688.ultlon.dao.mssql" })
 public class MssqlConfig {
 	
-	@Bean(name = "mssqlDataSource")
+/*	@Bean(name = "mssqlDataSource")
 	@ConfigurationProperties(prefix="datasource.mssql")
 	public DataSource mssqlDataSource(){
 		return DataSourceBuilder.create().build();
@@ -47,6 +47,6 @@ public class MssqlConfig {
 		JpaTransactionManager txManager = new JpaTransactionManager();
 	    txManager.setEntityManagerFactory(entityManagerFactory());
 	    return txManager;
-	}
+	}*/
 	
 }

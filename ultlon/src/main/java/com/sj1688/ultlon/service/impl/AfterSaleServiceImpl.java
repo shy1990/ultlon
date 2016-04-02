@@ -16,10 +16,12 @@ import org.springframework.stereotype.Service;
 import com.sj1688.ultlon.dao.mssql.CktCodeOutRepository;
 import com.sj1688.ultlon.dao.mysql.AfterSaleFormRepository;
 import com.sj1688.ultlon.dao.mysql.AfterSaleOrderRepository;
+import com.sj1688.ultlon.dao.mysql.StockRemovalRecordRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.AfterSaleOrder;
 import com.sj1688.ultlon.domain.AfterSaleType;
+import com.sj1688.ultlon.domain.StockRemovalRecord;
 import com.sj1688.ultlon.domain.sz.CktCodeOut;
 import com.sj1688.ultlon.event.AfterSaleFormCreateEvent;
 import com.sj1688.ultlon.service.AfterSaleService;
@@ -34,10 +36,13 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	private B2BDao b2bdao;
 	@Autowired
 	private AfterSaleFormRepository asfRepository;
+	//@Autowired
+	//private AfterSaleOrderRepository asor;
+	//@Autowired
+	//private CktCodeOutRepository ccor;
+	
 	@Autowired
-	private AfterSaleOrderRepository asor;
-	@Autowired
-	private CktCodeOutRepository ccor;
+	private StockRemovalRecordRepository srrr;
 	
 	@Override
 	public AfterSaleForm genrateAfterSaleForm(String imei, String userId) {
@@ -83,7 +88,7 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 	private Map<String, String> getOrderMap(String imei) {
 		Map<String, String> result=new HashMap<String, String>();
 		//List<AfterSaleOrder> ors = asor.findByImeiOrderByCreatedDateDesc(imei);
-		List<CktCodeOut> ccos = ccor.findByCodeID(imei);
+		/*List<CktCodeOut> ccos = ccor.findByCodeID(imei);
 		List<AfterSaleOrder> ors = new ArrayList<AfterSaleOrder>();
 		for(CktCodeOut cco:ccos){
 			String str=cco.getConfig();
@@ -111,12 +116,15 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		//System.out.println("神州串码数据2："+JSON.toJSONString(ors));
 		
 		
-		AfterSaleOrder aso = ors!=null&&ors.size()>0?ors.get(0):null;
+		AfterSaleOrder aso = ors!=null&&ors.size()>0?ors.get(0):null;*/
 		//System.out.println("------------"+ors.get(0));
 		//AfterSaleOrder aso = asor.findByImei(imei);
-		if(aso!=null){
-			result.put("skucode", aso.getNormsCode().trim());
-			result.put("ddnum", aso.getEcerpNo().trim());
+		
+		StockRemovalRecord srr = srrr.findOne(imei);
+		
+		if(srr!=null){
+			result.put("skucode", srr.getSkuCode().trim());
+			result.put("ddnum", srr.getOrderNum().trim());
 			return result;
 		}
 		return null;

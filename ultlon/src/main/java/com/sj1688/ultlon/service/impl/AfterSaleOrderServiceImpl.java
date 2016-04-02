@@ -1,6 +1,5 @@
 package com.sj1688.ultlon.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -9,12 +8,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
-import com.sj1688.ultlon.dao.mssql.CktCodeOutRepository;
 import com.sj1688.ultlon.dao.mysql.AfterSaleOrderRepository;
+import com.sj1688.ultlon.dao.mysql.StockRemovalRecordRepository;
 import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleOrder;
-import com.sj1688.ultlon.domain.sz.CktCodeOut;
+import com.sj1688.ultlon.domain.StockRemovalRecord;
 import com.sj1688.ultlon.service.AfterSaleOrderService;
 
 @Service
@@ -25,16 +23,18 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 	@Autowired
 	private B2BDao om;
 	
+	//@Autowired
+	//private CktCodeOutRepository ccor;
+	
 	@Autowired
-	private CktCodeOutRepository ccor;
-
+	private StockRemovalRecordRepository srrr;
 
 
 
 	@Override
 	public Map<String, Object> getOrder(String imei, String userId) {
 		Map<String, Object> map = null;
-		List<CktCodeOut> ccos = ccor.findByCodeID(imei);
+		/*List<CktCodeOut> ccos = ccor.findByCodeID(imei);
 		List<AfterSaleOrder> ors = new ArrayList<AfterSaleOrder>();
 		for(CktCodeOut cco:ccos){
 			String[] config = cco.getConfig().split(":");
@@ -56,9 +56,10 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 		System.out.println("神州串码数据2："+JSON.toJSONString(ors));
 		
 		AfterSaleOrder uo = ors!=null&&ors.size()>0?ors.get(0):null;
-		System.out.println("查出的串码信息："+JSON.toJSONString(uo));
-		if(null!=uo && !uo.getEcerpNo().isEmpty()){
-			map = om.selectByUidAndErp(userId, uo.getEcerpNo());
+		System.out.println("查出的串码信息："+JSON.toJSONString(uo));*/
+		StockRemovalRecord srr = srrr.findOne(imei);
+		if(null!=srr ){
+			map = om.selectByUidAndErp(userId, srr.getOrderNum().trim());
 		}
 		return map;
 	}
