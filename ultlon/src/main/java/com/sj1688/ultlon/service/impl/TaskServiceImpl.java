@@ -30,6 +30,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public TaskForm genrateForm(AfterSaleForm afterSaleForm) {
+		//TODO 这里要改成从业务数据库查询用户所属区域编码//首先从b2b数据库查出该用户名的id然后再从业务数据库获取用户所属区域编码
 		String area = b2bDao.findUserArea(afterSaleForm.getUsername());
 		TaskForm result = new TaskForm(afterSaleForm, area);
 		return result;
@@ -81,7 +82,6 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String findMobileByOrderNum1(String orderNum) {
-		// TODO Auto-generated method stub
 		return b2bDao.findMobileByOrderNum1(orderNum);
 	}
 

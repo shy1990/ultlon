@@ -73,7 +73,6 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 
 	@Override
 	public AfterSaleOrder save(AfterSaleOrder uo) {
-		// TODO Auto-generated method stub
 		return or.saveAndFlush(uo);
 	}
 
@@ -86,7 +85,6 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 
 	@Override
 	public Map<String, Object> getGoodsBySkunum(String skuNum) {
-		// TODO Auto-generated method stub
 		return om.getGoodsBySkunum(skuNum);
 	}
 
@@ -98,7 +96,6 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 
 	@Override
 	public Map<String, Object> selectByArea(String ecerpNo, String goodsId) {
-		// TODO Auto-generated method stub
 		return om.selectByArea(ecerpNo, goodsId);
 	}
 	

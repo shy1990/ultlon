@@ -33,6 +33,7 @@
 				/fonts/** = anon
 				/images/** = anon
 				/unauthorized=anon
+				/app/**=anon
 				/login = authc
 				/logout = logout
 				/admin/** = roles[admin] 

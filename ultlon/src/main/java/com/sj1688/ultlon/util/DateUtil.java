@@ -64,10 +64,8 @@ public class DateUtil {
 	    try {
 			return sdf.parse(sdf.format(new Date(Long.parseLong(str))));
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
 	    return null;
@@ -106,7 +104,6 @@ public class DateUtil {
 			Date date = fmt.parse(dateStr);
 			return date;
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	return null;
