@@ -19,11 +19,36 @@
 	padding: 50px 0;
 }
 
+.phone_main_07 {
+	padding-top: 20px;
+	width: 500px;
+	margin: 0 auto;
+}
+
 </style>
 </head>
 <body>
-	<%@include file="../../common/navbar.jsp"%>
 
+	<%@include file="../../common/navbar.jsp"%>
+	  <div class="am-collapse am-topbar-collapse" id="collapse-head">
+		<div class="am-topbar-right" style="margin-right: 200px;">
+			<div class="am-u-lg-6">
+				<div class="am-input-group">
+				<span
+						class="am-input-group-btn"> <input type="text" class="am-form-field" style="width: 300px"
+						id="status" placeholder="请输入要查询的状态" value="${status}">
+						<button class="am-btn am-btn-default" type="button"
+							onclick="goSearch();" style="margin-right: 5px;">搜索</button>
+						<button class="am-btn am-btn-default" type="button"
+							onclick="goAll();">查询全部</button>
+					</span>
+
+
+				</div>
+			</div>
+		</div>
+	</div>  
+	
 	<div class="content">
 		<div class="am-g">
 			<table id="mytable1"
@@ -71,6 +96,38 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+	<div class="phone_main_07">
+		<p id="p"></p>
+		<!-- <ul id="phone_list_page_ul"> -->
+		<ul data-am-widget="pagination"
+			class="am-pagination am-pagination-select">
+			<li class="am-pagination-prev "><c:choose>
+					<c:when test="${data.metadata.number ==0}">
+						<a>上一页</a>
+					</c:when>
+					<c:otherwise>
+						<a
+							href="historyList?sort=createdDate,desc&status=${status}&page=${data.metadata.number-1}"
+							class="">上一页</a>
+					</c:otherwise>
+				</c:choose></li>
+			<li class="am-pagination-select">${data.metadata.number+1} /
+				${data.metadata.totalPages}</li>
+			<li class="am-pagination-next "><c:choose>
+					<c:when
+						test="${ data.metadata.number+1 == data.metadata.totalPages}">
+						<a>下一页</a>
+					</c:when>
+
+					<c:otherwise>
+						<a
+							href="historyList?sort=createdDate,desc&status=${status}&page=${data.metadata.number+1}"
+							class="">下一页</a>
+					</c:otherwise>
+				</c:choose></li>
+		</ul>
+		<!-- </ul> -->
 	</div>
 	<script src="${ctx }/js/jquery.min.js"></script>
 	<script src="${ctx }/js/amazeui.min.js"></script>
@@ -128,6 +185,25 @@
 
 			});
 		})
+		
+		function goSearch() {
+			var status= $("#status").val().trim();
+		//	if(!(status.equals("处理中")||status.equals("同意")||status.equals("已完成")||status.equals("拒绝")){
+		//		alert("请按照处理状态查询");
+		//	}else{
+				window.location.href = "historyList?sort=createdDate,desc&status="+status;	
+		//	}
+	//	if(status=="处理中"){
+	//		alert{"chulizhong"};
+	//	}else{
+	//		alert("bupipei");
+	//	}								
+		}
+		
+		function goAll() {
+			$("#imei").val("");
+			window.location.href = "historyList?sort=createdDate,desc";
+		}
 	</script>
 </body>
 </html>

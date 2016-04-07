@@ -84,4 +84,13 @@ public class RepairServiceImpl implements RepairService{
 		return rfr.findByTaskForm(taskForm);
 	}
 
+	@Override
+	public Page<RepairForm> findAll2(String username, Pageable pageable) {
+		if(username != null && !"".equals(username)){
+			return rfr.findByUsername(username,pageable);
+		}else{
+			return rfr.findAll(pageable);
+		}
+	}
+
 }

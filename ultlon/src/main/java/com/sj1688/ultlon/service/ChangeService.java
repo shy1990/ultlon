@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.sj1688.ultlon.domain.ChangeForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
+import com.sj1688.ultlon.domain.RefundForm;
 import com.sj1688.ultlon.domain.TaskForm;
 
 /**
@@ -27,4 +28,6 @@ public interface ChangeService {
 	public void updateStatus(ChangeForm entity,FormAuditStatus statusToUpdate,String remark);
 
 	public Page<ChangeForm> findAll(String imei,Pageable pageable);
+	
+	public Page<ChangeForm> findAll2(String username,Pageable pageable);
 }

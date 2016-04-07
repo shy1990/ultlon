@@ -1,6 +1,8 @@
 package com.sj1688.ultlon.controller;
 
-import java.math.BigDecimal;
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -68,12 +70,29 @@ public class RefundAdminController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
 			PagedResourcesAssembler<RefundForm> assembler, Model model,String imei) {
-		Page<RefundForm> refundForms = refundService.findAll(imei,pageable);
-		model.addAttribute("data", assembler.toResource(refundForms));
-		model.addAttribute("meta", assembler.toResource(refundForms).getMetadata());
-		//System.out.println("+++++++++++++++++++++++++++++++++++++");
-		//System.out.println(JSON.toJSONString(model));
-		model.addAttribute("imei",imei);
+		
+		Pattern pattern = Pattern.compile("[0-9]*"); 
+		if(imei!=null){
+			 Matcher match=pattern.matcher(imei);
+		 System.out.println("ssss"+match.matches());
+			if(match.matches()==false){
+				Page<RefundForm> refundForms = refundService.findAll2(imei,pageable);
+				System.out.println("imei"+imei);
+				model.addAttribute("data", assembler.toResource(refundForms));
+				model.addAttribute("meta", assembler.toResource(refundForms).getMetadata());
+			}else{
+				Page<RefundForm> refundForms=refundService.findAll(imei, pageable);
+				System.out.println("imei"+imei);
+				model.addAttribute("data",assembler.toResource(refundForms));
+				model.addAttribute("meta",assembler.toResource(refundForms).getMetadata());
+			}
+		}else{
+			Page<RefundForm> refundForms=refundService.findAll(imei, pageable);
+			System.out.println("imei"+imei);
+			model.addAttribute("data",assembler.toResource(refundForms));
+			model.addAttribute("meta",assembler.toResource(refundForms).getMetadata());
+		}
+
 		return "admin/refund/list";
 	}
 	
