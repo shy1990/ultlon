@@ -36,7 +36,8 @@
 	</select>
 	
 	<select id="findUserArea" resultType="string">
-		select area from sj_tb_members where username=#{username}
+	    select r.region_id area from sj_tb_members m join sj_yewu.biz_registdata r on r.member_id=m.id where m.username=#{username}
+		<!-- select area from sj_tb_members where username=#{username} -->
 	</select>
 	
 	<select id="findOrderId" resultType="string">
