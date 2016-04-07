@@ -19,6 +19,12 @@
 	padding: 50px 0;
 }
 
+.phone_main_07 {
+	padding-top: 20px;
+	width: 500px;
+	margin: 0 auto;
+}
+
 </style>
 </head>
 <body>
@@ -69,6 +75,39 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+	
+		<div class="phone_main_07">
+		<p id="p"></p>
+		<!-- <ul id="phone_list_page_ul"> -->
+		<ul data-am-widget="pagination"
+			class="am-pagination am-pagination-select">
+			<li class="am-pagination-prev "><c:choose>
+					<c:when test="${data.metadata.number ==0}">
+						<a>上一页</a>
+					</c:when>
+					<c:otherwise>
+						<a
+							href="task?sort=createdDate,desc&page=${data.metadata.number-1}"
+							class="">上一页</a>
+					</c:otherwise>
+				</c:choose></li>
+			<li class="am-pagination-select">${data.metadata.number+1} /
+				${data.metadata.totalPages}</li>
+			<li class="am-pagination-next "><c:choose>
+					<c:when
+						test="${ data.metadata.number+1 == data.metadata.totalPages}">
+						<a>下一页</a>
+					</c:when>
+
+					<c:otherwise>
+						<a
+							href="task?sort=createdDate,desc&page=${data.metadata.number+1}"
+							class="">下一页</a>
+					</c:otherwise>
+				</c:choose></li>
+		</ul>
+		<!-- </ul> -->
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>

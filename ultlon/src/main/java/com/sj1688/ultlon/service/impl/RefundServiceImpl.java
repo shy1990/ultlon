@@ -196,4 +196,13 @@ public class RefundServiceImpl implements RefundService {
 		return null;
 	}
 
+	@Override
+	public Page<RefundForm> findAll2(String username, Pageable pageable) {
+		if(username != null && !"".equals(username)){
+			return rfr.findByUsername(username,pageable);
+		}else{
+			return rfr.findAll(pageable);
+		}
+	}
+
 }

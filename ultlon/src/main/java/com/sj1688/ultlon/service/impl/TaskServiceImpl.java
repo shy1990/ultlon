@@ -85,5 +85,27 @@ public class TaskServiceImpl implements TaskService {
 		return b2bDao.findMobileByOrderNum1(orderNum);
 	}
 
+	@Override
+	public Page<TaskForm> getStatus(Pageable pageable,
+			List<String> regionList, String status) {
+		// TODO Auto-generated method stub
+		FormAuditStatus fstatus = null;
+		if(status.equals("处理中")){
+			 fstatus=FormAuditStatus.PROCESSING;
+		}else if(status.equals("同意")){
+			fstatus=FormAuditStatus.AGREE;
+		}else if(status.equals("拒绝")){
+			fstatus=FormAuditStatus.REJECT;
+		}else if(status.equals("已完成")){
+			fstatus=FormAuditStatus.FINISH;
+		}else{
+			return tfr.findByAreaInAndStatusNot(regionList, pageable,FormAuditStatus.NOPROCESS );
+		}
+		return tfr.findByAreaInAndStatusIn(regionList, pageable, fstatus);
+		
+	}
+
+
+
 
 }

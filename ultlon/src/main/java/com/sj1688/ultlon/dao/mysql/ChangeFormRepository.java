@@ -15,4 +15,7 @@ public interface ChangeFormRepository extends JpaRepository<ChangeForm, Long> {
 
 	@Query("select a from ChangeForm a where a.taskForm.afterSaleForm.imei=?1")
 	Page<ChangeForm> findByImei(String imei, Pageable pageable);
+	
+	@Query("select a from ChangeForm a where a.taskForm.afterSaleForm.username=?1")
+	Page<ChangeForm> findByUsername(String username,Pageable pageable);
 }

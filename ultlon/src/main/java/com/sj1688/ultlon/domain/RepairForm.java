@@ -15,7 +15,7 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 public class RepairForm extends AbstractAuditable<User, Long>{
 	private static final long serialVersionUID = 1L;
 	@OneToOne(fetch=FetchType.EAGER)
-	private TaskForm taskForm;
+	private TaskForm taskForm;/////
 	private BigDecimal cost;
 	@Enumerated(EnumType.STRING)
 	private FormAuditStatus status=FormAuditStatus.NOPROCESS;

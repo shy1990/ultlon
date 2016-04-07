@@ -78,4 +78,13 @@ public class ChangeServiceImpl implements ChangeService{
 		}
 	}
 
+	@Override
+	public Page<ChangeForm> findAll2(String username, Pageable pageable) {
+		if(username != null && !"".equals(username)){
+			return rfr.findByUsername(username,pageable);
+		}else{
+			return rfr.findAll(pageable);
+		}
+	}
+
 }

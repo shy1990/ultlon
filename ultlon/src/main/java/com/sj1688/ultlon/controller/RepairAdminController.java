@@ -1,6 +1,8 @@
 package com.sj1688.ultlon.controller;
 
 import java.math.BigDecimal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sj1688.ultlon.domain.FormAuditStatus;
+import com.sj1688.ultlon.domain.RefundForm;
 import com.sj1688.ultlon.domain.RepairForm;
 import com.sj1688.ultlon.service.RepairService;
 import com.sj1688.ultlon.service.TaskService;
@@ -66,10 +69,31 @@ public class RepairAdminController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
 			PagedResourcesAssembler<RepairForm> assembler, Model model,String imei) {
-		Page<RepairForm> repairForms = repairService.findAll(imei,pageable);
-		model.addAttribute("data", assembler.toResource(repairForms));
-		model.addAttribute("meta", assembler.toResource(repairForms).getMetadata());
-		model.addAttribute("imei",imei);
+//		Page<RepairForm> repairForms = repairService.findAll(imei,pageable);
+//		model.addAttribute("data", assembler.toResource(repairForms));
+//		model.addAttribute("meta", assembler.toResource(repairForms).getMetadata());
+//		model.addAttribute("imei",imei);
+		Pattern pattern = Pattern.compile("[0-9]*"); 
+		if(imei!=null){
+			 Matcher match=pattern.matcher(imei);
+		 System.out.println("ssss"+match.matches());
+			if(match.matches()==false){
+				Page<RepairForm> repairForms = repairService.findAll2(imei,pageable);
+				System.out.println("imei"+imei);
+				model.addAttribute("data", assembler.toResource(repairForms));
+				model.addAttribute("meta", assembler.toResource(repairForms).getMetadata());
+			}else{
+				Page<RepairForm> repairForms=repairService.findAll(imei, pageable);
+				System.out.println("imei"+imei);
+				model.addAttribute("data",assembler.toResource(repairForms));
+				model.addAttribute("meta",assembler.toResource(repairForms).getMetadata());
+			}
+		}else{
+			Page<RepairForm> repairForms=repairService.findAll(imei, pageable);
+			System.out.println("imei"+imei);
+			model.addAttribute("data",assembler.toResource(repairForms));
+			model.addAttribute("meta",assembler.toResource(repairForms).getMetadata());
+		}
 		return "admin/repair/list";
 	}
 
