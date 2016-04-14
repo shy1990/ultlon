@@ -116,6 +116,7 @@ public class TaskController {
 	public String reject(@PathVariable(value = "id") TaskForm form,@RequestParam("remark")String remark) {
 		form.setRemark(remark);
 		taskService.updateStatus(form,FormAuditStatus.REJECT);
+		System.out.println(form.getStatus());
 		return "ok";
 	}
 

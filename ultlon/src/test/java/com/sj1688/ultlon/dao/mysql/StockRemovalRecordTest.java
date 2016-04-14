@@ -26,7 +26,7 @@ public class StockRemovalRecordTest {
 			List<Map<Integer, String>> contentList = ExcelImport.readExcelContent(filePath);
 			System.out.println(contentList.size());
 			contentList.forEach((Map<Integer, String> excelContent)->{
-				if(null!=excelContent){
+				if(null!=excelContent){ 
 					 excelContent.forEach((integer, s) -> { 
 						 System.out.println(integer+"      "+s);
 						 if(null!=s && s.indexOf("sku")<0){

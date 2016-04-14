@@ -141,7 +141,7 @@
 		</thead>
 		<tbody>
 			<c:forEach var="item" items="${data.content }">
-				<tr class="am-active">
+				<tr class="am-active"  data-id="${item.content.id }">
 					<td>${item.content.taskForm.afterSaleForm.username }</td>
 					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
 					<td>${item.content.taskForm.afterSaleForm.imei }</td>
