@@ -2,161 +2,211 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sj1688.ultlon.dao.oracle.B2BDao">
 	<select id="findSomthing" resultType="map">
-		select * from sj_tb_admin where TRUENAME like '%'||#{name}||'%'
+		select * from sj_tb_admin
+		where TRUENAME like '%'||#{name}||'%'
 	</select>
 
 	<select id="findNRGBy" resultType="map">
-		select o.order_num,o.MEMBER_ID,o.signfortime RECEIVE_TIME ,g.name GOODS_NAME
+		select
+		o.order_num,o.MEMBER_ID,o.signfortime RECEIVE_TIME ,g.name GOODS_NAME
 		from sj_tb_order o
 		left join sj_tb_order_items oi on o.id=oi.order_id
 		left join sj_tb_goods_sku s on oi.target_id=s.id
-		left join sj_tb_goods g on s.goods_id=g.id
+		left join sj_tb_goods
+		g on s.goods_id=g.id
 		where o.ecerp_no=#{ddNum,jdbcType=VARCHAR} and
 		s.sku_num=#{skucode,jdbcType=VARCHAR}
 	</select>
 
 	<select id="findOrderPirceAndCurrentPrice" resultType="map">
-		select i.deal_price ORDER_PRICE, s.price CURRENT_PRICE from sj_tb_order o 
-		left join sj_tb_order_items i on o.id = i.order_id 
-		left join sj_tb_goods_sku s on i.target_id = s.id 
-		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR} and s.sku_num = #{skuCode,jdbcType=VARCHAR}
+		select
+		i.deal_price ORDER_PRICE, s.price CURRENT_PRICE from sj_tb_order o
+		left join sj_tb_order_items i on o.id = i.order_id
+		left join sj_tb_goods_sku s on i.target_id = s.id
+		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR}
+		and s.sku_num = #{skuCode,jdbcType=VARCHAR}
 	</select>
 	<!-- 根据订单编号获取dd号 -->
 	<select id="findByOrderNum" resultType="map">
-		select o.order_num,o.ecerp_no
+		select
+		o.order_num,o.ecerp_no
 		from sj_tb_order o
-		where o.order_num=#{orderNum,jdbcType=VARCHAR}
+		where
+		o.order_num=#{orderNum,jdbcType=VARCHAR}
 	</select>
-	
+
 	<select id="findPirceBySkuNum" resultType="map">
-		select s.price CURRENT_PRICE from sj_tb_order o 
-		left join sj_tb_order_items i on o.id = i.order_id 
-		left join sj_tb_goods_sku s on i.target_id = s.id 
-		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR} and s.sku_num = #{skuCode,jdbcType=VARCHAR}
+		select s.price
+		CURRENT_PRICE from sj_tb_order o
+		left join sj_tb_order_items i on o.id = i.order_id
+		left join sj_tb_goods_sku s on i.target_id = s.id
+		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR}
+		and s.sku_num = #{skuCode,jdbcType=VARCHAR}
 	</select>
-	
+
 	<select id="findUserArea" resultType="string">
-	    select r.region_id area from sj_tb_members m join sj_yewu.biz_registdata r on r.member_id=m.id where m.username=#{username}
+		select r.region_id area from sj_tb_members m join
+		sj_yewu.biz_registdata r on r.member_id=m.id where
+		m.username=#{username}
 		<!-- select area from sj_tb_members where username=#{username} -->
 	</select>
-	
+
 	<select id="findOrderId" resultType="string">
-		select o.id from sj_tb_order o where o.order_num = #{orderNum,jdbcType=VARCHAR}
+		select o.id from sj_tb_order
+		o where o.order_num = #{orderNum,jdbcType=VARCHAR}
 	</select>
-	<!-- 根据订单号获取客户手机号  -->
+	<!-- 根据订单号获取客户手机号 -->
 	<select id="findMobileByOrderNum" resultType="map">
-		select o.ship_tel from sj_tb_order o where o.order_num = #{orderNum,jdbcType=VARCHAR}
+		select o.ship_tel
+		from sj_tb_order o where o.order_num = #{orderNum,jdbcType=VARCHAR}
 	</select>
 	<select id="findMobileByOrderNum1" resultType="string">
-		select o.ship_tel from sj_tb_order o where order_num=#{orderNum}
+		select o.ship_tel
+		from sj_tb_order o where order_num=#{orderNum}
 	</select>
-	<!-- 根据订单号和商品ID获取订单信息  -->
+	<!-- 根据订单号和商品ID获取订单信息 -->
 	<select id="findAllByOrderNum" resultType="map">
-		select  i.marketbale_price,i.deal_price,s.sku_num,s.goods_id,o.pay_time,o.ship_name,o.ship_tel,o.address from sj_tb_order o 
-		left join sj_tb_order_items i on o.id = i.order_id 
-		left join sj_tb_goods_sku s on i.target_id = s.id 
-		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR} and s.sku_num = #{skuCode,jdbcType=VARCHAR}
+		select
+		i.marketbale_price,i.deal_price,s.sku_num,s.goods_id,o.pay_time,o.ship_name,o.ship_tel,o.address
+		from sj_tb_order o
+		left join sj_tb_order_items i on o.id = i.order_id
+		left join sj_tb_goods_sku s on i.target_id = s.id
+		where i.target_type = 'sku' and o.order_num = #{orderNum,jdbcType=VARCHAR}
+		and s.sku_num = #{skuCode,jdbcType=VARCHAR}
 	</select>
-	<select id="selectByUidAndErp" parameterType="java.lang.String" resultType="map">
-        select 
-		    ID, MEMBER_ID, CREATETIME, SOURCE_TYPE, SALE_TYPE, STATUS, PAY_STATUS, SHIP_STATUS, 
-		    KESH_STATUS, IS_DELIVERY, EXPRESS_ID, EXPRESS_NUM, PAY_MENT, PAY_TIME, SHIP_NAME, 
-		    AREA, SHIP_ZIP, SHIP_TEL, SHIP_EMAIL, SHIP_TIME, TOTAL_COST, CARRIAGE, ADVANCE, EBANK_MON, 
-		    REMARK, MODIFYTIME, ORDER_POINTS, PROVINCE, CITY, ADDRESS, MEMBER_TYPE, BILL_TYPE, 
-		    BILL_HEAD, BILL_CONTENT, DISABLED, ORDER_NUM, LOGISTICS_TEL, DEAL_ID, DEAL_TYPE
-	    from SJ_TB_ORDER o
-	    where o.MEMBER_ID= #{userId,jdbcType=VARCHAR} and o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR}
-   </select>
-   
-   <!-- 根据用户名和订单管易编号和商品id获取订单信息  -->
-   <select id="selectByUidAndErpAndGoodsId" parameterType="java.lang.String" resultType="map">
-	   select o.id orderId,o.order_num orderNum,o.ship_name shipName,o.area,o.ship_tel shipTel,o.total_cost totalCost,
-	       o.province,o.city,o.address,o.signfortime,o.ecerp_no ecerpNo,
-	       oi.id itemId, oi.deal_price dealPrice,oi.nums,oi.target_id targetId,
-		   s.price skuPrice,s.sku_num skuNum
-	       from sj_tb_order o
-	       left join sj_tb_order_items oi on o.id=oi.order_id
-	       left join sj_tb_goods_sku s on oi.target_id=s.id
-	       where o.MEMBER_ID= #{userId,jdbcType=VARCHAR} and o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR} and oi.target_id=#{goodsId,jdbcType=VARCHAR}
-  </select>
-  
-    <!-- 根据规格代码获取商品信息 -->
-  <select id="getGoodsBySkunum" parameterType="java.lang.String" resultType="map">
-	  select g.id goodsId,g.name,g.ram,gs.id skuId,gs.edition,gs.standard,gs.storage,c.color_name colorName,p.pic_src picSrc,b.name brandName
-	  	   from sj_tb_goods g 
-	       left join sj_tb_goods_sku gs on g.id=gs.goods_id 
-	       left join sj_tb_color c on gs.color_id=c.id
-	       left join sj_tb_goods_pic p on gs.id=p.sku_id
-	       left join Sj_Tb_Brand b on g.brand_id=b.id
-	       where gs.sku_num=#{skuNum,jdbcType=VARCHAR}
-  </select>
-  
-     <!-- 根据用户名和订单管易编号和商品id获取订单信息  -->
-   <select id="selectByArea" parameterType="java.lang.String" resultType="map">
-	   select o.id orderId,o.order_num orderNum,o.ship_name shipName,o.area,o.ship_tel shipTel,o.total_cost totalCost,
-	       o.province,o.city,o.address,o.signfortime,o.ecerp_no ecerpNo,
-	       oi.id itemId, oi.deal_price dealPrice,oi.nums,oi.target_id targetId
-	       from sj_tb_order o
-	       left join sj_tb_order_items oi on o.id=oi.order_id
-	       where o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR} and oi.target_id=#{goodsId,jdbcType=VARCHAR}
-  </select>
+	<select id="selectByUidAndErp" parameterType="java.lang.String"
+		resultType="map">
+		select
+		ID, MEMBER_ID, CREATETIME, SOURCE_TYPE, SALE_TYPE, STATUS, PAY_STATUS,
+		SHIP_STATUS,
+		KESH_STATUS, IS_DELIVERY, EXPRESS_ID, EXPRESS_NUM, PAY_MENT, PAY_TIME, SHIP_NAME,
+		AREA, SHIP_ZIP, SHIP_TEL, SHIP_EMAIL, SHIP_TIME, TOTAL_COST, CARRIAGE,
+		ADVANCE, EBANK_MON,
+		REMARK, MODIFYTIME, ORDER_POINTS, PROVINCE, CITY, ADDRESS, MEMBER_TYPE,
+		BILL_TYPE,
+		BILL_HEAD, BILL_CONTENT, DISABLED, ORDER_NUM, LOGISTICS_TEL, DEAL_ID, DEAL_TYPE
+		from SJ_TB_ORDER o
+		where o.MEMBER_ID= #{userId,jdbcType=VARCHAR} and
+		o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据用户名和订单管易编号和商品id获取订单信息 -->
+	<select id="selectByUidAndErpAndGoodsId" parameterType="java.lang.String"
+		resultType="map">
+		select o.id orderId,o.order_num orderNum,o.ship_name
+		shipName,o.area,o.ship_tel shipTel,o.total_cost totalCost,
+		o.province,o.city,o.address,o.signfortime,o.ecerp_no ecerpNo,
+		oi.id itemId, oi.deal_price dealPrice,oi.nums,oi.target_id targetId,
+		s.price skuPrice,s.sku_num skuNum
+		from sj_tb_order o
+		left join sj_tb_order_items oi on o.id=oi.order_id
+		left join sj_tb_goods_sku s on oi.target_id=s.id
+		where o.MEMBER_ID= #{userId,jdbcType=VARCHAR} and
+		o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR} and
+		oi.target_id=#{goodsId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据规格代码获取商品信息 -->
+	<select id="getGoodsBySkunum" parameterType="java.lang.String"
+		resultType="map">
+		select g.id goodsId,g.name,g.ram,gs.id
+		skuId,gs.edition,gs.standard,gs.storage,c.color_name
+		colorName,p.pic_src picSrc,b.name brandName
+		from sj_tb_goods g
+		left join sj_tb_goods_sku gs on g.id=gs.goods_id
+		left join sj_tb_color c on gs.color_id=c.id
+		left join sj_tb_goods_pic p on gs.id=p.sku_id
+		left join Sj_Tb_Brand b on g.brand_id=b.id
+		where gs.sku_num=#{skuNum,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据用户名和订单管易编号和商品id获取订单信息 -->
+	<select id="selectByArea" parameterType="java.lang.String"
+		resultType="map">
+		select o.id orderId,o.order_num orderNum,o.ship_name
+		shipName,o.area,o.ship_tel shipTel,o.total_cost totalCost,
+		o.province,o.city,o.address,o.signfortime,o.ecerp_no ecerpNo,
+		oi.id itemId, oi.deal_price dealPrice,oi.nums,oi.target_id targetId
+		from sj_tb_order o
+		left join sj_tb_order_items oi on o.id=oi.order_id
+		where o.ECERP_NO=#{ecerpNo,jdbcType=VARCHAR} and
+		oi.target_id=#{goodsId,jdbcType=VARCHAR}
+	</select>
 	<!-- 根据用户名查询积分 -->
-	<select id="findPointByUsername" parameterType="java.lang.String" resultType="int">
-		select point from sj_tb_members where username=#{username,jdbcType=VARCHAR}
+	<select id="findPointByUsername" parameterType="java.lang.String"
+		resultType="int">
+		select point from sj_tb_members where
+		username=#{username,jdbcType=VARCHAR}
 	</select>
-  
-  <!-- 用户浏览记录 -->
-  <select id="getUserGoodsRecords" parameterType="java.util.Map" resultType="map">
-  	SELECT r.username, r.name, r.create_time
-	  FROM (SELECT r.*, ROWNUM RN
-	          FROM (
-	          	SELECT m.username, g.name, r.create_time 
-	          	from sj_tb_user_goods_record r 
-	          	join sj_tb_members m on r.user_id = m.id
-	         	join sj_tb_goods g on r.goods_num = g.goods_num
-	         	where 1=1
-	         	<if test="userName != null and userName != ''">
-			    	and m.username=#{userName,jdbcType=VARCHAR}
-				</if> 
-				<if test="goodsName != null and goodsName != ''">
-			    	and g.name like '%${goodsName}%' 
-				</if> 
-				<if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
-			    	and to_char(r.create_time,'yyyy-mm-dd hh24:mi')  between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
-				</if> 
-	          	order by r.create_time desc
-	          	) r
-	         WHERE ROWNUM <![CDATA[<=]]> #{page}*#{rows}) r
-	 WHERE RN <![CDATA[>=]]> (#{page}-1)*#{rows}
-  </select>
-  
-  <!-- 查询记录总个数 -->
-  <select id="getUserGoodsRecordCount" parameterType="java.util.Map" resultType="java.lang.String">
-  	select count(r.id) count from sj_tb_user_goods_record r
-  		join sj_tb_members m on r.user_id = m.id
-       	join sj_tb_goods g on r.goods_num = g.goods_num
-       	where 1=1
-         	<if test="userName != null and userName != ''">
-		    	and m.username=#{userName,jdbcType=VARCHAR}
-			</if> 
-			<if test="goodsName != null and goodsName != ''">
-		    	and g.name like '%${goodsName}%' 
-			</if> 
-			<if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
-		    	and to_char(r.create_time,'yyyy-mm-dd hh24:mi')  between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
-			</if> 
-  </select>
-	
-	<!-- 根据用户名更新积分 -->
-  <update id="updatePoint" >
-  	update SJ_TB_MEMBERS 
-  	<set>
-  		<if test="point != null" >
-        	point = #{point,jdbcType=INTEGER}
+
+	<!-- 用户浏览记录 -->
+	<select id="getUserGoodsRecords" parameterType="java.util.Map"
+		resultType="map">
+		SELECT r.username, r.name, r.create_time
+		FROM (SELECT r.*, ROWNUM RN
+		FROM (
+		SELECT m.username, g.name, r.create_time
+		from sj_tb_user_goods_record r
+		join sj_tb_members m on r.user_id = m.id
+		join sj_tb_goods g on r.goods_num = g.goods_num
+		where 1=1
+		<if test="userName != null and userName != ''">
+			and m.username=#{userName,jdbcType=VARCHAR}
 		</if>
-		
-  	</set>
-    where username = #{username,jdbcType=VARCHAR}
-  </update>
-  
+		<if test="goodsName != null and goodsName != ''">
+			and g.name like '%${goodsName}%'
+		</if>
+		<if
+			test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+			and to_char(r.create_time,'yyyy-mm-dd hh24:mi') between
+			#{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+		</if>
+		order by r.create_time desc
+		) r
+		WHERE ROWNUM <![CDATA[<=]]>
+		#{page}*#{rows}) r
+		WHERE RN <![CDATA[>=]]>
+		(#{page}-1)*#{rows}
+	</select>
+
+	<!-- 查询记录总个数 -->
+	<select id="getUserGoodsRecordCount" parameterType="java.util.Map"
+		resultType="java.lang.String">
+		select count(r.id) count from sj_tb_user_goods_record r
+		join sj_tb_members m on r.user_id = m.id
+		join sj_tb_goods g on r.goods_num = g.goods_num
+		where 1=1
+		<if test="userName != null and userName != ''">
+			and m.username=#{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="goodsName != null and goodsName != ''">
+			and g.name like '%${goodsName}%'
+		</if>
+		<if
+			test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+			and to_char(r.create_time,'yyyy-mm-dd hh24:mi') between
+			#{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<!-- 根据用户名更新积分 -->
+	<update id="updatePoint">
+		update SJ_TB_MEMBERS
+		<set>
+			<if test="point != null">
+				point = #{point,jdbcType=INTEGER}
+			</if>
+
+		</set>
+		where username = #{username,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 根据用户名查找业务编号 -->
+	<select id="findYewuIdByUsername" parameterType="java.lang.String"	resultType="String">
+		select u.PHONE from sj_tb_members m join
+		sj_yewu.biz_registdata r on m.id=r.MEMBER_ID
+		join sj_db.sys_user u on r.user_id=u.USER_ID
+		where m.username=#{username,jdbcType=VARCHAR}
+	</select>
+
 </mapper>
