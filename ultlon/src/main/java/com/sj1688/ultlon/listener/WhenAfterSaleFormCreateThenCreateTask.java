@@ -33,20 +33,24 @@ public class WhenAfterSaleFormCreateThenCreateTask implements ApplicationListene
 	private B2BDao dao;
 	@Override
 	public void onApplicationEvent( AfterSaleFormCreateEvent event) {
-		AfterSaleForm afterSaleForm=(AfterSaleForm)event.getSource();
-		TaskForm taskForm = new TaskForm();
-		taskForm.setAfterForm(afterSaleForm);
-		taskService.save(taskForm);
-		LOG.info("售后单：{}",afterSaleForm);
-		//ctx.publishEvent(new AppMsgEvent(taskForm));//创建app消息通知
-		sendApp(afterSaleForm);
+		try {
+			AfterSaleForm afterSaleForm=(AfterSaleForm)event.getSource();
+			TaskForm taskForm = new TaskForm();
+			taskForm.setAfterForm(afterSaleForm);
+			taskService.save(taskForm);
+			LOG.info("售后单：{}",afterSaleForm);
+			//ctx.publishEvent(new AppMsgEvent(taskForm));//创建app消息通知
+			sendApp(afterSaleForm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void sendApp(AfterSaleForm afterSaleForm){
 		try {
 			//System.out.println("创建了app消息推送");
 		//TODO 这里发送app消息通知，等待假斌接口
-		String ywPhone = dao.findYewuIdByUsername(afterSaleForm.getUsername());
+		String ywPhone = dao.findYewuIdByUsername(afterSaleForm.getUsername()).get(0);
 		String url="http://115.28.87.182:28503/v1/push/pushNewAfterSales";
 		
 		Map<String, String> requet = new HashMap<String,String>();

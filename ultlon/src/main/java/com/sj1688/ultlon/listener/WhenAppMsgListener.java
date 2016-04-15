@@ -26,7 +26,7 @@ public class WhenAppMsgListener implements ApplicationListener<AppMsgEvent>{
 			System.out.println("创建了app消息推送");
 		//TODO 这里发送app消息通知，等待假斌接口
 		TaskForm taskForm = (TaskForm)event.getSource();
-		String ywPhone = dao.findYewuIdByUsername(taskForm.getAfterSaleForm().getUsername());
+		String ywPhone = dao.findYewuIdByUsername(taskForm.getAfterSaleForm().getUsername()).get(0);
 		String url="http://115.28.87.182:28503/v1/push/pushNewAfterSales";
 		
 		Map<String, String> requet = new HashMap<String,String>();
