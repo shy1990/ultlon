@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.FinanceForm;
@@ -129,15 +132,19 @@ public class FinanceAdminController {
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();
-			Map<String, Object> param = new HashMap<String, Object>();
+			Map<String, String> param = new HashMap<String, String>();
 			param.put("type", "REFUND");//退款
 			param.put("description", remark);
-			param.put("amount", price);//现在的价格
+			param.put("amount", price+"");//现在的价格
 			param.put("url", "http://www.3j1688.com/ultlon/list/1.html");
 			
 			Map<String, String> order = financeService.findByOrderNum(orderNum);
 			param.put("orderNum", orderNum);
-			param.put("ecerpNo", order!=null&&order.containsKey("ECERP_NO")?order.get("ECERP_NO"):"");
+			param.put("ecerpNo", order!=null&&order.containsKey("ECERP_NO")?order.get("ECERP_NO"):" ");
+			System.out.println(param);
+			String url = "http://115.28.87.182:58081/v1/accounts/"+userName+ "/tradings/";
+			 
+
 
 			HttpHeaders httpHeaders = new HttpHeaders(); // 设置HTTP请求的请求头信息
 			// 设置相应内容，相应内容将被转换为json格式返回
@@ -145,9 +152,9 @@ public class FinanceAdminController {
 
 			// 设置HttpEntity的Body类型为String，调用StringHttpMessageConverter转换报文体参数
 			HttpEntity<Object> httpEntity = new HttpEntity<Object>(param, httpHeaders);
-
+			//accounts/{username}/tradings
 			//String userName = ff.getTaskForm().getAfterSaleForm().getUsername();
-			String url = "http://115.28.92.73:58080/v1/accounts/"+userName+ "/tradings/";
+			
 			System.out.println(url);
 			ResponseEntity<JSONObject> obj = restTemplate.postForEntity(url, param, JSONObject.class);
 

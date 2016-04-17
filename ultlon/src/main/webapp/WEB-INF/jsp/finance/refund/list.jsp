@@ -75,6 +75,7 @@
 	}
 	
 	function agreeCaiWu(id) {
+		var agreeBtn = $("."+id+"agree_btn");
 		$('#my-prompt-a').modal({
 			relatedTarget : this,
 			onConfirm : function(e) {
@@ -88,7 +89,7 @@
 						location.reload();
 					}else{
 						alert("此用户没有开通钱包,请使用线下退款");
-						$("#agree_btn").show();
+						agreeBtn.show();
 						$(this).hide();
 					}
 				});
@@ -159,7 +160,7 @@
 					<td style="width:200px;"><c:if test='${item.content.status eq "NOPROCESS"}'>
 							<button type="button" class="am-btn am-btn-success am-radius" onclick="agreeCaiWu('${item.content.id}');">同意</button>
 							<button type="button" class="am-btn am-btn-danger am-radius" onclick="reject('${item.content.id}');">拒绝</button>
-							<button type="button" id="agree_btn" style="display:none;" class="am-btn am-btn-success am-radius" onclick="agree('${item.content.id}');">同意(线下退款)</button>
+							<button type="button" id="agree_btn" style="display:none;" class="am-btn am-btn-success am-radius ${item.content.id}agree_btn" onclick="agree('${item.content.id}');">同意(线下退款)</button>
 						</c:if></td>
 				</tr>
 			</c:forEach>
