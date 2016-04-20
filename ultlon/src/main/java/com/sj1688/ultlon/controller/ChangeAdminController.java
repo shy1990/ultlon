@@ -3,6 +3,9 @@ package com.sj1688.ultlon.controller;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.Spring;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -66,39 +69,18 @@ public class ChangeAdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
-			PagedResourcesAssembler<ChangeForm> assembler, Model model,String imei) {
-//		Page<ChangeForm> changeForms = changeService.findAll(imei,pageable);
-//		System.out.println("aaaaa="+changeForms.getSize());
-//		System.out.println("bbbbb="+changeForms.getNumber());
-//		System.out.println("TotalPages"+changeForms.getTotalPages());
-		System.out.println(imei);
-//		System.out.println(imei.replaceAll(" ", ""));
-//    	System.out.println("imei="+imei.trim());
-//		model.addAttribute("data", assembler.toResource(changeForms));
-//		model.addAttribute("meta",assembler.toResource(changeForms).getMetadata());
-//		model.addAttribute("imei",imei);
-		Pattern pattern = Pattern.compile("[0-9]*"); 
-		if(imei!=null){
-			 Matcher match=pattern.matcher(imei);
-		 System.out.println("ssss"+match.matches());
-			if(match.matches()==false){
-				Page<ChangeForm> changeForms = changeService.findAll2(imei,pageable);
-				System.out.println("imei"+imei);
-				model.addAttribute("data", assembler.toResource(changeForms));				
-				System.out.println("assembler.toResource(changeForms)"+ assembler.toResource(changeForms));
-				model.addAttribute("meta", assembler.toResource(changeForms).getMetadata());
-			}else{
-				Page<ChangeForm> changeForms=changeService.findAll(imei, pageable);
-				System.out.println("imei"+imei);
-				model.addAttribute("data",assembler.toResource(changeForms));
-				model.addAttribute("meta",assembler.toResource(changeForms).getMetadata());
-			}
-		}else{
-			Page<ChangeForm> changeForms=changeService.findAll(imei, pageable);
-			System.out.println("imei"+imei);
-			model.addAttribute("data",assembler.toResource(changeForms));
-			model.addAttribute("meta",assembler.toResource(changeForms).getMetadata());
-		}
+			PagedResourcesAssembler<ChangeForm> assembler, Model model,HttpServletRequest request) {
+	    String imei=request.getParameter("imei");
+	    String username=request.getParameter("username");
+	    if(username!=null){
+	    	Page<ChangeForm> changeForms = changeService.findAll2(username,pageable);
+			model.addAttribute("data", assembler.toResource(changeForms));
+			model.addAttribute("meta",assembler.toResource(changeForms).getMetadata());	
+	    }else{
+		Page<ChangeForm> changeForms = changeService.findAll(imei,pageable);
+		model.addAttribute("data", assembler.toResource(changeForms));
+		model.addAttribute("meta",assembler.toResource(changeForms).getMetadata());
+	    }
 		return "admin/change/list";
 	}
 	

@@ -72,12 +72,30 @@ public class AppTaskController {
 		//String area = "2278,2212,2211,2210,2209,2208,2207,2206,2205,2204,2203,2213,2202,2201,2200,2199,2198,2197,2196,2195,2194,3275,2193,2192,2191,2190,2189,2188,2187,2186,2185,2184,2183,2339,2338,2337,2336,2335,2334,2333,2332,2331,2330,2329,2328,2327,2326,2325,2324,3268,2323,2322,2321,2320,2319,2318,2317,2316,2315,2314,2313,2312,2311,2310,2309,2308,2307,2306,2305,2304,2303,2302,2301,2300,2275,2274,2273,2272,2271,2270,2269,2268,2267,2266,2265,2264,2263,2262,2261,2260,2259,2258,2257,2256,2255,2254,2253,2252,2251,2250,2249,2248,2247,2246,2245,2244,2243,2242,2241,2240,2239,2238,2237,2236,2235,2234,2233,2232,2231,2230,2229,2228,2227,2226,2225,2224,2223,2222,2221,2220,2219,2218,2217,2216,2215,2214,2182,2277,2276,2299,2298,2297,2296,2295,2294,2293,2292,2291,2290,2289,2288,2287,2286,2285,2284,2283,2282,2281,2280,2279";
 		//User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Map<String,Object> result = new HashMap<String,Object>();
-		try{
-			Sort sort = new Sort(Direction.DESC,"createdDate");
-			List<String> areaList = Arrays.asList(area.split(","));
-			Page<TaskForm> tasks = taskService.getNoProccessTask(new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort), areaList);
-			List<AppTaskFormDto> dtoList = new ArrayList<AppTaskFormDto>();
-			List<TaskForm> tasksContent = tasks.getContent();
+//		try{
+//			Sort sort = new Sort(Direction.DESC,"createdDate");
+//			List<String> areaList = Arrays.asList(area.split(","));
+//			Page<TaskForm> tasks = taskService.getNoProccessTask(new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort), areaList);
+//			List<AppTaskFormDto> dtoList = new ArrayList<AppTaskFormDto>();
+//			List<TaskForm> tasksContent = tasks.getContent();
+//			tasksContent.forEach(t->{
+//				dtoList.add(dtoFunction.apply(t));
+//			});
+//
+//			result.put("data", dtoList);
+//			result.put("totalPages", tasks.getTotalPages());
+//			result.put("number", tasks.getNumber());//当前页	
+//			result.put("success", true);
+//		}catch(Exception e){
+//			result.put("msg", "系统异常,请稍后重试");
+//			result.put("success", false);
+//		}
+		Sort sort = new Sort(Direction.DESC,"createdDate");
+		List<String> areaList = Arrays.asList(area.split(","));
+		Page<TaskForm> tasks = taskService.getNoProccessTask(new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort), areaList);
+		List<AppTaskFormDto> dtoList = new ArrayList<AppTaskFormDto>();
+		List<TaskForm> tasksContent = tasks.getContent();
+		if(!tasks.getContent().isEmpty()){
 			tasksContent.forEach(t->{
 				dtoList.add(dtoFunction.apply(t));
 			});
@@ -85,10 +103,12 @@ public class AppTaskController {
 			result.put("data", dtoList);
 			result.put("totalPages", tasks.getTotalPages());
 			result.put("number", tasks.getNumber());//当前页	
-			result.put("success", true);
-		}catch(Exception e){
+			result.put("result", true);
+		}else if(tasks.getContent().isEmpty()){
+			result.put("result", "请求为空");
+		}else{
 			result.put("msg", "系统异常,请稍后重试");
-			result.put("success", false);
+			result.put("result", false);
 		}
 		
 		//result.put("HttpStatus", "200");
