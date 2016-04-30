@@ -52,7 +52,7 @@ import com.sj1688.ultlon.util.DateUtil;
  * <td>/aftersale</td>
  * <td>获取列表,?page=1&size=2&sort=id,desc</td>
  * </tr>
- * <tr>
+ * <tr>  
  * <td>GET</td>
  * <td>/aftersale/{userId}/{imei}</td>
  * <td>查看能销售的服务</td>

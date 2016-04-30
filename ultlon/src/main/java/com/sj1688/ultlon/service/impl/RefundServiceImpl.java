@@ -186,14 +186,21 @@ public class RefundServiceImpl implements RefundService {
 
 	@Override
 	public RefundForm findByTaskForm(TaskForm tf) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Map<String, Serializable>> findMobileByOrderNum(String orderNum) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Page<RefundForm> findAll2(String username, Pageable pageable) {
+		if(username != null && !"".equals(username)){
+			return rfr.findByUsername(username,pageable);
+		}else{
+			return rfr.findAll(pageable);
+		}
 	}
 
 }

@@ -79,6 +79,7 @@ public class TaskController {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Page<TaskForm> tasks = taskService.getNoProccessTask(pageable, user.getRegionList());
 		model.addAttribute("data", assembler.toResource(tasks));
+		model.addAttribute("meta",assembler.toResource(tasks).getMetadata());
 		model.getClass().getName();
 
 		return "task/list";
@@ -86,10 +87,26 @@ public class TaskController {
 
 	@RequestMapping(value="/historyList", method = RequestMethod.GET)
 	public String historyList(Pageable pageable,
-			PagedResourcesAssembler<TaskForm> assembler, Model model) {
+			PagedResourcesAssembler<TaskForm> assembler, Model model,String status) {
+		System.out.println("status"+status);
+		if(status==null||status==""){
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Page<TaskForm> tasks = taskService.getHistory(pageable, user.getRegionList());
 		model.addAttribute("data", assembler.toResource(tasks));
+		model.addAttribute("meta",assembler.toResource(tasks).getMetadata());
+		}else{
+			if(status.equals("处理中")){
+				System.out.println("chulizhong");
+			}else{
+				System.out.println("bupipei");
+			}
+			User user = (User) SecurityUtils.getSubject().getPrincipal();
+			Page<TaskForm> tasks = taskService.getStatus(pageable, user.getRegionList(),status);
+			System.out.println(status);
+			model.addAttribute("data", assembler.toResource(tasks));
+			model.addAttribute("meta",assembler.toResource(tasks).getMetadata());
+			model.addAttribute("status",status);
+		}
 
 		return "task/history_list";
 	}
@@ -99,6 +116,7 @@ public class TaskController {
 	public String reject(@PathVariable(value = "id") TaskForm form,@RequestParam("remark")String remark) {
 		form.setRemark(remark);
 		taskService.updateStatus(form,FormAuditStatus.REJECT);
+		System.out.println(form.getStatus());
 		return "ok";
 	}
 

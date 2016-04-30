@@ -109,7 +109,6 @@ public class FinanceServiceImpl implements FinanceService {
 
 	@Override
 	public void updatePoint(String username,BigDecimal orderPrice) {
-		// TODO Auto-generated method stub
 		 int point=b2bDao.findPointByUsername(username);
 		 BigDecimal pt=orderPrice.divide(new BigDecimal(10), 1,java.math.RoundingMode.DOWN);
 		int op=point-pt.intValue();
@@ -125,7 +124,6 @@ public class FinanceServiceImpl implements FinanceService {
 
 	/*@Override
 	public List<Map<String, Serializable>> findMobileByOrderNum(String orderNum) {
-		// TODO Auto-generated method stub
 		return null;
 	}*/
 

@@ -27,7 +27,9 @@ public interface RepairService {
 	
 	public void updateStatus(RepairForm entity,FormAuditStatus statusToUpdate,String remark,String track_no);
 
-	public Page<RepairForm> findAll(Pageable pageable);
+	public Page<RepairForm> findAll(String imei,Pageable pageable);
+	
+	public Page<RepairForm> findAll2(String imei,Pageable pageable);
 	RepairForm findByTaskForm(TaskForm taskForm);
 }
 

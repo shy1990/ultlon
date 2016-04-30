@@ -13,4 +13,7 @@ public interface RefundFormRepository extends JpaRepository<RefundForm, Long> {
 	
 	@Query("select a from RefundForm a where a.taskForm.afterSaleForm.imei=?1")
 	Page<RefundForm> findByImei(String imei,Pageable pageable);
+	
+	@Query("select a from RefundForm a where a.taskForm.afterSaleForm.username=?1")
+	Page<RefundForm> findByUsername(String username,Pageable pageable);
 }

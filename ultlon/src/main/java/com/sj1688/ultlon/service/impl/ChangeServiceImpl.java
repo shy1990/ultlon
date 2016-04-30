@@ -64,9 +64,27 @@ public class ChangeServiceImpl implements ChangeService{
 		}
 	}
 
+//	@Override
+//	public Page<ChangeForm> findAll(String imei,Pageable pageable) {
+//		return rfr.findAll(pageable);
+//	}
+	
 	@Override
-	public Page<ChangeForm> findAll(Pageable pageable) {
-		return rfr.findAll(pageable);
+	public Page<ChangeForm> findAll(String imei,Pageable pageable) {
+		if(imei != null && !"".equals(imei)){
+			return rfr.findByImei(imei,pageable);
+		}else{
+			return rfr.findAll(pageable);
+		}
+	}
+
+	@Override
+	public Page<ChangeForm> findAll2(String username, Pageable pageable) {
+		if(username != null && !"".equals(username)){
+			return rfr.findByUsername(username,pageable);
+		}else{
+			return rfr.findAll(pageable);
+		}
 	}
 
 }

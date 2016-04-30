@@ -30,7 +30,8 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public TaskForm genrateForm(AfterSaleForm afterSaleForm) {
-		String area = b2bDao.findUserArea(afterSaleForm.getUsername());
+		//TODO 这里要改成从业务数据库查询用户所属区域编码//首先从b2b数据库查出该用户名的id然后再从业务数据库获取用户所属区域编码
+		String area = b2bDao.findUserArea(afterSaleForm.getUsername()).get(0);
 		TaskForm result = new TaskForm(afterSaleForm, area);
 		return result;
 	}
@@ -81,9 +82,30 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String findMobileByOrderNum1(String orderNum) {
-		// TODO Auto-generated method stub
 		return b2bDao.findMobileByOrderNum1(orderNum);
 	}
+
+	@Override
+	public Page<TaskForm> getStatus(Pageable pageable,
+			List<String> regionList, String status) {
+		// TODO Auto-generated method stub
+		FormAuditStatus fstatus = null;
+		if(status.equals("处理中")){
+			 fstatus=FormAuditStatus.PROCESSING;
+		}else if(status.equals("同意")){
+			fstatus=FormAuditStatus.AGREE;
+		}else if(status.equals("拒绝")){
+			fstatus=FormAuditStatus.REJECT;
+		}else if(status.equals("已完成")){
+			fstatus=FormAuditStatus.FINISH;
+		}else{
+			return tfr.findByAreaInAndStatusNot(regionList, pageable,FormAuditStatus.NOPROCESS );
+		}
+		return tfr.findByAreaInAndStatusIn(regionList, pageable, fstatus);
+		
+	}
+
+
 
 
 }

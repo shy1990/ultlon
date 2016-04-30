@@ -1,7 +1,6 @@
 /**  
 * @Title: ToolsUtil.java
 * @Package com.sanji.mall.common.util
-* @Description: TODO(用一句话描述该文件做什么)
 * @author ZhouZhangbao  
 * @date 2014-7-23 下午2:02:11
 * @version V1.0  
@@ -17,7 +16,6 @@ import org.apache.log4j.Logger;
 
 /**
  * @ClassName: ToolsUtil
- * @Description: TODO(这里用一句话描述这个类的作用)
  * @author ZhouZhangbao
  * @date 2014-7-23 下午2:02:11
  */
@@ -32,7 +30,6 @@ public class ToolsUtil {
 	 * 将string(格式如：a,b,c)转换为List
 	 * 
 	 * @Title: StringConvertList
-	 * @Description: TODO(这里用一句话描述这个方法的作用)
 	 * @param @return    设定文件
 	 * @return List<String>    返回类型
 	 */

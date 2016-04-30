@@ -40,7 +40,14 @@ public interface B2BDao {
 	 * @param username
 	 * @return
 	 */
-	public String findUserArea(String username);
+	public List<String> findUserArea(String username);
+	
+	/**
+	 * 根据用户名查找业务编号 
+	 * @param username
+	 * @return
+	 */
+	public List<String> findYewuIdByUsername(String username);
 
 	/**
 	 * 通过orderNum 查找订单id

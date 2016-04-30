@@ -18,13 +18,11 @@ public class GoodsServiceImpl implements GoodsService{
 
 	@Override
 	public Goods save(Goods g) {
-		// TODO Auto-generated method stub
 		return gr.saveAndFlush(g);
 	}
 
 	@Override
 	public Goods findByBarCode(String barCode) {
-		// TODO Auto-generated method stub
 		return gr.findByBarCode(barCode);
 	}
 

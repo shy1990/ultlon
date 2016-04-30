@@ -13,7 +13,6 @@ public interface RegionsMapper {
 	/**
 	 * 根据父ID查询子类
 	* @Title: gainRegionByPid
-	* @Description: TODO(这里用一句话描述这个方法的作用)
 	* @param @param pid
 	* @param @return    设定文件
 	* @return List<Regions>    返回类型
