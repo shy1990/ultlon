@@ -177,7 +177,7 @@
 <%@include file="../../../common/afterbar.jsp"%>
 	<div class="am-collapse am-topbar-collapse" id="collapse-head">
 		<div class="am-topbar-right" style="margin-right: 200px;">
-			<div class="am-u-lg-6">
+			<div class="am-u-lg-3">
 				<div class="am-input-group">
 					<input type="text" class="am-form-field" style="width:300px" id="imei" placeholder="请输入要查询的串号" value="${imei }"> <span
 						class="am-input-group-btn">
