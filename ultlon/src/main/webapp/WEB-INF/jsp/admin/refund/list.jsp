@@ -360,35 +360,19 @@
 		function goSearch() {
 			var imei = $("#imei").val().trim();
 			if(($("#choose").val()=="1")){
-				if(!isNaN(imei)){
-					alert("将按照串号查询");
-					window.location.href = "admin/refund?sort=createdDate,desc&imei="	+ imei;	
+				console.log(imei);
+				if(imei==""){
+					alert("串号不能为空，请输入串号");
 				}else{
-					alert("请按照串号查询");
+					window.location.href = "admin/refund?sort=createdDate,desc&imei="	+ imei;	
 				}
 			}else{
-				if(isNaN(imei)){
-					alert("将按照申请人查询");
-					window.location.href = "admin/refund?sort=createdDate,desc&imei="
-						+ imei;	
+				if(imei==""){
+					alert("申请人不能为空，请输入申请人")
 				}else{
-					alert("请按照申请人查询");
-				}				
-	
+					window.location.href = "admin/refund?sort=createdDate,desc&username="	+ imei;					
+				}
 			}
-			
-			
-			/*if (!isNaN(imei)) {
-				alert("按照串号查询");
-				window.location.href = "admin/refund?sort=createdDate,desc&imei="
-						+ imei;
-			} else {
-				alert("按照申请人查询");
-				window.location.href = "admin/refund?sort=createdDate,desc&imei="
-						+ imei;
-			}*/
-
-			//window.location.href = "admin/refund?sort=createdDate,desc&imei="+imei;
 		}
 	</script>
 
