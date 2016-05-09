@@ -7,7 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+import org.aspectj.weaver.reflect.IReflectionWorld;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -83,7 +83,10 @@ public class ExcelImport {
         //XSSFSheet sheet = workbook.getSheetAt(0);
         
 		for(int i=0;i<sheetNum;i++){
-			contentList.add( getSheetContent(sb, workbook.getSheetAt(i)));
+			XSSFSheet sheet = workbook.getSheetAt(i);
+			if(null!=sheet){
+				contentList.add( getSheetContent(sb, sheet));
+			}
 		}
         return contentList;
     }
@@ -103,10 +106,12 @@ public class ExcelImport {
             int j = 0;
 
             while (j < colNum) {
-                sb.append(getCellFormatValue(row.getCell(j)).trim());
-
-                // 用4个空格分割开
-                sb.append("    ");
+            	if(row!=null&&null!=row.getCell(j)){
+	                sb.append(getCellFormatValue(row.getCell(j)).trim());
+	
+	                // 用4个空格分割开
+	                sb.append("    ");
+            	}
 
                 j++;
             }
