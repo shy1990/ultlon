@@ -46,7 +46,7 @@
 
 	<select id="findUserArea" resultType="string">
 		select r.region_id area from sj_tb_members m join
-		sj_yewu.biz_registdata r on r.member_id=m.id where
+		sj_buzmgt.sys_registdata r on r.member_id=m.id where
 		m.username=#{username}
 		<!-- select area from sj_tb_members where username=#{username} -->
 	</select>
@@ -203,9 +203,9 @@
 
 	<!-- 根据用户名查找业务编号 -->
 	<select id="findYewuIdByUsername" parameterType="java.lang.String"	resultType="String">
-		select u.PHONE from sj_tb_members m join
-		sj_yewu.biz_registdata r on m.id=r.MEMBER_ID
-		join sj_db.sys_user u on r.user_id=u.USER_ID
+		select u.mobile from sj_tb_members m join
+		sj_buzmgt.sys_registdata r on m.id=r.MEMBER_ID
+		join sj_buzmgt.sys_salesman u on r.user_id=u.USER_ID
 		where m.username=#{username,jdbcType=VARCHAR}
 	</select>
 

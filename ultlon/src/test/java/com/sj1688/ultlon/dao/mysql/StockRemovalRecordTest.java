@@ -22,7 +22,8 @@ public class StockRemovalRecordTest {
 	@Test
 	public void add(){
 		try {
-			String filePath="/home/icodebug/文档/项目/售后改版/售后串码数据/B2B神州扫描记录5月8号.xlsx";
+			String filePath="/home/icodebug/文档/项目/售后改版/售后串码数据/B2B神州扫描记录5月20号.xlsx";
+			System.out.println("读取文件："+filePath);
 			List<Map<Integer, String>> contentList = ExcelImport.readExcelContent(filePath);
 			System.out.println(contentList.size());
 			contentList.forEach((Map<Integer, String> excelContent)->{

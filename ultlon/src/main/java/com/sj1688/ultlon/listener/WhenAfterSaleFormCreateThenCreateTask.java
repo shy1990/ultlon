@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +16,6 @@ import com.sj1688.ultlon.dao.oracle.B2BDao;
 import com.sj1688.ultlon.domain.AfterSaleForm;
 import com.sj1688.ultlon.domain.TaskForm;
 import com.sj1688.ultlon.event.AfterSaleFormCreateEvent;
-import com.sj1688.ultlon.event.AppMsgEvent;
 import com.sj1688.ultlon.service.TaskService;
 /**
  * 创建换新单的时候创建售后任务
@@ -71,4 +69,5 @@ public class WhenAfterSaleFormCreateThenCreateTask implements ApplicationListene
 		e.printStackTrace();
 	}
 	}
+	
 }
