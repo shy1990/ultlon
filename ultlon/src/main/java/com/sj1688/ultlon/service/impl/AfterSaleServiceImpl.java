@@ -120,11 +120,17 @@ public class AfterSaleServiceImpl implements AfterSaleService{
 		//System.out.println("------------"+ors.get(0));
 		//AfterSaleOrder aso = asor.findByImei(imei);
 		
-		StockRemovalRecord srr = srrr.findOne(imei);
+		//StockRemovalRecord srr = srrr.findOne(imei);
+		List<Map<String, Object>> outInfo=new ArrayList<Map<String,Object>>();
+		outInfo=b2bdao.findSzImei(imei);
+		if(outInfo!=null&&outInfo.size()==0){
+			outInfo=b2bdao.findGyImei(imei);
+		}
 		
-		if(srr!=null){
-			result.put("skucode", srr.getSkuCode().trim());
-			result.put("ddnum", srr.getOrderNum().trim());
+		if(outInfo!=null&&outInfo.size()>0){
+			Map<String, Object> m = outInfo.get(0);
+			result.put("skucode", m.get("SKU_CODE").toString().trim());
+			result.put("ddnum", m.get("ORDER_NUM").toString().trim());
 			return result;
 		}
 		return null;

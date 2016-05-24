@@ -208,5 +208,14 @@
 		join sj_buzmgt.sys_salesman u on r.user_id=u.USER_ID
 		where m.username=#{username,jdbcType=VARCHAR}
 	</select>
+	<!-- 查询神舟的出库串码数据 -->
+	<select id="findSzImei" resultType="map">
+		select code_id imei,ORDER_NUM,SKU_CODE from SJ_IMEI.SJ_SZ_OUT_STOCK where CODE_ID=#{imei,jdbcType=VARCHAR}
+	</select>
+	
+		<!-- 查询管易的出库串码数据 -->
+	<select id="findGyImei" resultType="map">
+		select serial_number imei ,code_id order_num,COMMODITY_ID sku_code  from SJ_IMEI.SJ_GY_OUT_STOCK where SERIAL_NUMBER=#{imei,jdbcType=VARCHAR}
+	</select>
 
 </mapper>
