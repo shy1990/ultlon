@@ -109,12 +109,12 @@
 	<div class="am-collapse am-topbar-collapse" id="collapse-head">
 		<div class="am-topbar-right" style="margin-right: 200px;">
 			<div class="am-u-lg-6">
-				<div class="am-input-group">
+				<div class="am-input-group" >
 					<select id="choose" onchange="choose()">
 						<option value="1">串号</option>
 						<option value="2">申请人</option>
 					</select><span
-						class="am-input-group-btn"> <input type="text" class="am-form-field" style="width: 300px"
+						class="am-input-group-btn"> <input type="text" class="am-form-field" style="width: 300px;"
 						id="imei" placeholder="请输入要查询的串号" value="${imei}">
 						<button class="am-btn am-btn-default" type="button"
 							onclick="goSearch();" style="margin-right: 5px;">搜索</button>
@@ -345,21 +345,18 @@
 		function goSearch() {
 			var imei = $("#imei").val().trim();
 			if(($("#choose").val()=="1")){
-				if(!isNaN(imei)){
-					alert("将按照串号查询");
-					window.location.href = "admin/change?sort=createdDate,desc&imei="	+ imei;	
+				console.log(imei);
+				if(imei==""){
+					alert("串号不能为空，请输入串号");
 				}else{
-					alert("请按照串号查询");
+					window.location.href = "admin/change?sort=createdDate,desc&imei="	+ imei;	
 				}
 			}else{
-				if(isNaN(imei)){
-					alert("将按照申请人查询");
-					window.location.href = "admin/change?sort=createdDate,desc&imei="
-						+ imei;	
+				if(imei==""){
+					alert("申请人不能为空，请输入申请人")
 				}else{
-					alert("请按照申请人查询");
-				}				
-	
+					window.location.href = "admin/change?sort=createdDate,desc&username="	+ imei;					
+				}
 			}
 		}
 	</script>

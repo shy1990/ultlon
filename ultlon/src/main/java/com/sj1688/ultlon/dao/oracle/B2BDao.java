@@ -147,4 +147,17 @@ public interface B2BDao {
 	 * @return
 	 */
 	String getUserGoodsRecordCount(Map map);
+	
+	/**
+	 * 查询神舟的出库串码数据
+	 * @param imei
+	 * @return
+	 */
+	List<Map<String, Object>> findSzImei(String imei);
+	/**
+	 * 查询管易的出库串码数据
+	 * @param imei
+	 * @return
+	 */
+	List<Map<String, Object>> findGyImei(String imei);
 }

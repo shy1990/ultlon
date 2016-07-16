@@ -68,17 +68,9 @@ public class RepairAdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
-			PagedResourcesAssembler<RepairForm> assembler, Model model,String imei) {
-//		Page<RepairForm> repairForms = repairService.findAll(imei,pageable);
-//		model.addAttribute("data", assembler.toResource(repairForms));
-//		model.addAttribute("meta", assembler.toResource(repairForms).getMetadata());
-//		model.addAttribute("imei",imei);
-		Pattern pattern = Pattern.compile("[0-9]*"); 
-		if(imei!=null){
-			 Matcher match=pattern.matcher(imei);
-		 System.out.println("ssss"+match.matches());
-			if(match.matches()==false){
-				Page<RepairForm> repairForms = repairService.findAll2(imei,pageable);
+			PagedResourcesAssembler<RepairForm> assembler, Model model,String imei,String username) {
+			if(username!=null){
+				Page<RepairForm> repairForms = repairService.findAll2(username,pageable);
 				System.out.println("imei"+imei);
 				model.addAttribute("data", assembler.toResource(repairForms));
 				model.addAttribute("meta", assembler.toResource(repairForms).getMetadata());
@@ -88,12 +80,7 @@ public class RepairAdminController {
 				model.addAttribute("data",assembler.toResource(repairForms));
 				model.addAttribute("meta",assembler.toResource(repairForms).getMetadata());
 			}
-		}else{
-			Page<RepairForm> repairForms=repairService.findAll(imei, pageable);
-			System.out.println("imei"+imei);
-			model.addAttribute("data",assembler.toResource(repairForms));
-			model.addAttribute("meta",assembler.toResource(repairForms).getMetadata());
-		}
+		
 		return "admin/repair/list";
 	}
 

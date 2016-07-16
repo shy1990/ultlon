@@ -1,5 +1,6 @@
 package com.sj1688.ultlon.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -57,9 +58,21 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
 		
 		AfterSaleOrder uo = ors!=null&&ors.size()>0?ors.get(0):null;
 		System.out.println("查出的串码信息："+JSON.toJSONString(uo));*/
+		//TODO 这里修改成查询oracle数据库的串码
+		/*oracle 神舟串码如果没数据，那么久查询管易出库看看有没有这个串码数据
 		StockRemovalRecord srr = srrr.findOne(imei);
 		if(null!=srr ){
 			map = om.selectByUidAndErp(userId, srr.getOrderNum().trim());
+		}
+		return map;*/
+		List<Map<String, Object>> outInfo=new ArrayList<Map<String,Object>>();
+		outInfo=om.findSzImei(imei);
+		if(outInfo.size()==0){
+			outInfo=om.findGyImei(imei);
+		}
+		
+		if(null!=outInfo ){
+			map = om.selectByUidAndErp(userId, outInfo.get(0).get("ORDER_NUM").toString().trim());
 		}
 		return map;
 	}
