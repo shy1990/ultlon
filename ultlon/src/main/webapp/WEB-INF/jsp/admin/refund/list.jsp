@@ -14,10 +14,12 @@
 <base href="<%=basePath%>" />
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/amazeui.min.css" />
+<link rel="stylesheet" href="css/amazeui.datetimepicker.css"/>
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery.scroll-follow.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/amazeui.min.js"></script>
+<script type="text/javascript" src="css/amazeui.datetimepicker.min.js"></script>
 
 <title>退货退款申请</title>
 <script type="text/javascript">
@@ -232,12 +234,30 @@
 <body>
 	<%@include file="../../../common/afterbar.jsp"%>
 	<div class="am-collapse am-topbar-collapse" id="collapse-head">
+	<div class="am-topbar-left" style="margin-left: 100px; min-width:50%;">
+	<div class="am-u-lg-12">
+		<div class="am-input-group">
+			<div class="am-u-lg-5 form_date_start">
+			<input type="text" class="am-form-field J_startDate" placeholder="请输入开始日期" data-am-datepicker="{theme: 'success'}" readonly/>
+			</div>
+			<div class="am-u-lg-1" style="text-align:center;">-</div>
+			<div class="am-u-lg-5 form_date_end">
+			<input type="text" class="am-form-field J_endDate" placeholder="请输入结束日期" data-am-datepicker="{theme: 'success'}" readonly/>
+			</div>
+			<div class="am-u-lg-1">
+			<button class="am-btn am-btn-default" type="button"
+							onclick="dateSearch();" style="margin-right: 5px;">筛选</button>
+			</div>
+		</div>
+	</div>
+</div>
 		<div class="am-topbar-right" style="margin-right: 200px;">
 			<div class="am-u-lg-3">
 				<div class="am-input-group">
 					<select id="choose" onchange="choose()">
 						<option value="1">串号</option>
 						<option value="2">申请人</option>
+						<option value="3">订单号</option>
 					</select> <span class="am-input-group-btn"><input type="text"
 						class="am-form-field" style="width: 300px" id="imei"
 						placeholder="请输入要查询的串号" value="${imei}">
@@ -255,6 +275,7 @@
 		<thead>
 			<tr>
 				<th>申请人</th>
+				<th>审核人</th>
 				<th>手机</th>
 				<th>串号</th>
 				<th>订单号</th>
@@ -270,6 +291,7 @@
 			<c:forEach var="item" items="${data.content }">
 				<tr class="am-active">
 					<td>${item.content.taskForm.afterSaleForm.username }</td>
+					<td style="width:70px;">${item.content.lastModifiedBy.username }</td>
 					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
 					<td>${item.content.taskForm.afterSaleForm.imei }</td>
 					<td>${item.content.taskForm.afterSaleForm.orderNum }</td>
@@ -323,7 +345,7 @@
 					</c:when>
 					<c:otherwise>
 						<a
-							href="admin/refund?sort=createdDate,desc&imei=${imei}&page=${data.metadata.number-1}"
+							href="admin/refund?sort=createdDate,desc&imei=${imei}&page=${data.metadata.number-1}&startDate=${startDate}&endDate=${endDate}"
 							class="">上一页</a>
 					</c:otherwise>
 				</c:choose></li>
@@ -337,7 +359,7 @@
 
 					<c:otherwise>
 						<a
-							href="admin/refund?sort=createdDate,desc&imei=${imei}&page=${data.metadata.number+1}"
+							href="admin/refund?sort=createdDate,desc&imei=${imei}&page=${data.metadata.number+1}&startDate=${startDate}&endDate=${endDate}"
 							class="">下一页</a>
 					</c:otherwise>
 				</c:choose></li>
@@ -345,14 +367,49 @@
 		<!-- </ul> -->
 	</div>
 	<script>
+	
+	$(function () {
+	    initDate();
+	});
+	
+	function initDate(){
+		$('.J_startDate').datetimepicker({
+			format: "yyyy-mm-dd",
+	        language: 'zh-CN',
+	        weekStart: 1,
+	        todayBtn: 1,
+	        autoclose: 1,
+	        todayHighlight: 1,
+	        startView: 2,
+	        minView: 2,
+	        pickerPosition: "bottom-right",
+	        forceParse: 0
+		});
+		
+		$('.J_endDate').datetimepicker({
+			format: "yyyy-mm-dd",
+	        language: 'zh-CN',
+	        weekStart: 1,
+	        todayBtn: 1,
+	        autoclose: 1,
+	        todayHighlight: 1,
+	        startView: 2,
+	        minView: 2,
+	        pickerPosition: "bottom-right",
+	        forceParse: 0
+		});
+	}
+	
 		function choose() {
 			//alert($("#choose").val());
 			//$("#imei").val()=$("#choose").val();
 			if ($("#choose").val() == "1") {
 				$("#imei").attr('placeholder', "请输入要查询的串号");
 
-			} else {
+			} else if($("#choose").val() == "2") {
 				$("#imei").attr('placeholder', "请输入要查询的申请人");
+			}else {
+				$("#imei").attr('placeholder', "请输入要查询的订单号");
 			}
 
 		}
@@ -364,15 +421,43 @@
 				if(imei==""){
 					alert("串号不能为空，请输入串号");
 				}else{
-					window.location.href = "admin/refund?sort=createdDate,desc&imei="	+ imei;	
+					window.location.href = "admin/refund?sort=createdDate,desc&imei="	+ imei;
 				}
-			}else{
+			}else if($("#choose").val() == "2") {
 				if(imei==""){
-					alert("申请人不能为空，请输入申请人")
+					alert("申请人不能为空，请输入申请人");
 				}else{
-					window.location.href = "admin/refund?sort=createdDate,desc&username="	+ imei;					
+					window.location.href = "admin/refund?sort=createdDate,desc&username="	+ imei;
+				}
+			}else {
+				if(imei==""){
+					alert("订单号不能为空，请输入订单号");
+				}else{
+					window.location.href = "admin/refund?sort=createdDate,desc&orderNum="	+ imei;
 				}
 			}
+		}
+		
+		function dateSearch() {
+			var imei = $("#imei").val("");
+			var startDate = $(".J_startDate").val() + " 00:00:00";
+			var endDate = $(".J_endDate").val() + " 23:59:59";
+			if(isEmpty(startDate) && isEmpty(endDate)){
+				console.log(imei);
+				alert("日期不能为空，请输入日期");
+			}else{
+				window.location.href = "admin/refund?sort=createdDate,desc&startDate="+ startDate + "&endDate="+ endDate;
+			}
+		}
+		
+		/**
+		 * 判读是否为空
+		 *
+		 * @param value
+		 * @returns 为空返回true 不为空返回false
+		 */
+		function isEmpty(value) {
+		    return value == undefined || value == "" || value == null;
 		}
 	</script>
 

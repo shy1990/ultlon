@@ -1,9 +1,9 @@
 package com.sj1688.ultlon.controller;
 
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sj1688.ultlon.domain.FinanceForm;
 import com.sj1688.ultlon.domain.FormAuditStatus;
 import com.sj1688.ultlon.domain.RefundForm;
-import com.sj1688.ultlon.domain.RepairForm;
 import com.sj1688.ultlon.service.RefundService;
 import com.sj1688.ultlon.service.TaskService;
+import com.sj1688.ultlon.util.DateUtil;
 
 /**
  * 退货单管理控制器 <br>
@@ -69,20 +69,26 @@ public class RefundAdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Pageable pageable,
-			PagedResourcesAssembler<RefundForm> assembler, Model model,String imei,String username) {
+			PagedResourcesAssembler<RefundForm> assembler, Model model,String imei,String username,String orderNum,String startDate,String endDate) {
 		
-			if(username!=null){
-				Page<RefundForm> refundForms = refundService.findAll2(username,pageable);
-				System.out.println("imei"+imei);
-				model.addAttribute("data", assembler.toResource(refundForms));
-				model.addAttribute("meta", assembler.toResource(refundForms).getMetadata());
+		Page<RefundForm> refundForms = null;
+			if(StringUtils.isNotEmpty(username)){
+				refundForms = refundService.findAllByUserName(username,pageable);
+			}else if(StringUtils.isNotEmpty(imei)) {
+				refundForms=refundService.findAllByImei(imei, pageable);
+			}else if(StringUtils.isNotEmpty(orderNum)){
+				refundForms=refundService.findAllByOrderNum(orderNum, pageable);
+			}else if(StringUtils.isNotEmpty(startDate) && StringUtils.isNotEmpty(endDate)){
+				Date start = DateUtil.strToDate(startDate);
+				Date end = DateUtil.strToDate(endDate);
+				refundForms=refundService.findByModifiedDateBetween(start,end, pageable);
 			}else{
-				Page<RefundForm> refundForms=refundService.findAll(imei, pageable);
-				System.out.println("imei"+imei);
-				model.addAttribute("data",assembler.toResource(refundForms));
-				model.addAttribute("meta",assembler.toResource(refundForms).getMetadata());
+				refundForms=refundService.findAll(pageable);
 			}
-
+			model.addAttribute("startDate",startDate);
+			model.addAttribute("endDate",endDate);
+			model.addAttribute("data", assembler.toResource(refundForms));
+			model.addAttribute("meta", assembler.toResource(refundForms).getMetadata());
 		return "admin/refund/list";
 	}
 	

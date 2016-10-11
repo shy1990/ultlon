@@ -1,11 +1,13 @@
 package com.sj1688.ultlon.service.impl;
 
 import java.io.Serializable;
-import java.math.BigDecimal;import java.util.HashMap;
+import java.math.BigDecimal;import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
@@ -156,12 +158,8 @@ public class RefundServiceImpl implements RefundService {
 	}
 
 	@Override
-	public Page<RefundForm> findAll(String imei,Pageable pageable) {
-		if(imei != null && !"".equals(imei)){
-			return rfr.findByImei(imei,pageable);
-		}else{
-			return rfr.findAll(pageable);
-		}
+	public Page<RefundForm> findAllByImei(String imei,Pageable pageable) {
+		return rfr.findByImei(imei,pageable);
 	}
 
 	@Override
@@ -195,12 +193,22 @@ public class RefundServiceImpl implements RefundService {
 	}
 
 	@Override
-	public Page<RefundForm> findAll2(String username, Pageable pageable) {
-		if(username != null && !"".equals(username)){
-			return rfr.findByUsername(username,pageable);
-		}else{
-			return rfr.findAll(pageable);
-		}
+	public Page<RefundForm> findAllByUserName(String username, Pageable pageable) {
+		return rfr.findByUsername(username,pageable);
 	}
 
+	@Override
+	public Page<RefundForm> findAllByOrderNum(String orderNum, Pageable pageable) {
+		return rfr.findByOrderNum(orderNum,pageable);
+	}
+
+	@Override
+	public Page<RefundForm> findByModifiedDateBetween(Date startDate,Date endDate, Pageable pageable) {
+		return rfr.findByModifiedDateBetween(startDate,endDate,pageable);
+	}
+	
+	@Override
+	public Page<RefundForm> findAll(Pageable pageable) {
+		return rfr.findAll(pageable);
+	}
 }

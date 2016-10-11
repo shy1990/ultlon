@@ -132,6 +132,7 @@
 		<thead>
 			<tr>
 				<th>申请人</th>
+				<th>审核人</th>
 				<th>手机</th>
 				<th>串号</th>
 				<th>备注</th>
@@ -143,6 +144,7 @@
 			<c:forEach var="item" items="${data.content }">
 				<tr class="am-active"  data-id="${item.content.id }">
 					<td>${item.content.taskForm.afterSaleForm.username }</td>
+					<td style="width:70px;">${item.content.lastModifiedBy.username }</td>
 					<td>${item.content.taskForm.afterSaleForm.goodsName }</td>
 					<td>${item.content.taskForm.afterSaleForm.imei }</td>
 					<td class="remark"

@@ -1,5 +1,7 @@
 package com.sj1688.ultlon.dao.mysql;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +18,10 @@ public interface RefundFormRepository extends JpaRepository<RefundForm, Long> {
 	
 	@Query("select a from RefundForm a where a.taskForm.afterSaleForm.username=?1")
 	Page<RefundForm> findByUsername(String username,Pageable pageable);
+	
+	@Query("select a from RefundForm a where a.taskForm.afterSaleForm.orderNum=?1")
+	Page<RefundForm> findByOrderNum(String orderNum,Pageable pageable);
+	
+	@Query("select a from RefundForm a where a.lastModifiedDate between ?1 and ?2")
+	Page<RefundForm> findByModifiedDateBetween(Date startDate,Date endDate,Pageable pageable);
 }

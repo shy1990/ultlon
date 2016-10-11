@@ -23,6 +23,13 @@
 .remark {
 	width: 260px;
 }
+
+/*----------- 分页 start------------- */
+.phone_main_07 {
+	padding-top: 20px;
+	width: 500px;
+	margin: 0 auto;
+}
 </style>
 
 <script src="js/jquery.min.js"></script>
@@ -140,6 +147,9 @@
 		<thead>
 			<tr>
 				<th>申请人</th>
+				<th>审核人</th>
+				<th>串号</th>
+				<th>订单号</th>
 				<th>订单价格</th>
 				<th>当前价格</th>
 				<th>退款价格</th>
@@ -152,6 +162,9 @@
 			<c:forEach var="item" items="${data.content }">
 				<tr class="am-active">
 					<td>${item.content.taskForm.afterSaleForm.username }</td>
+					<td style="width:70px;">${item.content.lastModifiedBy.username }</td>
+					<td>${item.content.taskForm.afterSaleForm.imei }</td>
+					<td>${item.content.taskForm.afterSaleForm.orderNum }</td>
 					<td>${item.content.orderPrice }</td>
 					<td>${item.content.currentPrice }</td>
 					<td>${item.content.realPrice }</td>
@@ -166,6 +179,39 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="phone_main_07">
+
+		<p id="p"></p>
+		<!-- <ul id="phone_list_page_ul"> -->
+		<ul data-am-widget="pagination"
+			class="am-pagination am-pagination-select">
+			<li class="am-pagination-prev "><c:choose>
+					<c:when test="${data.metadata.number ==0}">
+						<a>上一页</a>
+					</c:when>
+					<c:otherwise>
+						<a
+							href="finance/refund?sort=createdDate,desc&imei=${imei}&page=${data.metadata.number-1}"
+							class="">上一页</a>
+					</c:otherwise>
+				</c:choose></li>
+			<li class="am-pagination-select">${data.metadata.number+1} /
+				${data.metadata.totalPages}</li>
+			<li class="am-pagination-next "><c:choose>
+					<c:when
+						test="${ data.metadata.number+1 == data.metadata.totalPages}">
+						<a>下一页</a>
+					</c:when>
+
+					<c:otherwise>
+						<a
+							href="finance/refund?sort=createdDate,desc&imei=${imei}&page=${data.metadata.number+1}"
+							class="">下一页</a>
+					</c:otherwise>
+				</c:choose></li>
+		</ul>
+		<!-- </ul> -->
+	</div>
 
 	<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt-a">
 		<div class="am-modal-dialog">

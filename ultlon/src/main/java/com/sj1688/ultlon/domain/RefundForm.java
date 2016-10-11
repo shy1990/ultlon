@@ -1,16 +1,21 @@
 package com.sj1688.ultlon.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tb_refund_form")
@@ -26,7 +31,7 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 	private BigDecimal orderPrice;
 	private BigDecimal currentPrice;
 	private String remark;
-
+	
 	public RefundForm() {
 		super();
 	}
@@ -90,5 +95,4 @@ public class RefundForm extends AbstractAuditable<User, Long> {
 		this.currentPrice = currentPrice;
 	}
 
-	
 }
